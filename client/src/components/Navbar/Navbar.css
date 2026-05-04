@@ -1,0 +1,81 @@
+.navbar {
+  width: 100%;
+  background-color: var(--color-bg);
+  position: relative;
+  z-index: 100;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+}
+
+.navbar-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Brand Section */
+.nav-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.brand-name {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  line-height: 1.2;
+}
+
+.brand-qualifications {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--color-primary);
+  opacity: 0.8;
+  letter-spacing: 0.5px;
+}
+
+/* Links Section */
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+  align-items: center;
+}
+
+.nav-link {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--color-primary);
+  opacity: 0.85;
+  transition:
+    opacity 0.2s ease,
+    color 0.2s ease;
+}
+
+.nav-link:hover {
+  opacity: 1;
+  color: var(--color-accent);
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .nav-links {
+    display: none; /* Hide links on mobile for now, can add hamburger later */
+  }
+}
+
+@media (max-width: 576px) {
+  .brand-name {
+    font-size: 1.25rem;
+  }
+
+  .brand-qualifications {
+    font-size: 0.7rem;
+  }
+}
