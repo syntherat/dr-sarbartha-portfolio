@@ -10,7 +10,7 @@ const Navbar = () => {
         <div className="nav-brand">
           <div className="brand-name">Dr. Sarbartha Kumar Pratihar</div>
           <div className="brand-qualifications">
-            MBBS, MS (General Surgery), M.Ch (Urology)
+            URO-ONCOLOGY & ROBOTIC SURGERY
           </div>
         </div>
 
