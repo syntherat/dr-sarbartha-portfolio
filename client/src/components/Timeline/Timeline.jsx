@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import doctorPlaceholder from "../../assets/doctor_placeholder.png";
-import doctorCutout from "../../assets/doc-placeholder-nobg.png";
-import heroPortrait from "../../assets/hero.png";
+import doctorPlaceholder from "../../assets/drskp-pfp.jpg";
+import doctorCutout from "../../assets/drskp-pfp.jpg";
+import heroPortrait from "../../assets/drskp-pfp.jpg";
 import "./Timeline.css";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -11,63 +11,92 @@ gsap.registerPlugin(ScrollTrigger);
 const timelineData = [
   {
     id: 1,
-    year: "2010",
+    year: "2006 - 2012",
     title: "Bachelor of Medicine, Bachelor of Surgery (MBBS)",
-    institution: "Maulana Azad Medical College, Delhi",
+    institution: "Nilratan Sircar Medical College Hospital, Kolkata",
     type: "education",
     image: doctorCutout,
     description:
-      "Graduated with distinction while building strong foundations in clinical diagnosis and patient-first care.",
+      "Completed rigorous medical training, including a full-year clinical internship, with a strong focus on diagnostic precision and patient-centered care.",
   },
   {
     id: 2,
-    year: "2013",
-    title: "MD Urology",
-    institution: "University of Delhi",
+    year: "2013 - 2016",
+    title: "MS in General Surgery",
+    institution: "Nilratan Sircar Medical College Hospital, Kolkata",
     type: "education",
     image: doctorPlaceholder,
     description:
-      "Focused on reconstructive urology and oncological pathways with a research-driven approach to treatment planning.",
+      "Secured second rank at the university level during advanced surgical training, with a focus on evidence-based care and clinical decision-making.",
   },
   {
     id: 3,
-    year: "2015",
-    title: "Senior Residency",
-    institution: "AIIMS, New Delhi",
-    type: "career",
+    year: "2017 - 2020",
+    title: "M.Ch in Urology",
+    institution: "Gauhati Medical College and Hospital, Assam",
+    type: "education",
     image: heroPortrait,
     description:
-      "Handled high-volume tertiary-care cases and sharpened decision making for complex surgical interventions.",
+      "Completed super-specialty training in urology with focused expertise in advanced surgical care and patient-centered treatment.",
   },
   {
     id: 4,
-    year: "2018",
-    title: "Fellowship in Uro-Oncology",
-    institution: "Max Healthcare, Delhi",
+    year: "2020",
+    title: "Certified Console Surgeon in DaVinci Surgical Robotic System",
     type: "education",
     image: doctorCutout,
     description:
-      "Advanced training in precision cancer surgery, multidisciplinary collaboration, and evidence-based outcomes.",
+      "Certified console surgeon in robotic-assisted urology, specializing in precision-driven, minimally invasive surgical techniques.",
   },
   {
     id: 5,
-    year: "2020",
-    title: "Consultant Uro-Oncologist",
-    institution: "Leading Multi-speciality Hospital",
+    year: "2013 - 2016",
+    title: "Jr. Resident, General Surgery",
+    institution: "NRSMCH, Kolkata",
     type: "career",
     image: doctorPlaceholder,
     description:
-      "Developed a signature treatment model that balances modern technology with deeply personalized counselling.",
+      "Lorem Ipsum dolor sit amet",
   },
   {
     id: 6,
-    year: "2023",
-    title: "Director, Urology & Uro-Oncology",
-    institution: "Modern Urology Practice",
+    year: "2016 - 2017",
+    title: "Sr. Resident, General Surgery",
+    institution: "NRSMCH, Kolkata",
     type: "career",
     image: heroPortrait,
     description:
-      "Leading advanced cancer programs, mentoring younger surgeons, and shaping long-term clinical excellence.",
+      "Lorem Ipsum dolor sit amet",
+  },
+  {
+    id: 7,
+    year: "2017 - 2020",
+    title: "Sr. Resident, Urology and Renal Transplant",
+    institution: "Gauhati Medical College Hospital, Guwahati",
+    type: "career",
+    image: heroPortrait,
+    description:
+      "Lorem Ipsum dolor sit amet",
+  },
+  {
+    id: 8,
+    year: "2020 - 2023",
+    title: "Attending Consultant, Urooncology and Robotic Surgery",
+    institution: "RGCIRC, Delhi",
+    type: "career",
+    image: heroPortrait,
+    description:
+      "Lorem Ipsum dolor sit amet",
+  },
+  {
+    id: 9,
+    year: "2023 - Present",
+    title: "Consultant, Urooncology and Robotic Surgery",
+    institution: "RGCIRC, Delhi",
+    type: "career",
+    image: heroPortrait,
+    description:
+      "Lorem Ipsum dolor sit amet",
   },
 ];
 
@@ -96,10 +125,10 @@ const Timeline = () => {
         const nodes = gsap.utils.toArray(".timeline-big-node");
 
         gsap.set(progress, { transformOrigin: "left center", scaleX: 0 });
-        gsap.set(cards, { opacity: 0.45, y: 40, rotateX: -8, scale: 0.92 });
-        gsap.set(nodes, { opacity: 0.55, scale: 0.88, rotate: -6 });
-        gsap.set(cards[0], { opacity: 1, y: 0, rotateX: 0, scale: 1 });
-        gsap.set(nodes[0], { opacity: 1, scale: 1, rotate: 0 });
+        gsap.set(cards, { opacity: 0.62, y: 20, scale: 0.97 });
+        gsap.set(nodes, { opacity: 0.72, scale: 0.95 });
+        gsap.set(cards[0], { opacity: 1, y: 0, scale: 1 });
+        gsap.set(nodes[0], { opacity: 1, scale: 1 });
 
         const viewportWidth = stage.clientWidth || window.innerWidth;
         const horizontalTravelPx = Math.max(0, track.scrollWidth - viewportWidth);
@@ -125,17 +154,15 @@ const Timeline = () => {
           panels.forEach((_, index) => {
             const isActive = index === activeIndex;
             gsap.to(cards[index], {
-              opacity: isActive ? 1 : 0.45,
-              y: isActive ? 0 : 40,
-              rotateX: isActive ? 0 : -8,
-              scale: isActive ? 1 : 0.92,
+              opacity: isActive ? 1 : 0.62,
+              y: isActive ? 0 : 20,
+              scale: isActive ? 1 : 0.97,
               duration: 0.35,
               overwrite: true,
             });
             gsap.to(nodes[index], {
-              opacity: isActive ? 1 : 0.55,
-              scale: isActive ? 1 : 0.88,
-              rotate: isActive ? 0 : -6,
+              opacity: isActive ? 1 : 0.72,
+              scale: isActive ? 1 : 0.95,
               duration: 0.35,
               overwrite: true,
             });
@@ -153,14 +180,6 @@ const Timeline = () => {
           });
         });
 
-        gsap.to(".timeline-big-node img", {
-          y: -18,
-          duration: 3.2,
-          ease: "sine.inOut",
-          yoyo: true,
-          repeat: -1,
-          stagger: 0.2,
-        });
       }, section);
 
       return () => ctx.revert();
