@@ -231,7 +231,7 @@
   }
 
   .footer-panel {
-    padding: 3rem 1.25rem 5.5rem;
+    padding: 3rem 1.25rem 4.05rem;
   }
 
   .footer-link-grid {
@@ -247,10 +247,10 @@
   .footer-signature {
     position: absolute;
     left: 50%;
-    bottom: -0.2em;
+    bottom: -0.08em;
     display: block;
     margin-top: 0;
-    font-size: clamp(2.85rem, 16vw, 5.4rem);
+    font-size: clamp(2.7rem, 15vw, 5.1rem);
     line-height: 0.75;
     text-align: center;
     white-space: nowrap;

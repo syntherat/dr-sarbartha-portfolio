@@ -316,9 +316,17 @@
 
 @media (max-width: 768px) {
   .services-section {
-    --services-divider-height: 92px;
-    --services-divider-overlap: 44px;
-    padding: 5rem 1.25rem;
+    --services-divider-height: 68px;
+    --services-divider-overlap: 30px;
+    padding: 4.6rem 1.25rem 5rem;
+  }
+
+  .services-divider.top .divider-sage {
+    fill: rgba(163, 177, 138, 0.24);
+  }
+
+  .services-divider.top .divider-shadow {
+    fill: rgba(31, 61, 59, 0.1);
   }
 
   .section-title {
@@ -327,7 +335,8 @@
 
   .services-directory {
     grid-template-columns: 1fr;
-    grid-auto-rows: 260px;
+    grid-auto-rows: auto;
+    gap: 1.15rem;
   }
 
   .service-card,
@@ -336,18 +345,31 @@
   .service-card.wide {
     grid-column: span 1;
     grid-row: span 1;
+    min-height: 0;
   }
 
   .service-card-body {
-    padding: 1.15rem;
+    padding: 1.25rem 1.15rem 0.95rem;
   }
 
-  .service-card h3 {
-    font-size: clamp(1.55rem, 8vw, 2.15rem);
+  .service-card-topline {
+    margin-bottom: 0.45rem;
+    font-size: 0.63rem;
+    line-height: 1.35;
+  }
+
+  .service-card h3,
+  .service-card.feature h3,
+  .service-card.tall h3,
+  .service-card.compact h3,
+  .service-card.wide h3 {
+    font-size: clamp(1.45rem, 7.5vw, 2rem);
+    margin-bottom: 0.45rem;
   }
 
   .service-card p {
     font-size: 0.95rem;
+    line-height: 1.48;
   }
 
   .service-card.compact p {
@@ -357,14 +379,39 @@
   .service-card.compact .service-focus-list {
     display: flex;
   }
+
+  .service-card-action {
+    margin-top: 0.9rem;
+  }
 }
 
 @media (max-width: 420px) {
   .services-section {
+    --services-divider-height: 58px;
+    --services-divider-overlap: 26px;
     padding-inline: 1rem;
   }
 
+  .service-card-body {
+    padding: 1.15rem 1rem 0.85rem;
+  }
+
+  .service-card-topline {
+    gap: 0.36rem;
+    letter-spacing: 0.08rem;
+  }
+
+  .service-focus-list {
+    gap: 0.32rem;
+    margin-top: 0.7rem;
+  }
+
+  .service-focus-list span {
+    padding: 0.26rem 0.48rem;
+    font-size: 0.64rem;
+  }
+
   .service-card-action {
-    padding-inline: 1.15rem;
+    padding: 0 1rem 1rem;
   }
 }
