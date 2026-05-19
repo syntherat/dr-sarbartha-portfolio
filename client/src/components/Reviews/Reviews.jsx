@@ -6,24 +6,24 @@ import "./Reviews.css";
 const reviewsData = [
   {
     id: 1,
-    name: "Farah Siddiqui",
-    text: "I visited Dr. Pratihar for my father’s urinary obstruction and suspected prostate condition. He evaluated all reports carefully, advised appropriate imaging, and started treatment without unnecessary procedures. His calm explanation and patient-friendly approach reduced our anxiety. Overall, a very dependable uro-oncology doctor in Delhi.",
+    name: "Manoj Limboo",
+    text: "For the past two years, Dr. Sarbartha Kumar Pratihar | Urologist, Uro-oncologist & Robotic Surgeon has been a great support to our family during my father’s prostate surgery and radiation treatment. His knowledge, calm guidance, and compassionate approach made a very challenging time much easier for us. We deeply appreciate the care and attention he gave to my father. Doctors like him truly make a difference in people’s lives. We will always remain thankful for his dedication and kindness.",
     rating: 5,
-    date: "2026-01-05T00:00:00.000Z",
+    date: "2026-03-05T00:00:00.000Z",
   },
   {
     id: 2,
-    name: "Rajiv Sethi",
-    text: "My uncle was diagnosed with invasive bladder cancer and required major surgery. Dr. Sarbartha Kumar Pratihar discussed treatment options, risks, and urinary diversion in a very practical manner. The surgery and post-operative care were well managed, and his recovery is progressing steadily. We appreciate the doctor’s experience and honest counselling during a difficult time.",
+    name: "Jai Kishun Das",
+    text: "Dr. Sarbartha Kumar Pratihar is an outstanding Uro Oncologist. From the first consultation, his deep medical knowledge and technical expertise were clear, providing immense confidence for my operation & my treatment plan at RGCIRC, Rohini & provide me his consultation over mobile for last 10 months. He explain complex procedures in simple terms, ensuring I felt informed and at ease. His calm, empathetic demeanor made a difficult situation much more manageable. Furthermore, his entire team is professional and attentive, ensuring a seamless experience from start to finish.",
     rating: 5,
-    date: "2026-01-05T00:00:00.000Z",
+    date: "2026-05-08T00:00:00.000Z",
   },
   {
     id: 3,
-    name: "Anil Mathur",
-    text: "I was diagnosed with prostate cancer after my PSA levels increased. Dr. Sarbartha Kumar Pratihar explained the staging, biopsy findings, and treatment options in detail. I underwent robotic prostate surgery under his care, and the recovery has been smooth so far. His structured follow-up plan and clear communication helped me and my family stay confident throughout the treatment journey.",
+    name: "Rinchen C",
+    text: "Doctor Sarbartha & team handled my father’s case previously at RGCI&RC, Rohini and my family and I were, are and always will be extremely grateful for his genuine concern and expertise. He took his time explaining all possibilities and their respective treatments and was approachable when we had any doubts. I will highly recommend him and his team for those who require treatment in prostrate issues.",
     rating: 5,
-    date: "2026-01-05T00:00:00.000Z",
+    date: "2026-05-03T00:00:00.000Z",
   },
 ];
 
