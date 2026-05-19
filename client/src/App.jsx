@@ -5,6 +5,7 @@ import CaseStudies from "./components/CaseStudies/CaseStudies";
 import CaseMediaDivider from "./components/CaseMediaDivider/CaseMediaDivider";
 import MediaUpdates from "./components/MediaUpdates/MediaUpdates";
 import Schedule from "./components/Schedule/Schedule";
+import Footer from "./components/Footer/Footer";
 import Reviews from "./components/Reviews/Reviews";
 import Timeline from "./components/Timeline/Timeline";
 import ServiceDetail from "./components/ServiceDetail/ServiceDetail";
@@ -44,6 +45,7 @@ function App() {
       ) : (
         <HomePage />
       )}
+      <Footer />
     </div>
   );
 }
