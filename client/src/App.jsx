@@ -2,6 +2,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Hero from "./components/Hero/Hero";
 import Services from "./components/Services/Services";
 import CaseStudies from "./components/CaseStudies/CaseStudies";
+import CaseMediaDivider from "./components/CaseMediaDivider/CaseMediaDivider";
 import MediaUpdates from "./components/MediaUpdates/MediaUpdates";
 import Schedule from "./components/Schedule/Schedule";
 import Reviews from "./components/Reviews/Reviews";
@@ -17,6 +18,7 @@ const HomePage = () => (
     <Timeline />
     <Services />
     <CaseStudies />
+    <CaseMediaDivider />
     <MediaUpdates />
     <Schedule />
   </>

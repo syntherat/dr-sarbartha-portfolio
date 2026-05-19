@@ -52,6 +52,19 @@ const Schedule = () => {
 
   return (
     <section className="schedule-section" id="schedule">
+      <div className="schedule-top-sweep" aria-hidden="true">
+        <svg viewBox="0 0 1440 112" preserveAspectRatio="none">
+          <path
+            className="schedule-sweep-fill"
+            d="M0 112 L0 56 C180 62 320 58 480 50 C640 42 780 58 960 62 C1120 66 1266 38 1440 50 L1440 112 Z"
+          />
+          <path
+            className="schedule-sweep-line"
+            d="M90 49 C260 56 390 52 520 45 C690 36 820 52 990 55 C1138 58 1268 36 1360 42"
+          />
+        </svg>
+      </div>
+
       <div className="schedule-container">
         <div className="schedule-header">
           <span className="schedule-tag">
