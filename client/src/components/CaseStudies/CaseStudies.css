@@ -115,6 +115,7 @@
   gap: clamp(2rem, 6vw, 5rem);
   align-items: end;
   margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  min-width: 0;
 }
 
 .case-studies-tag {
@@ -163,6 +164,7 @@
     linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(248, 245, 242, 0.88)),
     var(--color-bg);
   box-shadow: 8px 8px 0 rgba(31, 61, 59, 0.13);
+  min-width: 0;
 }
 
 .case-study-card::before {
@@ -302,6 +304,7 @@
   .case-studies-header {
     grid-template-columns: 1fr;
     align-items: start;
+    gap: 1.5rem;
   }
 
   .case-study-flow {
@@ -330,9 +333,18 @@
     gap: 0.35rem;
   }
 
+  .case-study-card {
+    box-shadow: 5px 5px 0 rgba(31, 61, 59, 0.1);
+  }
+
   .case-study-main,
   .case-study-top,
   .case-study-step {
     padding-inline: 1rem;
+  }
+
+  .case-study-profile {
+    width: 100%;
+    border-radius: 8px;
   }
 }

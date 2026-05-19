@@ -55,6 +55,7 @@
   overflow: hidden;
   border: 1px solid rgba(31, 61, 59, 0.22);
   box-shadow: 12px 12px 0 rgba(31, 61, 59, 0.1);
+  min-width: 0;
 }
 
 .service-detail-image img {
@@ -191,6 +192,15 @@
     width: min(100% - 2rem, 1400px);
   }
 
+  .service-detail-hero h1 {
+    font-size: clamp(2.25rem, 14vw, 3.4rem);
+  }
+
+  .service-detail-hero p {
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
   .service-detail-image {
     min-height: 300px;
     box-shadow: 7px 7px 0 rgba(31, 61, 59, 0.1);
@@ -198,5 +208,16 @@
 
   .related-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 420px) {
+  .service-detail-hero,
+  .service-detail-content {
+    width: min(100% - 1.5rem, 1400px);
+  }
+
+  .related-services {
+    padding-inline: 1rem;
   }
 }

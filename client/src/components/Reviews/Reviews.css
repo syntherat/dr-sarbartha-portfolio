@@ -50,7 +50,7 @@
 
 .reviews-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
   gap: 2.5rem;
   align-items: start;
 }
@@ -210,10 +210,20 @@
 /* Responsive */
 @media (max-width: 768px) {
   .reviews-section {
-    padding: 5rem 1.5rem;
+    padding: 5rem 1.25rem;
+  }
+
+  .reviews-header {
+    margin-bottom: 3rem;
   }
 
   .review-card {
-    padding: 2rem 1.5rem;
+    padding: 1.5rem 1.25rem;
+    box-shadow: 4px 4px 0 var(--color-primary);
+  }
+
+  .review-card:hover {
+    transform: none;
+    box-shadow: 4px 4px 0 var(--color-primary);
   }
 }

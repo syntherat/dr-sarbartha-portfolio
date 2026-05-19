@@ -28,3 +28,9 @@
   padding-bottom: 0.25rem;
   font-weight: 700;
 }
+
+@media (max-width: 520px) {
+  .service-not-found {
+    padding: 3rem 1rem;
+  }
+}

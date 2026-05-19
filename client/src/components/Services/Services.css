@@ -59,10 +59,12 @@
   align-items: flex-end;
   margin-bottom: clamp(2.5rem, 5vw, 4rem);
   gap: 4rem;
+  min-width: 0;
 }
 
 .header-left {
   flex: 1;
+  min-width: 0;
 }
 
 .tag {
@@ -87,6 +89,7 @@
 
 .header-right {
   flex: 0 1 450px;
+  min-width: 0;
 }
 
 .header-desc {
@@ -289,6 +292,18 @@
 }
 
 @media (max-width: 900px) {
+  .services-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+
+  .header-left,
+  .header-right {
+    width: 100%;
+    flex: none;
+  }
+
   .services-directory {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-auto-rows: 210px;
@@ -306,14 +321,8 @@
     padding: 5rem 1.25rem;
   }
 
-  .services-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 2rem;
-  }
-
   .section-title {
-    font-size: 3.5rem;
+    font-size: clamp(2.45rem, 12vw, 3.5rem);
   }
 
   .services-directory {
@@ -347,5 +356,15 @@
 
   .service-card.compact .service-focus-list {
     display: flex;
+  }
+}
+
+@media (max-width: 420px) {
+  .services-section {
+    padding-inline: 1rem;
+  }
+
+  .service-card-action {
+    padding-inline: 1.15rem;
   }
 }

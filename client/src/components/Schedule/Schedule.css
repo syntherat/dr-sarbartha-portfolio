@@ -4,7 +4,8 @@
   --schedule-sweep-overlap: clamp(34px, 3.5vw, 54px);
   position: relative;
   z-index: 1;
-  overflow: visible;
+  overflow-x: clip;
+  overflow-y: visible;
   padding: clamp(5.75rem, 8vw, 8.5rem) 2rem;
   background:
     linear-gradient(180deg, var(--schedule-bg-top), var(--color-primary)),
@@ -96,6 +97,7 @@
   grid-template-columns: minmax(0, 1fr) minmax(280px, 470px);
   gap: clamp(2rem, 6vw, 5rem);
   align-items: end;
+  min-width: 0;
 }
 
 .schedule-heading-row h2 {
@@ -116,7 +118,7 @@
 
 .schedule-layout {
   display: grid;
-  grid-template-columns: minmax(340px, 0.82fr) minmax(0, 1.18fr);
+  grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
   gap: 1.15rem;
   align-items: start;
 }
@@ -128,6 +130,7 @@
   border-radius: 12px;
   background: rgba(248, 245, 242, 0.06);
   box-shadow: 0 24px 42px rgba(0, 0, 0, 0.12);
+  min-width: 0;
 }
 
 .clinic-card {
@@ -347,6 +350,7 @@
   border-radius: 8px;
   font-size: 0.9rem;
   font-weight: 900;
+  text-align: center;
 }
 
 .schedule-actions a:first-child {
@@ -399,7 +403,7 @@
 
   .clinic-card {
     display: grid;
-    grid-template-columns: minmax(280px, 0.8fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
   }
 
   .clinic-image {
@@ -444,6 +448,14 @@
 
   .schedule-heading-row h2 {
     font-size: clamp(2rem, 11vw, 2.8rem);
+  }
+
+  .schedule-top-sweep {
+    height: 76px;
+  }
+
+  .schedule-days-header span {
+    font-size: clamp(1.5rem, 10vw, 2rem);
   }
 
   .schedule-day-card {

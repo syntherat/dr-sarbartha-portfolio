@@ -1,4 +1,3 @@
-import React from "react";
 import "./Hero.css";
 import doctorImage from "../../assets/doc-placeholder-nobg.png";
 
@@ -12,7 +11,7 @@ const Hero = () => {
           <h1 className="hero-heading">
             Redefining Urological
             <br />
-            Cancer Care with
+            {" "}Cancer Care with
             <br /> Robotic Precision
           </h1>
 
