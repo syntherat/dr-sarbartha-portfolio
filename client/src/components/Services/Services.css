@@ -5,7 +5,9 @@
   background-color: var(--color-primary);
   color: var(--color-bg);
   position: relative;
+  z-index: 2;
   isolation: isolate;
+  overflow: visible;
 }
 
 .services-divider {
