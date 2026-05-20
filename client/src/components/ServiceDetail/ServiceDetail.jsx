@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { services } from "../../data/services";
 import "./ServiceDetail.css";
 
@@ -8,9 +9,9 @@ const ServiceDetail = ({ service }) => {
     <main className="service-detail-page">
       <section className="service-detail-hero">
         <div className="service-detail-hero-copy">
-          <a href="/#services" className="service-back-link">
+          <Link to="/#services" className="service-back-link">
             Back to services
-          </a>
+          </Link>
           <div className="service-detail-kicker">{service.category}</div>
           <h1>{service.title}</h1>
           <p>{service.summary}</p>
@@ -52,10 +53,10 @@ const ServiceDetail = ({ service }) => {
         </div>
         <div className="related-grid">
           {relatedServices.slice(0, 4).map((item) => (
-            <a key={item.slug} href={`/services/${item.slug}`}>
+            <Link key={item.slug} to={`/services/${item.slug}`}>
               <img src={item.image} alt={item.imageAlt} />
               <span>{item.title}</span>
-            </a>
+            </Link>
           ))}
         </div>
       </section>

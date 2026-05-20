@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { services } from "../../data/services";
 import "./Services.css";
 
@@ -14,11 +15,11 @@ const bentoSizes = [
 const serviceDividers = {
   top: {
     sage:
-      "M0 130 L0 46 C156 44 254 63 398 58 C548 53 630 30 780 42 C924 54 1010 42 1156 36 C1278 31 1354 42 1440 33 L1440 130 Z",
+      "M0 130 L0 38 C142 50 244 34 394 45 C544 56 632 44 778 40 C920 36 1012 58 1154 45 C1280 34 1356 43 1440 36 L1440 130 Z",
     shadow:
-      "M0 130 L0 56 C154 54 260 74 404 68 C552 62 632 42 780 52 C920 62 1016 52 1158 46 C1284 41 1356 52 1440 43 L1440 130 Z",
+      "M0 130 L0 49 C140 60 246 45 396 55 C542 65 632 54 778 50 C920 46 1012 68 1154 55 C1280 45 1358 53 1440 47 L1440 130 Z",
     fill:
-      "M0 130 L0 63 C154 61 262 82 406 76 C552 70 634 51 780 60 C922 69 1018 60 1158 54 C1288 49 1358 60 1440 51 L1440 130 Z",
+      "M0 130 L0 57 C140 70 248 55 398 64 C542 73 632 62 778 59 C920 56 1012 78 1154 64 C1282 54 1360 62 1440 56 L1440 130 Z",
   },
   bottom: {
     sage:
@@ -65,10 +66,10 @@ const Services = () => {
 
         <div className="services-directory">
           {services.map((service, index) => (
-            <a
+            <Link
               key={service.slug}
               className={`service-card ${bentoSizes[index]}`}
-              href={`/services/${service.slug}`}
+              to={`/services/${service.slug}`}
               aria-label={`Open ${service.title} service page`}
             >
               <div className="service-card-image">
@@ -90,7 +91,7 @@ const Services = () => {
               <div className="service-card-action" aria-hidden="true">
                 View
               </div>
-            </a>
+            </Link>
           ))}
         </div>
       </div>

@@ -71,6 +71,11 @@
   color: var(--color-accent);
 }
 
+.nav-link-active {
+  opacity: 1;
+  color: var(--color-accent);
+}
+
 /* Responsive adjustments */
 @media (max-width: 992px) {
   .navbar-container {

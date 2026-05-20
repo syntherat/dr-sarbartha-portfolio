@@ -1,13 +1,14 @@
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 import "./Navbar.css";
 
 const navItems = [
-  { label: "Home", href: "/" },
-  { label: "About Us", href: "/#about" },
-  { label: "Our Services", href: "/#services" },
-  { label: "Media", href: "/#media" },
-  { label: "Contact", href: "/#contact" },
+  { label: "Home", to: "/", route: true },
+  { label: "About Us", to: "/about", route: true },
+  { label: "Our Services", to: "/#services" },
+  { label: "Media", to: "/#media" },
+  { label: "Contact", to: "/#contact" },
 ];
 
 const Navbar = () => {
@@ -20,12 +21,12 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        <a href="/" className="nav-brand" onClick={closeMobileMenu}>
+        <Link to="/" className="nav-brand" onClick={closeMobileMenu}>
           <div className="brand-name">Dr. Sarbartha Kumar Pratihar</div>
           <div className="brand-qualifications">
             URO-ONCOLOGY & ROBOTIC SURGERY
           </div>
-        </a>
+        </Link>
 
         <button
           className="mobile-nav-toggle"
@@ -49,14 +50,27 @@ const Navbar = () => {
           className={`nav-links${isMobileMenuOpen ? " nav-links-open" : ""}`}
         >
           {navItems.map((item) => (
-            <li key={item.href}>
-              <a
-                href={item.href}
-                className="nav-link"
-                onClick={closeMobileMenu}
-              >
-                {item.label}
-              </a>
+            <li key={item.to}>
+              {item.route ? (
+                <NavLink
+                  to={item.to}
+                  end={item.to === "/"}
+                  className={({ isActive }) =>
+                    `nav-link${isActive ? " nav-link-active" : ""}`
+                  }
+                  onClick={closeMobileMenu}
+                >
+                  {item.label}
+                </NavLink>
+              ) : (
+                <Link
+                  to={item.to}
+                  className="nav-link"
+                  onClick={closeMobileMenu}
+                >
+                  {item.label}
+                </Link>
+              )}
             </li>
           ))}
         </ul>

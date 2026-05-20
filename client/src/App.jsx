@@ -1,3 +1,12 @@
+import { useEffect } from "react";
+import {
+  BrowserRouter,
+  Link,
+  Route,
+  Routes,
+  useLocation,
+  useParams,
+} from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import Hero from "./components/Hero/Hero";
 import Services from "./components/Services/Services";
@@ -9,6 +18,7 @@ import Footer from "./components/Footer/Footer";
 import Reviews from "./components/Reviews/Reviews";
 import Timeline from "./components/Timeline/Timeline";
 import ServiceDetail from "./components/ServiceDetail/ServiceDetail";
+import AboutPage from "./pages/About/AboutPage";
 import { getServiceBySlug } from "./data/services";
 import "./App.css";
 
@@ -25,28 +35,67 @@ const HomePage = () => (
   </>
 );
 
-function App() {
-  const serviceMatch = window.location.pathname.match(/^\/services\/([^/]+)\/?$/);
-  const selectedService = serviceMatch
-    ? getServiceBySlug(serviceMatch[1])
-    : null;
+const ScrollToRouteTarget = () => {
+  const { hash, pathname } = useLocation();
 
+  useEffect(() => {
+    if (!hash) {
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+      return;
+    }
+
+    const target = document.getElementById(hash.slice(1));
+
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [hash, pathname]);
+
+  return null;
+};
+
+const ServiceDetailRoute = () => {
+  const { slug } = useParams();
+  const selectedService = getServiceBySlug(slug);
+
+  if (!selectedService) {
+    return <ServiceNotFound />;
+  }
+
+  return <ServiceDetail service={selectedService} />;
+};
+
+const ServiceNotFound = () => (
+  <main className="service-not-found">
+    <span>Service not found</span>
+    <h1>This service page is not available.</h1>
+    <Link to="/#services">Return to services</Link>
+  </main>
+);
+
+const NotFound = () => (
+  <main className="service-not-found">
+    <span>Page not found</span>
+    <h1>This page is not available.</h1>
+    <Link to="/">Return home</Link>
+  </main>
+);
+
+function App() {
   return (
-    <div className="App">
-      <Navbar />
-      {serviceMatch && selectedService ? (
-        <ServiceDetail service={selectedService} />
-      ) : serviceMatch ? (
-        <main className="service-not-found">
-          <span>Service not found</span>
-          <h1>This service page is not available.</h1>
-          <a href="/#services">Return to services</a>
-        </main>
-      ) : (
-        <HomePage />
-      )}
-      <Footer />
-    </div>
+    <BrowserRouter>
+      <ScrollToRouteTarget />
+      <div className="App">
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/services/:slug" element={<ServiceDetailRoute />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+        <Footer />
+      </div>
+    </BrowserRouter>
   );
 }
 
