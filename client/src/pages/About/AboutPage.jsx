@@ -299,6 +299,26 @@ const RecognitionEmblem = () => (
   </div>
 );
 
+const ProfilePracticeMark = () => (
+  <svg className="about-profile-emblem" viewBox="0 0 160 160" aria-hidden="true">
+    <circle className="profile-emblem-orbit" cx="80" cy="80" r="62" />
+    <circle className="profile-emblem-soft" cx="80" cy="80" r="43" />
+    <path className="profile-emblem-arc" d="M39 93c12 23 45 30 66 13" />
+    <path className="profile-emblem-arc accent" d="M55 48c20-15 51-9 65 12" />
+    <path
+      className="profile-emblem-line"
+      d="M80 35v90M35 80h90"
+    />
+    <path
+      className="profile-emblem-tool"
+      d="M58 99 96 61l9 9-38 38-16 7z"
+    />
+    <circle className="profile-emblem-core" cx="80" cy="80" r="10" />
+    <circle className="profile-emblem-dot" cx="43" cy="80" r="4" />
+    <circle className="profile-emblem-dot" cx="117" cy="80" r="4" />
+  </svg>
+);
+
 const AboutPage = () => {
   return (
     <main className="about-page">
@@ -344,7 +364,7 @@ const AboutPage = () => {
         />
         <div className="about-story-layout">
           <div className="about-story-mark" aria-hidden="true">
-            <span>01</span>
+            <ProfilePracticeMark />
             <small>Profile Note</small>
           </div>
 

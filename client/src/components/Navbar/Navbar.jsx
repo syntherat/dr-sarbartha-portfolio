@@ -5,7 +5,7 @@ import "./Navbar.css";
 
 const navItems = [
   { label: "Home", to: "/", route: true },
-  { label: "About Us", to: "/about", route: true },
+  { label: "About", to: "/about", route: true },
   { label: "Our Services", to: "/#services" },
   { label: "Media", to: "/#media" },
   { label: "Contact", to: "/#contact" },

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 import {
   BrowserRouter,
   Link,
@@ -39,16 +39,31 @@ const ScrollToRouteTarget = () => {
   const { hash, pathname } = useLocation();
 
   useEffect(() => {
+    const previousScrollRestoration = window.history.scrollRestoration;
+    window.history.scrollRestoration = "manual";
+
+    return () => {
+      window.history.scrollRestoration = previousScrollRestoration;
+    };
+  }, []);
+
+  useLayoutEffect(() => {
     if (!hash) {
       window.scrollTo({ top: 0, left: 0, behavior: "auto" });
       return;
     }
 
-    const target = document.getElementById(hash.slice(1));
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
 
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+    const scrollFrame = window.requestAnimationFrame(() => {
+      const target = document.getElementById(hash.slice(1));
+
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    });
+
+    return () => window.cancelAnimationFrame(scrollFrame);
   }, [hash, pathname]);
 
   return null;

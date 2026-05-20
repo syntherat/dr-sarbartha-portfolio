@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import doctorPlaceholder from "../../assets/drskp-pfp.jpg";
@@ -106,7 +106,7 @@ const Timeline = () => {
   const trackRef = useRef(null);
   const progressRef = useRef(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const section = sectionRef.current;
     const stage = stageRef.current;
     const track = trackRef.current;
@@ -119,10 +119,16 @@ const Timeline = () => {
     const mm = gsap.matchMedia();
 
     mm.add("(min-width: 901px)", () => {
+      const triggers = [];
+
       const ctx = gsap.context(() => {
-        const panels = gsap.utils.toArray(".timeline-panel");
-        const cards = gsap.utils.toArray(".timeline-card-shell");
-        const nodes = gsap.utils.toArray(".timeline-big-node");
+        const panels = gsap.utils.toArray(section.querySelectorAll(".timeline-panel"));
+        const cards = gsap.utils.toArray(section.querySelectorAll(".timeline-card-shell"));
+        const nodes = gsap.utils.toArray(section.querySelectorAll(".timeline-big-node"));
+
+        if (!panels.length || !cards.length || !nodes.length) {
+          return;
+        }
 
         gsap.set(progress, { transformOrigin: "left center", scaleX: 0 });
         gsap.set(cards, { opacity: 0.62, y: 20, scale: 0.97 });
@@ -147,6 +153,10 @@ const Timeline = () => {
           },
         });
 
+        if (mainTl.scrollTrigger) {
+          triggers.push(mainTl.scrollTrigger);
+        }
+
         mainTl.to(track, { x: -horizontalTravelPx }, 0);
         mainTl.to(progress, { scaleX: 1 }, 0);
 
@@ -170,7 +180,7 @@ const Timeline = () => {
         };
 
         panels.forEach((panel, index) => {
-          ScrollTrigger.create({
+          const trigger = ScrollTrigger.create({
             trigger: panel,
             containerAnimation: mainTl,
             start: "left center",
@@ -178,20 +188,27 @@ const Timeline = () => {
             onEnter: () => activatePanel(index),
             onEnterBack: () => activatePanel(index),
           });
+
+          triggers.push(trigger);
         });
 
       }, section);
 
-      return () => ctx.revert();
+      return () => {
+        triggers.forEach((trigger) => trigger.kill(true));
+        ctx.revert();
+      };
     });
 
     mm.add("(max-width: 900px)", () => {
+      const triggers = [];
+
       const ctx = gsap.context(() => {
-        gsap.utils.toArray(".timeline-panel").forEach((panel) => {
+        gsap.utils.toArray(section.querySelectorAll(".timeline-panel")).forEach((panel) => {
           const node = panel.querySelector(".timeline-big-node");
           const card = panel.querySelector(".timeline-card-shell");
 
-          gsap.fromTo(
+          const animation = gsap.fromTo(
             [node, card],
             { opacity: 0, y: 45 },
             {
@@ -208,14 +225,25 @@ const Timeline = () => {
               },
             }
           );
+
+          if (animation.scrollTrigger) {
+            triggers.push(animation.scrollTrigger);
+          }
         });
       }, section);
 
-      return () => ctx.revert();
+      return () => {
+        triggers.forEach((trigger) => trigger.kill(true));
+        ctx.revert();
+      };
     });
 
     return () => {
       mm.revert();
+      gsap.killTweensOf([section, stage, track, progress]);
+      gsap.set([section, stage, track, progress], { clearProps: "all" });
+      ScrollTrigger.clearScrollMemory("manual");
+      ScrollTrigger.refresh();
     };
   }, []);
 

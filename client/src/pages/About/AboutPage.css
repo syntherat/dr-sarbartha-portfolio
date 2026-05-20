@@ -2,8 +2,15 @@
   --about-ink-soft: rgba(31, 61, 59, 0.72);
   --about-line: rgba(31, 61, 59, 0.14);
   --about-paper: rgba(255, 255, 255, 0.58);
+  overflow-x: clip;
   background: var(--color-bg);
   color: var(--color-primary);
+}
+
+.about-page *,
+.about-page *::before,
+.about-page *::after {
+  min-width: 0;
 }
 
 .about-hero {
@@ -36,6 +43,7 @@
   font-size: 0.76rem;
   font-weight: 800;
   line-height: 1.1;
+  white-space: normal;
 }
 
 .about-eyebrow svg,
@@ -421,12 +429,61 @@
   padding-right: clamp(0.9rem, 2.4vw, 1.6rem);
 }
 
-.about-story-mark span {
-  color: var(--color-primary);
-  font-family: var(--font-heading);
-  font-size: clamp(3rem, 7vw, 6.5rem);
-  font-weight: 700;
-  line-height: 0.85;
+.about-profile-emblem {
+  width: clamp(6.5rem, 10vw, 9rem);
+  max-width: 100%;
+  display: block;
+  overflow: visible;
+}
+
+.profile-emblem-orbit,
+.profile-emblem-soft,
+.profile-emblem-arc,
+.profile-emblem-line,
+.profile-emblem-tool {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.profile-emblem-orbit {
+  stroke: rgba(31, 61, 59, 0.24);
+  stroke-dasharray: 7 10;
+}
+
+.profile-emblem-soft {
+  fill: rgba(232, 168, 124, 0.08);
+  stroke: rgba(31, 61, 59, 0.12);
+}
+
+.profile-emblem-arc {
+  stroke: rgba(31, 61, 59, 0.5);
+  stroke-width: 1.7;
+}
+
+.profile-emblem-arc.accent {
+  stroke: rgba(232, 168, 124, 0.9);
+}
+
+.profile-emblem-line {
+  stroke: rgba(31, 61, 59, 0.16);
+  stroke-width: 1;
+}
+
+.profile-emblem-tool {
+  fill: rgba(248, 245, 242, 0.9);
+  stroke: var(--color-primary);
+  stroke-width: 2.2;
+}
+
+.profile-emblem-core {
+  fill: var(--color-primary);
+}
+
+.profile-emblem-dot {
+  fill: var(--color-bg);
+  stroke: var(--color-primary);
+  stroke-width: 1.4;
 }
 
 .about-story-mark small {
@@ -1174,13 +1231,14 @@
 .conference-honor-timeline li::before {
   content: "";
   position: absolute;
-  top: -0.38rem;
-  left: 1rem;
+  top: 0;
+  left: 0;
   width: 0.72rem;
   aspect-ratio: 1;
   border-radius: 50%;
   background: var(--color-bg);
   border: 1.5px solid var(--color-primary);
+  transform: translate(-50%, -50%);
 }
 
 .conference-honor-timeline time {
@@ -1696,6 +1754,11 @@
 }
 
 @media (max-width: 1100px) {
+  .about-hero {
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 0.58fr);
+    gap: clamp(1.5rem, 4vw, 3rem);
+  }
+
   .about-record-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1714,6 +1777,16 @@
 
   .membership-registry-note {
     min-height: 300px;
+  }
+
+  .membership-stamp-wall {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .membership-stamp,
+  .membership-stamp:nth-child(1),
+  .membership-stamp:nth-child(2) {
+    grid-column: span 2;
   }
 
   .recognition-board {
@@ -1760,6 +1833,28 @@
 @media (max-width: 900px) {
   .about-hero {
     grid-template-columns: 1fr;
+    max-width: 760px;
+  }
+
+  .about-hero-copy {
+    display: contents;
+  }
+
+  .about-hero .about-eyebrow {
+    order: 1;
+    justify-self: start;
+  }
+
+  .about-hero h1 {
+    order: 2;
+  }
+
+  .about-hero-copy > p {
+    order: 4;
+  }
+
+  .about-hero-stats {
+    order: 5;
   }
 
   .about-section-header {
@@ -1778,11 +1873,13 @@
   }
 
   .about-journey-section .about-section-kicker {
+    grid-row: 1;
     justify-self: start;
     margin-top: 0;
   }
 
   .about-journey-section .about-section-header h2 {
+    grid-row: 2;
     text-align: left;
   }
 
@@ -1791,7 +1888,9 @@
   }
 
   .about-portrait-card {
+    order: 3;
     max-width: 440px;
+    justify-self: start;
   }
 
   .journey-board {
@@ -1847,6 +1946,34 @@
   }
 }
 
+@media (max-width: 760px) {
+  .about-section {
+    padding: clamp(3rem, 8vw, 4.5rem) 0;
+  }
+
+  .membership-stamp-wall {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .membership-stamp,
+  .membership-stamp:nth-child(1),
+  .membership-stamp:nth-child(2) {
+    grid-column: auto;
+    transform: none;
+  }
+
+  .membership-stamp:nth-child(3),
+  .membership-stamp:nth-child(4),
+  .membership-stamp:nth-child(5) {
+    transform: none;
+  }
+
+  .featured-honors article,
+  .conference-honor-timeline li {
+    min-height: auto;
+  }
+}
+
 @media (max-width: 680px) {
   .about-hero,
   .about-section {
@@ -1855,6 +1982,22 @@
 
   .about-hero {
     padding-top: 3.5rem;
+  }
+
+  .about-section::before {
+    left: 0;
+    right: 0;
+    width: auto;
+    max-width: 100%;
+    height: 1px;
+    border: 0;
+    background: linear-gradient(90deg, rgba(31, 61, 59, 0.18), rgba(232, 168, 124, 0.42), transparent);
+    box-shadow: none;
+    transform: none;
+  }
+
+  .about-section::after {
+    display: none;
   }
 
   .about-hero h1 {
@@ -1885,6 +2028,23 @@
     transform: none;
   }
 
+  .membership-registry-note {
+    min-height: auto;
+    padding-bottom: 4.4rem;
+  }
+
+  .membership-note-stamps {
+    right: -1.5rem;
+    bottom: 1.2rem;
+    width: 10rem;
+    height: 7rem;
+    opacity: 0.8;
+  }
+
+  .membership-note-stamps img {
+    width: 5.4rem;
+  }
+
   .journey-stat-strip div + div {
     border-top: 1px solid rgba(31, 61, 59, 0.12);
     border-left: 0;
@@ -1908,6 +2068,10 @@
     grid-template-columns: 1fr;
   }
 
+  .recognition-emblem {
+    margin-inline: auto;
+  }
+
   .conference-honor-timeline li + li,
   .conference-honor-timeline li:nth-child(3) {
     border-left: 0;
@@ -1928,6 +2092,10 @@
     grid-template-columns: 1fr;
   }
 
+  .research-catalog {
+    gap: 0.9rem;
+  }
+
   .research-catalog > span,
   .research-catalog h3,
   .research-catalog-meta {
@@ -1941,6 +2109,23 @@
 
   .research-document:nth-child(3n + 2) {
     transform: none;
+  }
+
+  .research-folder {
+    border-radius: 8px;
+  }
+
+  .research-folder::before {
+    inset: 0.35rem -0.25rem -0.25rem 0.35rem;
+  }
+
+  .research-folder-tab {
+    width: calc(100% + 2rem);
+    margin-inline: -1rem 0;
+  }
+
+  .research-document p {
+    overflow-wrap: anywhere;
   }
 
   .about-story-layout,
@@ -1958,8 +2143,8 @@
     padding-bottom: 1rem;
   }
 
-  .about-story-mark span {
-    font-size: clamp(4.2rem, 22vw, 7rem);
+  .about-profile-emblem {
+    width: clamp(6.2rem, 28vw, 8.5rem);
   }
 
   .clinical-track::before {
@@ -1998,12 +2183,81 @@
 
   .about-eyebrow,
   .about-section-kicker {
-    width: 100%;
-    justify-content: center;
+    width: fit-content;
+    max-width: 100%;
+    justify-content: flex-start;
+    text-align: left;
   }
 
   .about-record-card,
   .membership-stamp {
     min-height: auto;
+  }
+
+  .about-hero-stats div,
+  .about-record-card,
+  .procedure-feature,
+  .featured-honors article,
+  .membership-stamp,
+  .research-document {
+    padding: 0.95rem;
+  }
+
+  .about-story-mark {
+    flex-wrap: wrap;
+  }
+
+  .about-story-mark small {
+    width: 100%;
+    text-align: center;
+  }
+
+  .research-catalog-meta {
+    width: 100%;
+  }
+
+  .membership-registry-note::after {
+    display: flex;
+    align-items: center;
+    left: 1rem;
+    right: 1rem;
+    width: auto;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+@media (max-width: 360px) {
+  .about-hero,
+  .about-section {
+    width: min(100% - 1.1rem, 1240px);
+  }
+
+  .about-hero h1 {
+    font-size: clamp(2rem, 12vw, 2.7rem);
+  }
+
+  .about-section-header h2,
+  .about-profile-section .about-section-header h2,
+  .about-journey-section .about-section-header h2 {
+    font-size: clamp(1.85rem, 12vw, 2.55rem);
+  }
+
+  .about-story-lead,
+  .procedure-feature h3,
+  .journey-robotics h3 {
+    font-size: clamp(1.65rem, 10vw, 2.2rem) !important;
+  }
+
+  .about-story-copy p,
+  .procedure-map p,
+  .research-document p,
+  .membership-registry-note p {
+    font-size: 0.9rem;
+  }
+
+  .membership-stamp-watermark {
+    width: 72%;
+    opacity: 0.08;
   }
 }
