@@ -1,5 +1,5 @@
 import { ArrowUpRight, CalendarDays, MapPin, ShieldPlus } from "lucide-react";
-import { FaInstagram, FaLinkedinIn, FaXTwitter, FaYoutube } from "react-icons/fa6";
+import { FaFacebookF, FaInstagram, FaLinkedinIn, FaXTwitter, FaYoutube } from "react-icons/fa6";
 import "./Footer.css";
 
 const footerLinks = [
@@ -38,10 +38,11 @@ const footerLinks = [
 ];
 
 const socialLinks = [
-  { label: "LinkedIn", href: "#contact", Icon: FaLinkedinIn },
-  { label: "Instagram", href: "#contact", Icon: FaInstagram },
-  { label: "YouTube", href: "#contact", Icon: FaYoutube },
-  { label: "X", href: "#contact", Icon: FaXTwitter },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/sarbartha-kumar-pratihar-295395266", Icon: FaLinkedinIn },
+  { label: "Instagram", href: "https://www.instagram.com/drsarbarthapratihar", Icon: FaInstagram },
+  { label: "YouTube", href: "https://www.youtube.com/@skpurology", Icon: FaYoutube },
+  { label: "X", href: "https://x.com/psarbartha", Icon: FaXTwitter },
+  { label: "X", href: "https://www.facebook.com/share/1JJ8gHFCyF/", Icon: FaFacebookF },
 ];
 
 const Footer = () => {
