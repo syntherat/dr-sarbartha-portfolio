@@ -79,7 +79,7 @@ const Footer = () => {
 
             <div className="footer-socials">
               {socialLinks.map(({ label, href, Icon }) => (
-                <a href={href} aria-label={label} key={label}>
+                <a href={href} aria-label={label} key={label} target="_blank" rel="noopener noreferrer">
                   <Icon />
                 </a>
               ))}
