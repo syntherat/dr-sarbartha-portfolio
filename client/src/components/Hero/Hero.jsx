@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./Hero.css";
 import doctorImage from "../../assets/doc-placeholder-nobg.png";
 
@@ -22,8 +23,12 @@ const Hero = () => {
           </p>
 
           <div className="hero-ctas">
-            <button className="btn-primary">Book Appointment</button>
-            <button className="btn-secondary">View Profile</button>
+            <Link to="/#schedule" className="btn-primary">
+              Book Appointment
+            </Link>
+            <Link to="/about" className="btn-secondary">
+              View Profile
+            </Link>
           </div>
 
           <div className="hero-trust-indicators">

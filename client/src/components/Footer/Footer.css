@@ -186,6 +186,20 @@
   margin: 0;
 }
 
+.footer-credit a {
+  color: rgba(248, 245, 242, 0.78);
+  text-decoration: underline;
+  text-decoration-color: rgba(232, 168, 124, 0.5);
+  text-underline-offset: 0.2em;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.footer-credit a:hover,
+.footer-credit a:focus-visible {
+  color: var(--color-accent);
+  text-decoration-color: var(--color-accent);
+}
+
 .footer-bottom span {
   color: rgba(163, 177, 138, 0.78);
   font-weight: 800;

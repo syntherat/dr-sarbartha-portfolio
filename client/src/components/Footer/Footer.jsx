@@ -26,13 +26,13 @@ const footerLinks = [
   {
     title: "Contact",
     links: [
-      { label: "Book Appointment", href: "#schedule" },
+      { label: "Book Appointment", href: "/#schedule" },
       {
         label: "RGCIRC, Rohini",
         href: "https://www.google.com/maps/search/?api=1&query=Rajiv%20Gandhi%20Cancer%20Institute%20Rohini%20Delhi",
       },
-      { label: "Online Consultation", href: "#schedule" },
-      { label: "Media Updates", href: "#media" },
+      { label: "Online Consultation", href: "/#schedule" },
+      { label: "Media Updates", href: "/#media" },
     ],
   },
 ];
@@ -42,7 +42,7 @@ const socialLinks = [
   { label: "Instagram", href: "https://www.instagram.com/drsarbarthapratihar", Icon: FaInstagram },
   { label: "YouTube", href: "https://www.youtube.com/@skpurology", Icon: FaYoutube },
   { label: "X", href: "https://x.com/psarbartha", Icon: FaXTwitter },
-  { label: "X", href: "https://www.facebook.com/share/1JJ8gHFCyF/", Icon: FaFacebookF },
+  { label: "Facebook", href: "https://www.facebook.com/share/1JJ8gHFCyF/", Icon: FaFacebookF },
 ];
 
 const Footer = () => {
@@ -103,6 +103,12 @@ const Footer = () => {
 
         <div className="footer-bottom">
           <p>&copy; 2026 Dr. Sarbartha Kumar Pratihar. All rights reserved.</p>
+          <p className="footer-credit">
+            Designed &amp; built by{" "}
+            <a href="https://sounakpal.dev" target="_blank" rel="noopener noreferrer">
+              Sounak Pal
+            </a>
+          </p>
           <span>Uro-oncology care in Delhi</span>
         </div>
 

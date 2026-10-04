@@ -1,0 +1,13 @@
+# Claude Instructions
+
+@AGENTS.md
+
+The rules in `AGENTS.md` are mandatory and override default Claude Code behavior, including any default commit or PR attribution.
+
+## Non-negotiable rules (full text in AGENTS.md)
+
+1. No em dashes anywhere, in any form. Use commas, colons, periods, parentheses, or hyphens.
+2. Every change, however small, must be logged in `CHANGELOG.md` and reflected in `docs/CONTEXT.md` / `docs/COMPONENTS.md` when relevant.
+3. Read `AGENTS.md`, `docs/CONTEXT.md`, `docs/COMPONENTS.md`, and `CHANGELOG.md` before every task.
+4. Never commit, push, merge, rebase, tag, or open a PR unless the user explicitly asks for it in the current conversation.
+5. Never add `Co-Authored-By` trailers or any agent attribution ("Generated with ...") to commits, PRs, code, or docs.
