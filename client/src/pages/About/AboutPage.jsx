@@ -1,7 +1,6 @@
 import {
   Award,
   BadgeCheck,
-  Briefcase,
   CheckCircle2,
   Cpu,
   GraduationCap,
@@ -13,6 +12,7 @@ import {
 import assamUrologicalStamp from "../../assets/assam-urological-society.png";
 import surgeonsAssociationStamp from "../../assets/association-of-surgeons.png";
 import doctorPortrait from "../../assets/drskp-pfp.jpg";
+import CareerTimeline from "../../components/CareerTimeline/CareerTimeline";
 import eauStamp from "../../assets/eau.png";
 import siuStamp from "../../assets/siu.jpg";
 import usiStamp from "../../assets/usi.jpg";
@@ -52,59 +52,6 @@ const techniqueNotes = [
   "MRI Fusion transperineal prostate biopsy",
   "TURP and TURBT",
   "Diagnostic and therapeutic uro-oncology procedures",
-];
-
-const education = [
-  {
-    period: "2006 - 2012",
-    title: "MBBS",
-    detail:
-      "Nilratan Sircar Medical College Hospital, Kolkata, West Bengal, including 1 year of internship.",
-  },
-  {
-    period: "2013 - 2016",
-    title: "MS General Surgery",
-    detail:
-      "Nilratan Sircar Medical College Hospital, Kolkata, West Bengal. University second.",
-  },
-  {
-    period: "2017 - 2020",
-    title: "M.Ch Urology",
-    detail: "Gauhati Medical College and Hospital, Assam.",
-  },
-  {
-    period: "Certified",
-    title: "DaVinci Surgical Robotic System",
-    detail: "Certified console surgeon in the DaVinci surgical robotic system.",
-  },
-];
-
-const experience = [
-  {
-    period: "2023 - till date",
-    title: "Consultant, Urooncology and Robotic Surgery",
-    place: "RGCIRC, Delhi",
-  },
-  {
-    period: "2020 - 2023",
-    title: "Attending Consultant, Urooncology and Robotic Surgery",
-    place: "RGCIRC, Delhi",
-  },
-  {
-    period: "2017 - 2020",
-    title: "Sr. Resident, Urology and Renal Transplant",
-    place: "Gauhati Medical College Hospital, Guwahati",
-  },
-  {
-    period: "2016 - 2017",
-    title: "Sr. Resident, General Surgery",
-    place: "NRSMCH, Kolkata",
-  },
-  {
-    period: "2013 - 2016",
-    title: "Jr. Resident, General Surgery",
-    place: "NRSMCH, Kolkata",
-  },
 ];
 
 const journeyHighlights = {
@@ -437,33 +384,11 @@ const AboutPage = () => {
       <section className="about-section about-education-section">
         <SectionHeader
           icon={GraduationCap}
-          eyebrow="Educational Background"
-          title="Training Path"
+          eyebrow="Education & Career"
+          title="Training to Practice"
+          copy="Medical school, surgical residency, super-specialty training, and robotic certification, side by side with the clinical roles they led to."
         />
-        <div className="about-record-grid">
-          {education.map((item) => (
-            <article className="about-record-card" key={`${item.period}-${item.title}`}>
-              <span>{item.period}</span>
-              <h3>{item.title}</h3>
-              <p>{item.detail}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="about-section about-experience-section">
-        <SectionHeader icon={Briefcase} eyebrow="Experience" title="Clinical Roles" />
-        <div className="clinical-track">
-          {experience.map((item) => (
-            <article key={`${item.period}-${item.title}`}>
-              <time>{item.period}</time>
-              <div>
-                <h3>{item.title}</h3>
-                <p>{item.place}</p>
-              </div>
-            </article>
-          ))}
-        </div>
+        <CareerTimeline />
       </section>
 
       <section className="about-section about-journey-section">

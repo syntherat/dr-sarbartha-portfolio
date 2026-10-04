@@ -13,7 +13,7 @@ A single-page-app portfolio website for Dr. Sarbartha Kumar Pratihar, a uro-onco
 | Framework | React 19 (JSX, function components, hooks) |
 | Build tool | Vite 8 with `@vitejs/plugin-react` |
 | Routing | `react-router-dom` 7 (`BrowserRouter`) |
-| Animation | GSAP 3 with `ScrollTrigger` (Timeline section) |
+| Animation | GSAP 3 with `ScrollTrigger` (About page `CareerTimeline`: scrubbed spine fill and travelling avatar, looping spine flow, card reveals) |
 | Icons | `lucide-react`, `react-icons` (fa6, md) |
 | Linting | ESLint 10 flat config with `react-hooks` and `react-refresh` plugins |
 | Styling | Plain CSS, one stylesheet per component, global tokens in `index.css` |
@@ -64,7 +64,7 @@ Run from `client/`:
 
 | Path | Renders |
 | --- | --- |
-| `/` | `HomePage`: Hero, Reviews, Timeline, Services, CaseStudies, CaseMediaDivider, MediaUpdates, Schedule |
+| `/` | `HomePage`: Hero, Reviews, Services, CaseStudies, CaseMediaDivider, MediaUpdates, Schedule |
 | `/about` | `AboutPage` |
 | `/services/:slug` | `ServiceDetail` for a slug in `data/services.js`, otherwise `ServiceNotFound` |
 | `*` | `NotFound` |
@@ -101,6 +101,7 @@ Fonts load from Google Fonts in `index.css`.
 
 ## Known notes
 
-- `Timeline.jsx` imports `drskp-pfp.jpg` three times under different names as placeholders.
 - Service images are remote Unsplash URLs.
 - `README.md` is a placeholder title only.
+- `CareerTimeline` career descriptions were written from the role titles and the About page; confirm wording with Dr. Pratihar.
+- `.claude/launch.json` defines the `client` dev server (port 5173) for the Claude desktop browser preview.

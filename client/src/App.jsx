@@ -16,7 +16,6 @@ import MediaUpdates from "./components/MediaUpdates/MediaUpdates";
 import Schedule from "./components/Schedule/Schedule";
 import Footer from "./components/Footer/Footer";
 import Reviews from "./components/Reviews/Reviews";
-import Timeline from "./components/Timeline/Timeline";
 import ServiceDetail from "./components/ServiceDetail/ServiceDetail";
 import AboutPage from "./pages/About/AboutPage";
 import { getServiceBySlug } from "./data/services";
@@ -26,7 +25,6 @@ const HomePage = () => (
   <>
     <Hero />
     <Reviews />
-    <Timeline />
     <Services />
     <CaseStudies />
     <CaseMediaDivider />

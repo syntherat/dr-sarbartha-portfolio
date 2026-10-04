@@ -7,7 +7,17 @@ Format: entries are grouped under `## [Unreleased]` until the owner asks for a r
 ## [Unreleased]
 
 ### Added
+- 2026-10-04: About page Education & Career timeline (`CareerTimeline`): a top-to-bottom timeline with education cards left of the spine and career cards right, grouped by start year. The spine is a thick tube whose striped fill flows downward with moving light sparks inside, and fills with scroll. A circular avatar of the doctor travels down the spine with scroll, showing the current year, and each year marker lights up with a ring burst as the avatar reaches it. Cards swing in from their side with staggered content. On screens up to 760px the spine moves to the left and cards stack. Respects `prefers-reduced-motion`. Files: `client/src/components/CareerTimeline/CareerTimeline.jsx`, `client/src/components/CareerTimeline/CareerTimeline.css`, `client/src/pages/About/AboutPage.jsx`.
 - 2026-10-04: Developer credit "Designed & built by Sounak Pal" in the footer bottom bar, linking to https://sounakpal.dev in a new tab, with a `.footer-credit` link style. Files: `client/src/components/Footer/Footer.jsx`, `client/src/components/Footer/Footer.css`.
+- 2026-10-04: Dev server launch config (`client`, port 5173) for the Claude desktop browser preview. Files: `.claude/launch.json`.
+
+### Changed
+- 2026-10-04: Added more GSAP motion to the Education & Career section: masked title word reveal, spinning column icons, a glowing head that travels down each rail and lights up dots (with a ring burst) as it reaches them, 3D swing plus clip-path card entrances with staggered content, counting period years, and a pointer-following card tilt with a spotlight on hover. Animations replay in reverse when scrolling back up and stay off for reduced motion. Files: `client/src/components/Timeline/Timeline.jsx`, `client/src/components/Timeline/Timeline.css`.
+- 2026-10-04: Redesigned the home page Education & Career section. Replaced the pinned horizontal scroller with repeated portrait placeholders by two side-by-side columns (Education, Career), each with a vertical rail and dated cards. GSAP: header fades up, each rail draws itself as you scroll (scrubbed), and each milestone dot pops before its card slides in. Respects `prefers-reduced-motion`. Columns stack on screens up to 900px. Career entries now have real descriptions instead of "Lorem Ipsum", the DaVinci entry gained an institution, and the placeholder image imports were removed. Files: `client/src/components/Timeline/Timeline.jsx`, `client/src/components/Timeline/Timeline.css`.
+
+### Removed
+- 2026-10-04: Education & Career section removed from the home page, and the `Timeline` component deleted (its content now lives in the About page `CareerTimeline`). Files: `client/src/App.jsx`, `client/src/components/Timeline/Timeline.jsx`, `client/src/components/Timeline/Timeline.css`.
+- 2026-10-04: About page "Training Path" (education cards) and "Clinical Roles" (experience list) sections, their `education` and `experience` data arrays, the unused `Briefcase` import, and their now-unused styles (`.about-record-*`, `.clinical-track*`, `.about-experience-section` decorations), replaced by `CareerTimeline`. Files: `client/src/pages/About/AboutPage.jsx`, `client/src/pages/About/AboutPage.css`.
 
 ### Fixed
 - 2026-10-04: Hero "Book Appointment" and "View Profile" buttons did nothing. They are now router links to `/#schedule` and `/about`, styled as inline-flex so the label stays centered (including full width on mobile). Files: `client/src/components/Hero/Hero.jsx`, `client/src/components/Hero/Hero.css`.
@@ -15,6 +25,9 @@ Format: entries are grouped under `## [Unreleased]` until the owner asks for a r
 - 2026-10-04: Footer Contact links (Book Appointment, Online Consultation, Media Updates) used `#schedule` / `#media` without a leading `/`, so they did nothing off the home page. Changed to `/#schedule` and `/#media`. Files: `client/src/components/Footer/Footer.jsx`.
 
 ### Docs
+- 2026-10-04: Documented `CareerTimeline`, the About page section change, and the home page removal; moved the footer credit changelog entry back under Added. Files: `docs/COMPONENTS.md`, `docs/CONTEXT.md`, `CHANGELOG.md`.
+- 2026-10-04: Documented the new Timeline animations. Files: `docs/COMPONENTS.md`, `docs/CONTEXT.md`.
+- 2026-10-04: Updated the Timeline entry, removed it from the `drskp-pfp.jpg` asset users, dropped the fixed triple-import known note, and added notes on career copy and the launch config. Files: `docs/COMPONENTS.md`, `docs/CONTEXT.md`.
 - 2026-10-04: Documented the Hero call-to-action links. Files: `docs/COMPONENTS.md`.
 - 2026-10-04: Documented the footer developer credit. Files: `docs/COMPONENTS.md`.
 - 2026-10-04: Removed the two fixed Footer bugs from Known notes. Files: `docs/CONTEXT.md`.

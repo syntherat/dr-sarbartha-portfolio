@@ -1,0 +1,419 @@
+.career-timeline {
+  --career-timeline-education: var(--color-secondary-accent);
+  --career-timeline-career: var(--color-accent);
+  --career-timeline-spine-w: 16px;
+  --career-timeline-center: 128px;
+
+  position: relative;
+}
+
+.career-timeline-legend {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--career-timeline-center) minmax(0, 1fr);
+  margin-bottom: 2.5rem;
+}
+
+.career-timeline-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-body);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.2rem;
+  text-transform: uppercase;
+  color: rgba(31, 61, 59, 0.72);
+}
+
+.career-timeline-legend-item::before {
+  content: "";
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 50%;
+}
+
+.career-timeline-legend-item--education {
+  justify-self: end;
+  flex-direction: row-reverse;
+}
+
+.career-timeline-legend-item--education::before {
+  background: var(--career-timeline-education);
+}
+
+.career-timeline-legend-item--career {
+  grid-column: 3;
+}
+
+.career-timeline-legend-item--career::before {
+  background: var(--career-timeline-career);
+}
+
+.career-timeline-body {
+  position: relative;
+}
+
+/* Spine: a thick tube with a striped, glowing fill */
+
+.career-timeline-spine {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: var(--career-timeline-spine-w);
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: rgba(31, 61, 59, 0.06);
+  border: 1px solid rgba(31, 61, 59, 0.1);
+  box-shadow: inset 0 2px 5px rgba(31, 61, 59, 0.12);
+}
+
+.career-timeline-spine-fill {
+  position: absolute;
+  inset: 2px;
+  overflow: hidden;
+  border-radius: inherit;
+  background: linear-gradient(
+    to bottom,
+    var(--career-timeline-education),
+    var(--color-primary) 55%,
+    var(--career-timeline-career)
+  );
+  box-shadow: 0 0 14px rgba(232, 168, 124, 0.35);
+}
+
+.career-timeline-spine-flow {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.28) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.28) 50%,
+    rgba(255, 255, 255, 0.28) 75%,
+    transparent 75%
+  );
+  background-size: 16px 16px;
+}
+
+.career-timeline-spine-spark {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 90px;
+  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.95), transparent);
+}
+
+/* Travelling avatar */
+
+.career-timeline-avatar {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  top: 0;
+  width: 72px;
+  height: 72px;
+  transform: translate(-50%, -50%);
+}
+
+.career-timeline-avatar-ring {
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 2px dashed rgba(232, 168, 124, 0.75);
+}
+
+.career-timeline-avatar-photo {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 22%;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  box-shadow:
+    0 0 0 3px var(--color-primary),
+    0 12px 28px rgba(31, 61, 59, 0.3);
+}
+
+.career-timeline-avatar-year {
+  position: absolute;
+  left: 50%;
+  top: calc(100% - 10px);
+  transform: translateX(-50%);
+  padding: 0.18rem 0.65rem;
+  border-radius: 999px;
+  background: var(--color-primary);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.08rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  box-shadow: 0 6px 14px rgba(31, 61, 59, 0.25);
+}
+
+.career-timeline:not(.is-animated) .career-timeline-avatar {
+  display: none;
+}
+
+/* Rows */
+
+.career-timeline-rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: clamp(2rem, 4vw, 3.25rem);
+}
+
+.career-timeline-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--career-timeline-center) minmax(0, 1fr);
+  align-items: start;
+}
+
+.career-timeline-side {
+  display: flex;
+}
+
+.career-timeline-side--education {
+  justify-content: flex-end;
+}
+
+.career-timeline-marker {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 0.35rem;
+  padding-top: 1.4rem;
+}
+
+.career-timeline-marker-dot {
+  position: relative;
+  z-index: 1;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--color-bg);
+  border: 3px solid rgba(31, 61, 59, 0.25);
+  transition:
+    background 0.4s ease,
+    border-color 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+.career-timeline-marker-ring {
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 2px solid var(--career-timeline-career);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.career-timeline-marker-year {
+  position: relative;
+  z-index: 1;
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+  background: var(--color-bg);
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: rgba(31, 61, 59, 0.45);
+  transition: color 0.4s ease;
+}
+
+.career-timeline-row.is-reached .career-timeline-marker-dot {
+  background: var(--career-timeline-career);
+  border-color: #fff;
+  box-shadow:
+    0 0 0 3px var(--career-timeline-career),
+    0 0 18px rgba(232, 168, 124, 0.7);
+}
+
+.career-timeline-row.is-reached .career-timeline-marker-year {
+  color: var(--color-primary);
+}
+
+/* Cards */
+
+.career-timeline-card {
+  --lane: var(--career-timeline-education);
+
+  position: relative;
+  width: min(100%, 470px);
+  padding: 1.35rem 1.5rem;
+  border-radius: 18px;
+  background: #fff;
+  border: 1px solid rgba(31, 61, 59, 0.08);
+  box-shadow: 0 12px 32px rgba(31, 61, 59, 0.07);
+  transition:
+    border-color 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+.career-timeline-card--career {
+  --lane: var(--career-timeline-career);
+}
+
+/* Connector toward the spine */
+.career-timeline-card::after {
+  content: "";
+  position: absolute;
+  top: 2.1rem;
+  width: 2rem;
+  height: 2px;
+  background: color-mix(in srgb, var(--lane) 60%, transparent);
+}
+
+.career-timeline-card--education::after {
+  left: 100%;
+}
+
+.career-timeline-card--career::after {
+  right: 100%;
+}
+
+.career-timeline-row.is-reached .career-timeline-card {
+  border-color: color-mix(in srgb, var(--lane) 55%, transparent);
+  box-shadow: 0 18px 40px rgba(31, 61, 59, 0.1);
+}
+
+.career-timeline-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.7rem;
+}
+
+.career-timeline-type {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.16rem;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--lane) 70%, var(--color-primary));
+}
+
+.career-timeline-period {
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--lane) 22%, transparent);
+  font-family: var(--font-body);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.04rem;
+  color: var(--color-primary);
+  white-space: nowrap;
+}
+
+.career-timeline-card h3 {
+  margin: 0 0 0.3rem;
+  font-family: var(--font-heading);
+  font-size: clamp(1.2rem, 1.8vw, 1.45rem);
+  font-weight: 600;
+  line-height: 1.22;
+  color: var(--color-primary);
+}
+
+.career-timeline-institution {
+  margin: 0 0 0.65rem;
+  font-size: 0.86rem;
+  color: rgba(31, 61, 59, 0.6);
+}
+
+.career-timeline-description {
+  margin: 0;
+  font-size: 0.94rem;
+  line-height: 1.6;
+  color: rgba(31, 61, 59, 0.8);
+}
+
+/* Mobile: spine on the left, cards stacked on the right */
+
+@media (max-width: 760px) {
+  .career-timeline {
+    --career-timeline-spine-w: 12px;
+    --career-timeline-center: 56px;
+  }
+
+  .career-timeline-legend {
+    display: flex;
+    gap: 1.25rem;
+    padding-left: var(--career-timeline-center);
+    margin-bottom: 1.75rem;
+  }
+
+  .career-timeline-legend-item--education {
+    flex-direction: row;
+  }
+
+  .career-timeline-spine {
+    left: calc(var(--career-timeline-center) / 2);
+  }
+
+  .career-timeline-avatar {
+    width: 46px;
+    height: 46px;
+  }
+
+  .career-timeline-avatar-ring {
+    inset: -6px;
+  }
+
+  .career-timeline-avatar-year {
+    top: calc(100% - 8px);
+    font-size: 0.66rem;
+  }
+
+  .career-timeline-row {
+    grid-template-columns: var(--career-timeline-center) minmax(0, 1fr);
+    row-gap: 1rem;
+  }
+
+  .career-timeline-marker {
+    grid-column: 1;
+    grid-row: 1;
+    padding-top: 0;
+  }
+
+  .career-timeline-marker-year {
+    display: none;
+  }
+
+  .career-timeline-side {
+    grid-column: 2;
+  }
+
+  .career-timeline-side:empty {
+    display: none;
+  }
+
+  .career-timeline-side--education {
+    justify-content: flex-start;
+  }
+
+  .career-timeline-card {
+    width: 100%;
+  }
+
+  .career-timeline-card::after {
+    display: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .career-timeline-card {
+    padding: 1.05rem 1.1rem;
+  }
+
+  .career-timeline-card-top {
+    flex-wrap: wrap;
+  }
+}

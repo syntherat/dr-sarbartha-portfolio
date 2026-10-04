@@ -27,7 +27,6 @@ All paths are relative to `client/src/`. Each component lives in `components/<Na
 | --- | --- | --- |
 | `Hero` | none | Headline, intro copy, portrait (`assets/doc-placeholder-nobg.png`). CTAs are `Link`s: "Book Appointment" to `/#schedule`, "View Profile" to `/about` |
 | `Reviews` | `reviews` | "Voices of Healing" testimonial grid. `ReviewCard` has read-more expand state; `getTimeAgo()` formats review dates |
-| `Timeline` | none | Career timeline driven by GSAP `ScrollTrigger`. Desktop (`min-width: 901px`) and mobile (`max-width: 900px`) animations set up via `gsap.matchMedia()` inside `useLayoutEffect` |
 | `Services` | `services` | "Specialized Care" bento grid built from `data/services.js`; cards link to `/services/:slug`. Includes `ServicesDivider` |
 | `CaseStudies` | `case-studies` | "Clinical Paths, Clearly Mapped": static `caseStudies` array |
 | `CaseMediaDivider` | none | Decorative divider, `aria-hidden` |
@@ -39,9 +38,17 @@ All paths are relative to `client/src/`. Each component lives in `components/<Na
 ### AboutPage
 `pages/About/AboutPage.jsx` (route `/about`)
 
-Data arrays at the top of the file: `aboutSummary`, `aboutHighlights`, `procedurePillars`, `techniqueNotes`, `education`, `experience`, `journeyHighlights`, `journeyStats`, `academicHonors`, `conferenceHonors`, `featuredHonors`, `publications`, `publicationFolders`, `memberships`, `stats`.
+Data arrays at the top of the file: `aboutSummary`, `aboutHighlights`, `procedurePillars`, `techniqueNotes`, `journeyHighlights`, `journeyStats`, `academicHonors`, `conferenceHonors`, `featuredHonors`, `publications`, `publicationFolders`, `memberships`, `stats`.
 
-Sections in order: hero, profile, specialized (procedure pillars), education, experience, journey, awards, publications (research folders), memberships. Uses a shared `SectionHeader` helper and a `ProfilePracticeMark` SVG. Society logos come from `assets/`.
+Sections in order: hero, profile, specialized (procedure pillars), education and career (`CareerTimeline`, inside `.about-education-section`), journey, awards, publications (research folders), memberships. Uses a shared `SectionHeader` helper and a `ProfilePracticeMark` SVG. Society logos come from `assets/`.
+
+### CareerTimeline
+`components/CareerTimeline/CareerTimeline.jsx` (used by AboutPage)
+
+- Data: `timelineData` (items with `start`, `period`, `title`, `institution`, `type` of `education` or `career`, `description`), grouped by start year into `timelineRows`.
+- Desktop: three-column rows, education card left, year marker on the center spine, career card right. Up to 760px: spine on the left, cards stacked on the right, empty sides hidden.
+- Spine: thick tube (`.career-timeline-spine`) with a gradient fill, striped flow layer and light sparks that loop downward.
+- GSAP (`gsap.matchMedia()` with `isDesktop` / `isMobile` conditions, off for reduced motion): fill clip-path and avatar (`assets/drskp-pfp.jpg`) position are scrubbed so the avatar stays at the viewport center while moving down the spine; markers get `.is-reached` with a ring burst and update the avatar year chip; cards swing in from their side (all from the right on mobile) with staggered content.
 
 ### ServiceDetail
 `components/ServiceDetail/ServiceDetail.jsx` (route `/services/:slug`)
@@ -75,6 +82,6 @@ Current slugs: `prostate-cancer`, `urinary-bladder-cancer`, `kidney-cancer`, `te
 | File | Used by |
 | --- | --- |
 | `doc-placeholder-nobg.png` | Hero |
-| `drskp-pfp.jpg` | Timeline, AboutPage |
+| `drskp-pfp.jpg` | AboutPage, CareerTimeline avatar |
 | `assam-urological-society.png`, `association-of-surgeons.png`, `eau.png`, `siu.jpg`, `usi.jpg` | AboutPage memberships |
 | `doctor_placeholder.png`, `hero.png` | Not currently imported |
