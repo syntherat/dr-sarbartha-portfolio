@@ -50,7 +50,7 @@ A single-page-app portfolio website for Dr. Sarbartha Kumar Pratihar, a uro-onco
         ├── pages/About/AboutPage.jsx + AboutPage.css
         ├── pages/FaqQuestion/FaqQuestionPage.jsx + .css   Page for a starred FAQ question
         ├── data/services.js  Service catalog and getServiceBySlug()
-        └── data/faq/         Patient FAQ sets (prostate.js) and helpers (index.js)
+        └── data/faq/         Patient FAQ sets (prostate.js, kidney.js) and helpers (index.js)
 ```
 
 ## Scripts
@@ -104,7 +104,7 @@ Fonts load from Google Fonts in `index.css`.
 - Layout must stay responsive with no horizontal overflow (global `overflow-x: clip`).
 - External links open in a new tab with `target="_blank"` and `rel="noopener noreferrer"`.
 - No em dashes anywhere (see `AGENTS.md`).
-- Patient FAQ pages and content follow `docs/PATIENT-FAQ.md`. Prostate is built; other cancers are added one at a time.
+- Patient FAQ pages and content follow `docs/PATIENT-FAQ.md`. Prostate and kidney are built; other cancers are added one at a time.
 
 ## Known notes
 

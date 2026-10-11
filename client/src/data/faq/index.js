@@ -1,8 +1,9 @@
+import { kidneyFaq } from "./kidney";
 import { prostateFaq } from "./prostate";
 
 export const doctorName = "Dr. Sarbartha Kumar Pratihar";
 
-const faqSets = [prostateFaq];
+const faqSets = [prostateFaq, kidneyFaq];
 
 export const getFaqBySlug = (slug) => faqSets.find((faq) => faq.slug === slug);
 

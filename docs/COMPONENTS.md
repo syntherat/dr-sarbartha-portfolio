@@ -113,6 +113,7 @@ Current slugs: `prostate-cancer`, `urinary-bladder-cancer`, `kidney-cancer`, `te
 Patient FAQ content, one file per set (rules and shape: `docs/PATIENT-FAQ.md`).
 
 - `prostate.js`: `prostateFaq` (slug `prostate-cancer`, 4 stages, 47 questions, 10 starred).
+- `kidney.js`: `kidneyFaq` (slug `kidney-cancer`, 4 stages, 33 questions, 4 starred).
 - `index.js`: `doctorName`, `getFaqBySlug(slug)`, `findFaqQuestion(faq, questionId)` (returns `{ stage, question }` or `null`), `getFaqListStages(faq)` (stages without starred questions, empty stages dropped), `getStarredWithStage(faq)` (`{ stage, question }` for each starred question), `getStarredQuestions(faq)`, `buildFaqSchema(questions)` (FAQPage JSON-LD string).
 
 ## Assets (`assets/`)

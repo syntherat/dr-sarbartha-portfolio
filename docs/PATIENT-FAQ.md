@@ -4,7 +4,7 @@ Last updated: 2026-10-12
 
 Rules for writing and building the patient question pages (one page per cancer type, plus shared pages). Source: Dr. Sarbartha Kumar Pratihar's "Patient FAQ Question Bank" (2026-10-05) and "Patient FAQ Answer Outlines" (2026-10-08). Read this file before adding or editing any FAQ content or FAQ component.
 
-Status: prostate cancer built (2026-10-12). Other sets arrive one cancer at a time. Content is added only from the owner's paste for that cancer.
+Status: prostate and kidney cancer built (2026-10-12). Other sets arrive one cancer at a time. Content is added only from the owner's paste for that cancer.
 
 ## 1. Editorial rules (from the doctor)
 
@@ -31,7 +31,7 @@ Status: prostate cancer built (2026-10-12). Other sets arrive one cancer at a ti
 | Set | Groups | Has its own page? |
 | --- | --- | --- |
 | Prostate cancer | 4 journey stages | Yes, `/services/prostate-cancer` (built, `data/faq/prostate.js`) |
-| Kidney cancer | 4 journey stages | Yes, `/services/kidney-cancer` |
+| Kidney cancer | 4 journey stages | Yes, `/services/kidney-cancer` (built, `data/faq/kidney.js`) |
 | Urinary bladder cancer | 4 journey stages | Yes, `/services/urinary-bladder-cancer` |
 | Ureter and renal pelvis cancer (upper tract urothelial) | 4 journey stages | Not yet: no service entry exists |
 | Penile cancer | 4 journey stages | Yes, `/services/penile-cancer` |
