@@ -26,6 +26,7 @@ import {
   getFaqBySlug,
   getSharedFaqBySlug,
 } from "./data/faq";
+import { getQuestionTranslation } from "./data/faq/translations";
 import "./App.css";
 
 const HomePage = () => (
@@ -86,21 +87,28 @@ const ServiceDetailRoute = () => {
 };
 
 // getFaq resolves the slug: cancer sets for /services, shared sets for
-// /patient-questions.
-const FaqQuestionRoute = ({ getFaq }) => {
+// /patient-questions. Only starred questions have pages; translated pages
+// (lang "hi") also need a translation. Non-starred translations are used only
+// in "More on this topic".
+const FaqQuestionRoute = ({ getFaq, lang = "en" }) => {
   const { slug, questionId } = useParams();
   const faq = getFaq(slug);
   const match = faq ? findFaqQuestion(faq, questionId) : null;
+  const hasPage =
+    match?.question.starred &&
+    (lang === "en" || Boolean(getQuestionTranslation(lang, faq, questionId)));
 
-  if (!match || !match.question.starred) {
+  if (!hasPage) {
     return <NotFound />;
   }
 
   return (
     <FaqQuestionPage
+      key={`${lang}-${slug}-${questionId}`}
       faq={faq}
       stage={match.stage}
       question={match.question}
+      lang={lang}
     />
   );
 };
@@ -150,6 +158,14 @@ function App() {
           <Route
             path="/patient-questions/:slug/:questionId"
             element={<FaqQuestionRoute getFaq={getSharedFaqBySlug} />}
+          />
+          <Route
+            path="/hi/services/:slug/:questionId"
+            element={<FaqQuestionRoute getFaq={getFaqBySlug} lang="hi" />}
+          />
+          <Route
+            path="/hi/patient-questions/:slug/:questionId"
+            element={<FaqQuestionRoute getFaq={getSharedFaqBySlug} lang="hi" />}
           />
           <Route path="*" element={<NotFound />} />
         </Routes>

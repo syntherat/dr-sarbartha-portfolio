@@ -213,6 +213,12 @@
   font-style: italic;
 }
 
+.kq-related-note {
+  margin: -0.5rem 0 1rem;
+  color: #5a6f6d;
+  font-size: 0.9rem;
+}
+
 .kq-related {
   display: flex;
   flex-direction: column;
@@ -265,6 +271,17 @@
 
 .kq-related-answer {
   padding: 0 2.5rem 1.4rem 0;
+}
+
+.kq-related-answer p.kq-related-hinglish {
+  color: #5a6f6d;
+  font-size: 0.95rem;
+}
+
+.kq-related-hinglish span {
+  color: var(--color-primary);
+  font-family: var(--font-heading);
+  font-style: italic;
 }
 
 .kq-related-item summary:hover span {
@@ -513,5 +530,85 @@
   .kq-related-item summary svg,
   .kq-contents a {
     transition: none;
+  }
+}
+
+/* Languages */
+
+.kq-masthead-end {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  color: #5a6f6d;
+}
+
+.kq-languages {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  letter-spacing: 0.08rem;
+  text-transform: none;
+}
+
+.kq-languages a {
+  color: var(--color-primary);
+  border-bottom: 1px solid var(--color-accent);
+}
+
+.kq-languages a:hover {
+  color: var(--color-accent);
+}
+
+.kq-languages [aria-current="page"] {
+  color: #5a6f6d;
+}
+
+.kq-hinglish {
+  margin-top: 1rem;
+  color: #5a6f6d;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.kq-hinglish span {
+  color: var(--color-primary);
+  font-family: var(--font-heading);
+  font-style: italic;
+}
+
+.kq-pending {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+}
+
+/* Devanagari: no letter-spacing (it breaks conjuncts) and taller lines so
+   vowel signs above and below the letters are not clipped. */
+
+.kq-page:lang(hi) .kq-masthead,
+.kq-page:lang(hi) .kq-stage,
+.kq-page:lang(hi) .kq-label,
+.kq-page:lang(hi) .kq-byline-item span,
+.kq-page:lang(hi) .kq-booking-eyebrow {
+  letter-spacing: 0;
+}
+
+.kq-page:lang(hi) .kq-header h1 {
+  line-height: 1.35;
+}
+
+.kq-page:lang(hi) .kq-lead,
+.kq-page:lang(hi) .kq-points p,
+.kq-page:lang(hi) .kq-pager-title,
+.kq-page:lang(hi) .kq-booking p {
+  line-height: 1.7;
+}
+
+@media (max-width: 620px) {
+  .kq-masthead {
+    flex-wrap: wrap;
+  }
+
+  .kq-masthead-end {
+    gap: 1rem;
   }
 }

@@ -10,6 +10,10 @@ const crossReferences = [
     pattern: /(?<=\((?:see|details under) )Robotic surgery(?=\))/,
     to: "/patient-questions/robotic-surgery#faq",
   },
+  {
+    pattern: /(?<=\((?:देखें|विवरण): )रोबोटिक सर्जरी(?=\))/,
+    to: "/patient-questions/robotic-surgery#faq",
+  },
 ];
 
 const linkCrossReferences = (text, keyPrefix) => {

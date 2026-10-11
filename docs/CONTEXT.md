@@ -76,6 +76,7 @@ Run from `client/`:
 | `/services/:slug/:questionId` | `FaqQuestionPage` for a starred question in that slug's FAQ set, otherwise `NotFound` |
 | `/patient-questions/:slug` | `SharedFaqPage` for a shared FAQ set (`robotic-surgery`, `common-questions`), otherwise `NotFound` |
 | `/patient-questions/:slug/:questionId` | `FaqQuestionPage` for a starred question in a shared set, otherwise `NotFound` |
+| `/hi/services/:slug/:questionId`, `/hi/patient-questions/:slug/:questionId` | Hindi `FaqQuestionPage` for a starred question with a Hindi translation, otherwise `NotFound` |
 | `*` | `NotFound` |
 
 `Navbar` and `Footer` render on every route.
@@ -107,7 +108,7 @@ Fonts load from Google Fonts in `index.css`.
 - Layout must stay responsive with no horizontal overflow (global `overflow-x: clip`).
 - External links open in a new tab with `target="_blank"` and `rel="noopener noreferrer"`.
 - No em dashes anywhere (see `AGENTS.md`).
-- Patient FAQ pages and content follow `docs/PATIENT-FAQ.md`. All eight cancer sets and both shared pages (robotic surgery, common questions) are built.
+- Patient FAQ pages and content follow `docs/PATIENT-FAQ.md`. All eight cancer sets and both shared pages (robotic surgery, common questions) are built, with Hindi drafts of the starred pages (pending medical review).
 
 ## Known notes
 

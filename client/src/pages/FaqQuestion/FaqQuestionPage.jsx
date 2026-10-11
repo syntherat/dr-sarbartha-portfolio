@@ -8,39 +8,106 @@ import {
   getStarredWithStage,
   sharedFaqSets,
 } from "../../data/faq";
+import {
+  getQuestionLanguages,
+  getSetTranslation,
+  langPrefix,
+  languages,
+  uiText,
+} from "../../data/faq/translations";
 import "./FaqQuestionPage.css";
 
 const pad = (number) => String(number).padStart(2, "0");
 
-const FaqQuestionPage = ({ faq, stage, question }) => {
+// A starred question on its own page, in English or a translation (`lang`).
+const FaqQuestionPage = ({ faq, stage, question, lang = "en" }) => {
+  const t = uiText[lang];
+  const setTranslation = lang === "en" ? null : getSetTranslation(lang, faq);
+  // Text in the page language: the translation when there is one, else English.
+  const textOf = (item) => setTranslation?.questions[item.id] ?? item;
+  const titleOf = (set) =>
+    lang === "en" ? set.title : (getSetTranslation(lang, set)?.title ?? set.title);
+  const stageTitle = setTranslation?.stages[stage.id] ?? stage.title;
+  const current = textOf(question);
+
   const keyQuestions = getStarredWithStage(faq);
   const position = keyQuestions.findIndex(
     (item) => item.question.id === question.id,
   );
   const previous = keyQuestions[position - 1];
   const next = keyQuestions[position + 1];
+  // Same-stage, non-starred answers. On translated pages each one is shown in
+  // the page language when translated, otherwise in English.
   const relatedQuestions = stage.questions.filter((item) => !item.starred);
+  const isTranslated = (item) => Boolean(setTranslation?.questions[item.id]);
+  const hasUntranslated =
+    lang !== "en" && relatedQuestions.some((item) => !isTranslated(item));
   const otherSharedSets = sharedFaqSets.filter((item) => item !== faq);
   const faqPath = getFaqPath(faq);
-  const questionPath = (id) => `${faqPath}/${id}`;
+  const questionPath = (id, pageLang = lang) =>
+    `${langPrefix(pageLang)}${faqPath}/${id}`;
+
+  // Language versions of this page, for the switcher and hreflang links.
+  const pageLanguages = ["en", ...getQuestionLanguages(faq, question.id)];
+  const languagePath = (pageLang) => questionPath(question.id, pageLang);
 
   return (
-    <main className="kq-page">
-      <title>{`${question.question} | ${doctorName}`}</title>
+    <main className="kq-page" lang={languages[lang].htmlLang}>
+      <title>{`${current.hinglish ?? current.question} | ${doctorName}`}</title>
+      {pageLanguages.length > 1 &&
+        pageLanguages.map((pageLang) => (
+          <link
+            key={pageLang}
+            rel="alternate"
+            hrefLang={languages[pageLang].htmlLang}
+            href={`${window.location.origin}${languagePath(pageLang)}`}
+          />
+        ))}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: buildFaqSchema([question]) }}
+        dangerouslySetInnerHTML={{
+          __html: buildFaqSchema(
+            [current],
+            lang === "en" ? undefined : languages[lang].htmlLang,
+          ),
+        }}
       />
 
       <div className="kq-container">
         <div className="kq-masthead">
           <Link to={`${faqPath}#faq`} className="kq-back">
             <ArrowLeft size={14} aria-hidden="true" />
-            {faq.title}
+            {titleOf(faq)}
           </Link>
-          <span>
-            Key question {pad(position + 1)} / {pad(keyQuestions.length)}
-          </span>
+          <div className="kq-masthead-end">
+            {pageLanguages.length > 1 && (
+              <nav className="kq-languages" aria-label="Language">
+                {pageLanguages.map((pageLang) =>
+                  pageLang === lang ? (
+                    <span
+                      key={pageLang}
+                      lang={languages[pageLang].htmlLang}
+                      aria-current="page"
+                    >
+                      {languages[pageLang].label}
+                    </span>
+                  ) : (
+                    <Link
+                      key={pageLang}
+                      to={languagePath(pageLang)}
+                      lang={languages[pageLang].htmlLang}
+                      hrefLang={languages[pageLang].htmlLang}
+                    >
+                      {languages[pageLang].label}
+                    </Link>
+                  ),
+                )}
+              </nav>
+            )}
+            <span>
+              {t.keyQuestion} {pad(position + 1)} / {pad(keyQuestions.length)}
+            </span>
+          </div>
         </div>
 
         <header className="kq-header">
@@ -48,8 +115,19 @@ const FaqQuestionPage = ({ faq, stage, question }) => {
             {pad(position + 1)}
           </span>
           <div>
-            <span className="kq-stage">{stage.title}</span>
-            <h1>{question.question}</h1>
+            <span className="kq-stage">{stageTitle}</span>
+            <h1>{current.question}</h1>
+            {current.hinglish && (
+              <p className="kq-hinglish">
+                {t.searchedAs}:{" "}
+                <span lang="hi-Latn">“{current.hinglish}”</span>
+              </p>
+            )}
+            {t.pendingReview && (
+              <p className="kq-pending" lang="en">
+                <FaqText text={t.pendingReview} />
+              </p>
+            )}
           </div>
         </header>
 
@@ -59,33 +137,33 @@ const FaqQuestionPage = ({ faq, stage, question }) => {
               SP
             </span>
             <span>
-              <strong>{doctorName}</strong>
+              <strong lang="en">{doctorName}</strong>
               <FaqText text={faq.credentials} />
             </span>
           </div>
           <div className="kq-byline-item">
-            <span>Medically reviewed</span>
+            <span>{t.reviewed}</span>
             <FaqText text={faq.reviewedOn} />
           </div>
           <div className="kq-byline-item">
-            <span>Topic</span>
-            {faq.title}
+            <span>{t.topic}</span>
+            {titleOf(faq)}
           </div>
         </div>
 
         <div className="kq-layout">
           <article className="kq-article">
             <section className="kq-block">
-              <h2 className="kq-label">The short answer</h2>
+              <h2 className="kq-label">{t.shortAnswer}</h2>
               <p className="kq-lead">
-                <FaqText text={question.answer} />
+                <FaqText text={current.answer} />
               </p>
             </section>
 
             <section className="kq-block">
-              <h2 className="kq-label">In detail</h2>
+              <h2 className="kq-label">{t.inDetail}</h2>
               <ol className="kq-points">
-                {question.points.map((point, index) => (
+                {current.points.map((point, index) => (
                   <li key={point}>
                     <span className="kq-point-number" aria-hidden="true">
                       {pad(index + 1)}
@@ -98,28 +176,40 @@ const FaqQuestionPage = ({ faq, stage, question }) => {
               </ol>
             </section>
 
-            <p className="kq-note">
-              Answers are general guidance, written to help you prepare for
-              your appointment.
-            </p>
+            <p className="kq-note">{t.note}</p>
 
             {relatedQuestions.length > 0 && (
               <section className="kq-block">
-                <h2 className="kq-label">More on this topic</h2>
-                <p className="kq-related-intro">{stage.title}</p>
+                <h2 className="kq-label">{t.moreOnTopic}</h2>
+                <p className="kq-related-intro">{stageTitle}</p>
+                {hasUntranslated && (
+                  <p className="kq-related-note">{t.relatedInEnglish}</p>
+                )}
                 <div className="kq-related">
                   {relatedQuestions.map((item) => (
-                    <details key={item.id} className="kq-related-item">
+                    <details
+                      key={item.id}
+                      className="kq-related-item"
+                      lang={
+                        lang !== "en" && !isTranslated(item) ? "en" : undefined
+                      }
+                    >
                       <summary>
-                        <span>{item.question}</span>
+                        <span>{textOf(item).question}</span>
                         <Plus size={18} strokeWidth={1.5} aria-hidden="true" />
                       </summary>
                       <div className="kq-related-answer">
+                        {textOf(item).hinglish && (
+                          <p className="kq-related-hinglish">
+                            {t.searchedAs}:{" "}
+                            <span lang="hi-Latn">“{textOf(item).hinglish}”</span>
+                          </p>
+                        )}
                         <p>
-                          <FaqText text={item.answer} />
+                          <FaqText text={textOf(item).answer} />
                         </p>
                         <ul>
-                          {item.points.map((point) => (
+                          {textOf(item).points.map((point) => (
                             <li key={point}>
                               <FaqText text={point} />
                             </li>
@@ -134,8 +224,8 @@ const FaqQuestionPage = ({ faq, stage, question }) => {
           </article>
 
           <aside className="kq-aside">
-            <nav className="kq-contents" aria-label="Key questions">
-              <h2 className="kq-label">Key questions</h2>
+            <nav className="kq-contents" aria-label={t.keyQuestions}>
+              <h2 className="kq-label">{t.keyQuestions}</h2>
               <ol>
                 {keyQuestions.map((item, index) => (
                   <li key={item.question.id}>
@@ -147,7 +237,7 @@ const FaqQuestionPage = ({ faq, stage, question }) => {
                       <span className="kq-contents-number">
                         {pad(index + 1)}
                       </span>
-                      <span>{item.question.question}</span>
+                      <span>{textOf(item.question).question}</span>
                     </Link>
                   </li>
                 ))}
@@ -155,21 +245,21 @@ const FaqQuestionPage = ({ faq, stage, question }) => {
             </nav>
 
             <div className="kq-booking">
-              <span className="kq-booking-eyebrow">Consultation</span>
-              <p>Have a question that is not here?</p>
+              <span className="kq-booking-eyebrow">{t.consultation}</span>
+              <p>{t.notHere}</p>
               <Link to="/#schedule">
-                Book a consultation
+                {t.book}
                 <ArrowRight size={16} aria-hidden="true" />
               </Link>
             </div>
 
-            <nav className="kq-shared" aria-label="More patient questions">
-              <h2 className="kq-label">More patient questions</h2>
+            <nav className="kq-shared" aria-label={t.morePatientQuestions}>
+              <h2 className="kq-label">{t.morePatientQuestions}</h2>
               <ul>
                 {otherSharedSets.map((item) => (
                   <li key={item.slug}>
                     <Link to={`${getFaqPath(item)}#faq`}>
-                      {item.title}
+                      {titleOf(item)}
                       <ArrowRight size={14} aria-hidden="true" />
                     </Link>
                   </li>
@@ -179,14 +269,16 @@ const FaqQuestionPage = ({ faq, stage, question }) => {
           </aside>
         </div>
 
-        <nav className="kq-pager" aria-label="Previous and next key question">
+        <nav className="kq-pager" aria-label={`${t.previous} / ${t.next}`}>
           {previous ? (
             <Link to={questionPath(previous.question.id)} className="kq-pager-link">
               <span className="kq-pager-label">
                 <ArrowLeft size={14} aria-hidden="true" />
-                Previous, {pad(position)}
+                {t.previous}, {pad(position)}
               </span>
-              <span className="kq-pager-title">{previous.question.question}</span>
+              <span className="kq-pager-title">
+                {textOf(previous.question).question}
+              </span>
             </Link>
           ) : (
             <span />
@@ -197,18 +289,22 @@ const FaqQuestionPage = ({ faq, stage, question }) => {
               className="kq-pager-link is-next"
             >
               <span className="kq-pager-label">
-                Next, {pad(position + 2)}
+                {t.next}, {pad(position + 2)}
                 <ArrowRight size={14} aria-hidden="true" />
               </span>
-              <span className="kq-pager-title">{next.question.question}</span>
+              <span className="kq-pager-title">
+                {textOf(next.question).question}
+              </span>
             </Link>
           ) : (
             <Link to={`${faqPath}#faq`} className="kq-pager-link is-next">
               <span className="kq-pager-label">
-                All questions
+                {t.allQuestions}
                 <ArrowRight size={14} aria-hidden="true" />
               </span>
-              <span className="kq-pager-title">Ask the doctor: {faq.title}</span>
+              <span className="kq-pager-title">
+                {t.askTheDoctor}: {titleOf(faq)}
+              </span>
             </Link>
           )}
         </nav>

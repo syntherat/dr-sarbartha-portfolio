@@ -94,7 +94,8 @@ Sections in order: hero, profile, specialized (procedure pillars), education and
 ### FaqQuestionPage
 `pages/FaqQuestion/FaqQuestionPage.jsx` (route `/services/:slug/:questionId`)
 
-- Props `faq`, `stage`, `question`, resolved in `App.jsx` by `FaqQuestionRoute`; non-starred or unknown ids render `NotFound`.
+- Props `faq`, `stage`, `question`, `lang` (default `"en"`), resolved in `App.jsx` by `FaqQuestionRoute`. Starred questions only, in English or in a language that has the question translated; otherwise `NotFound`.
+- Translated pages (`lang="hi"`): text, stage and set titles from `data/faq/hi/`, interface labels from `uiText`, the Hinglish phrasing line (`.kq-hinglish`) when the translation has `hinglish`, the "[Hindi translation pending medical review]" mark (`.kq-pending`), and "More on this topic" with each answer in Hindi when translated, otherwise English (`lang="en"`), plus a note (`.kq-related-note`, `uiText.relatedInEnglish`) when some are English. The masthead language switcher (`.kq-languages`) and hreflang `<link>`s list English plus every translation of the question. The title uses the Hinglish phrasing when present.
 - Minimal editorial layout with no rules or grid lines (classes prefixed `kq-`): running head (back link to `/services/:slug#faq`, "Key question NN / NN"), italic numeral with stage and question as `h1`, tinted byline band (name, credentials, review date, topic), "The short answer", numbered "In detail" points, the general-guidance note, "More on this topic" (`<details>` for the same stage's non-starred questions with their answers), a sticky aside (key questions contents with `aria-current`, booking block to `/#schedule`, "More patient questions" links to the shared pages other than the current set), and previous / next links (the last one links to the FAQ). Single column up to 980px.
 - Sets the document `<title>` and renders FAQPage JSON-LD for the single question.
 
@@ -109,7 +110,7 @@ Defined in `App.jsx`, styled by `App.css` (`.service-not-found`):
 - `HomePage`: composes the home sections listed above.
 - `ScrollToRouteTarget`: manual scroll restoration, scroll to top on navigation, smooth scroll to hash target.
 - `ServiceDetailRoute`: reads `:slug`, calls `getServiceBySlug()`.
-- `FaqQuestionRoute`: prop `getFaq` (`getFaqBySlug` or `getSharedFaqBySlug`); reads `:slug` and `:questionId`, resolves them with `getFaq()` and `findFaqQuestion()`, renders `FaqQuestionPage` for starred questions only.
+- `FaqQuestionRoute`: props `getFaq`, `lang` (routes `/hi/services/:slug/:questionId` and `/hi/patient-questions/:slug/:questionId` pass `"hi"`); prop `getFaq` (`getFaqBySlug` or `getSharedFaqBySlug`); reads `:slug` and `:questionId`, resolves them with `getFaq()` and `findFaqQuestion()`, renders `FaqQuestionPage` for starred questions only.
 - `SharedFaqRoute`: resolves `/patient-questions/:slug` with `getSharedFaqBySlug()`, renders `SharedFaqPage` or `NotFound`.
 
 ## Data
@@ -135,7 +136,9 @@ Patient FAQ content, one file per set (rules and shape: `docs/PATIENT-FAQ.md`).
 - `retroperitoneal.js`: `retroperitonealFaq` (slug `retroperitoneal-cancer`, 19 questions, 4 starred).
 - `robotic.js`: `roboticFaq` (shared, slug `robotic-surgery`, 4 groups, 28 questions, 5 starred).
 - `common.js`: `commonFaq` (shared, slug `common-questions`, 5 groups, 28 questions, 5 starred).
-- `index.js`: `doctorName`, `faqSets` (cancer sets), `sharedFaqSets`, `getFaqBySlug(slug)` (cancer sets only), `getSharedFaqBySlug(slug)`, `getFaqPath(faq)` (`/services/:slug` or `/patient-questions/:slug`), `findFaqQuestion(faq, questionId)` (returns `{ stage, question }` or `null`), `getFaqListStages(faq)` (stages without starred questions, empty stages dropped), `getStarredWithStage(faq)` (`{ stage, question }` for each starred question), `getStarredQuestions(faq)`, `buildFaqSchema(questions)` (FAQPage JSON-LD string).
+- `hi/*.js`: Hindi drafts, one per set (`prostateHi` ... `commonHi`): `title`, `stages` (stage id to Hindi title), `questions` (question id to `{ question, answer, points, hinglish? }`). 248 questions: the 50 starred plus the 198 non-starred shown in "More on this topic" (non-starred translations are used only there); 14 with `hinglish` (2 of them on non-starred questions, `normal-psa-for-age` and `treatment-without-surgery`, shown inside their "More on this topic" answer as `.kq-related-hinglish`). `hi/index.js` exports `hiSets` keyed by set slug.
+- `translations.js`: `languages` (`en`, `hi`: label and `htmlLang`), `getSetTranslation(lang, faq)`, `getQuestionTranslation(lang, faq, id)`, `getQuestionLanguages(faq, id)`, `langPrefix(lang)`, `uiText` (question page labels per language).
+- `index.js`: `doctorName`, `faqSets` (cancer sets), `sharedFaqSets`, `getFaqBySlug(slug)` (cancer sets only), `getSharedFaqBySlug(slug)`, `getFaqPath(faq)` (`/services/:slug` or `/patient-questions/:slug`), `findFaqQuestion(faq, questionId)` (returns `{ stage, question }` or `null`), `getFaqListStages(faq)` (stages without starred questions, empty stages dropped), `getStarredWithStage(faq)` (`{ stage, question }` for each starred question), `getStarredQuestions(faq)`, `buildFaqSchema(questions, inLanguage?)` (FAQPage JSON-LD string).
 
 ## Assets (`assets/`)
 

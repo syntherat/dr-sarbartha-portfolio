@@ -74,11 +74,13 @@ export const getStarredQuestions = (faq) =>
 const answerText = (question) =>
   [question.answer, ...question.points].join(" ");
 
-// FAQPage structured data (schema.org) for search engines.
-export const buildFaqSchema = (questions) =>
+// FAQPage structured data (schema.org) for search engines. `inLanguage` is
+// set for translated pages.
+export const buildFaqSchema = (questions, inLanguage) =>
   JSON.stringify({
     "@context": "https://schema.org",
     "@type": "FAQPage",
+    ...(inLanguage && { inLanguage }),
     mainEntity: questions.map((question) => ({
       "@type": "Question",
       name: question.question,
