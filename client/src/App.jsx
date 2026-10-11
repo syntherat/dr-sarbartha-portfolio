@@ -19,8 +19,13 @@ import Reviews from "./components/Reviews/Reviews";
 import ServiceDetail from "./components/ServiceDetail/ServiceDetail";
 import AboutPage from "./pages/About/AboutPage";
 import FaqQuestionPage from "./pages/FaqQuestion/FaqQuestionPage";
+import SharedFaqPage from "./pages/SharedFaq/SharedFaqPage";
 import { getServiceBySlug } from "./data/services";
-import { findFaqQuestion, getFaqBySlug } from "./data/faq";
+import {
+  findFaqQuestion,
+  getFaqBySlug,
+  getSharedFaqBySlug,
+} from "./data/faq";
 import "./App.css";
 
 const HomePage = () => (
@@ -80,9 +85,11 @@ const ServiceDetailRoute = () => {
   return <ServiceDetail service={selectedService} />;
 };
 
-const FaqQuestionRoute = () => {
+// getFaq resolves the slug: cancer sets for /services, shared sets for
+// /patient-questions.
+const FaqQuestionRoute = ({ getFaq }) => {
   const { slug, questionId } = useParams();
-  const faq = getFaqBySlug(slug);
+  const faq = getFaq(slug);
   const match = faq ? findFaqQuestion(faq, questionId) : null;
 
   if (!match || !match.question.starred) {
@@ -96,6 +103,17 @@ const FaqQuestionRoute = () => {
       question={match.question}
     />
   );
+};
+
+const SharedFaqRoute = () => {
+  const { slug } = useParams();
+  const faq = getSharedFaqBySlug(slug);
+
+  if (!faq) {
+    return <NotFound />;
+  }
+
+  return <SharedFaqPage key={faq.slug} faq={faq} />;
 };
 
 const ServiceNotFound = () => (
@@ -126,7 +144,12 @@ function App() {
           <Route path="/services/:slug" element={<ServiceDetailRoute />} />
           <Route
             path="/services/:slug/:questionId"
-            element={<FaqQuestionRoute />}
+            element={<FaqQuestionRoute getFaq={getFaqBySlug} />}
+          />
+          <Route path="/patient-questions/:slug" element={<SharedFaqRoute />} />
+          <Route
+            path="/patient-questions/:slug/:questionId"
+            element={<FaqQuestionRoute getFaq={getSharedFaqBySlug} />}
           />
           <Route path="*" element={<NotFound />} />
         </Routes>

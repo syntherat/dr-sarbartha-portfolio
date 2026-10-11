@@ -4,7 +4,7 @@ Last updated: 2026-10-12
 
 Rules for writing and building the patient question pages (one page per cancer type, plus shared pages). Source: Dr. Sarbartha Kumar Pratihar's "Patient FAQ Question Bank" (2026-10-05) and "Patient FAQ Answer Outlines" (2026-10-08). Read this file before adding or editing any FAQ content or FAQ component.
 
-Status: prostate and kidney cancer built (2026-10-12). Other sets arrive one cancer at a time. Content is added only from the owner's paste for that cancer.
+Status: all eight cancer sets and both shared pages built (2026-10-12). Content is added only from the owner's paste for that cancer.
 
 ## 1. Editorial rules (from the doctor)
 
@@ -32,20 +32,20 @@ Status: prostate and kidney cancer built (2026-10-12). Other sets arrive one can
 | --- | --- | --- |
 | Prostate cancer | 4 journey stages | Yes, `/services/prostate-cancer` (built, `data/faq/prostate.js`) |
 | Kidney cancer | 4 journey stages | Yes, `/services/kidney-cancer` (built, `data/faq/kidney.js`) |
-| Urinary bladder cancer | 4 journey stages | Yes, `/services/urinary-bladder-cancer` |
-| Ureter and renal pelvis cancer (upper tract urothelial) | 4 journey stages | Not yet: no service entry exists |
-| Penile cancer | 4 journey stages | Yes, `/services/penile-cancer` |
-| Testicular cancer | 4 journey stages | Yes, `/services/testicular-cancer` |
-| Adrenal tumours and adrenal cancer | 4 journey stages | Yes, `/services/adrenal-cancer` |
-| Retroperitoneal tumours and sarcoma | 4 journey stages | Yes, `/services/retroperitoneal-cancer` |
-| Robotic surgery | Understanding, Safety and choosing a surgeon, Cost and insurance, Recovery | Shared page |
-| Common to all urological cancers | Choosing care, Family and emotional concerns, Myths, Money and paperwork, Travelling from another city or country | Shared page, linked from every cancer page |
+| Urinary bladder cancer | 4 journey stages | Yes, `/services/urinary-bladder-cancer` (built, `data/faq/bladder.js`) |
+| Ureter and renal pelvis cancer (upper tract urothelial) | 4 journey stages | Yes, `/services/ureter-renal-pelvis-cancer` (built, `data/faq/upperTract.js`; service added 2026-10-12) |
+| Penile cancer | 4 journey stages | Yes, `/services/penile-cancer` (built, `data/faq/penile.js`) |
+| Testicular cancer | 4 journey stages | Yes, `/services/testicular-cancer` (built, `data/faq/testicular.js`) |
+| Adrenal tumours and adrenal cancer | 4 journey stages | Yes, `/services/adrenal-cancer` (built, `data/faq/adrenal.js`) |
+| Retroperitoneal tumours and sarcoma | 4 journey stages | Yes, `/services/retroperitoneal-cancer` (built, `data/faq/retroperitoneal.js`) |
+| Robotic surgery | Understanding, Safety and choosing a surgeon, Cost and insurance, Recovery | Shared page, `/patient-questions/robotic-surgery` (built, `data/faq/robotic.js`) |
+| Common to all urological cancers | Choosing care, Family and emotional concerns, Myths, Money and paperwork, Travelling from another city or country | Shared page, `/patient-questions/common-questions` (built, `data/faq/common.js`), linked from every cancer page |
 
 ## 3. Page structure
 
-- **Cancer page** (`/services/:slug`): existing service content, then **Key questions** (an editorial numbered index, one entry per starred question, each linking to its own page), then the "Ask the doctor" FAQ (design B, see below) with the four journey stages as the topic list and **only the non-starred questions** (owner decision 2026-10-12, matching rule 2), then links to the shared pages (not built).
+- **Cancer page** (`/services/:slug`): existing service content, then **Key questions** (an editorial numbered index, one entry per starred question, each linking to its own page), then the "Ask the doctor" FAQ (design B, see below) with the four journey stages as the topic list and **only the non-starred questions** (owner decision 2026-10-12, matching rule 2), then "Questions for every cancer" (`SharedFaqLinks`), linking to both shared pages.
 - **Starred question page** (`/services/:slug/:questionId`, for example `/services/prostate-cancer/psa-high`): one question with its short answer and numbered detail, reviewer byline, FAQPage schema, page `<title>`, "More on this topic" (the same stage's non-starred questions, expandable), a contents list of the set's key questions, booking block, and previous / next links. Minimal editorial style without rules or grid lines. Only starred questions have a page; other ids show the not-found view.
-- **Shared pages** (not built): robotic surgery and common questions, same FAQ component, their own groups as topics.
+- **Shared pages** (`/patient-questions/:slug`): robotic surgery and common questions. Title header, Key questions, the same "Ask the doctor" component with their own groups as topics, then links to the other shared page and every cancer FAQ. Starred questions have pages at `/patient-questions/:slug/:questionId`. Answers that cite "(source)" render the word as written; the source list is in section 6.
 
 ## 4. UI: "Ask the doctor" (design B)
 

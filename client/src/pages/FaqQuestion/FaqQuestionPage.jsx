@@ -4,6 +4,7 @@ import FaqText from "../../components/FaqText/FaqText";
 import {
   buildFaqSchema,
   doctorName,
+  getFaqPath,
   getStarredWithStage,
 } from "../../data/faq";
 import "./FaqQuestionPage.css";
@@ -18,7 +19,8 @@ const FaqQuestionPage = ({ faq, stage, question }) => {
   const previous = keyQuestions[position - 1];
   const next = keyQuestions[position + 1];
   const relatedQuestions = stage.questions.filter((item) => !item.starred);
-  const questionPath = (id) => `/services/${faq.slug}/${id}`;
+  const faqPath = getFaqPath(faq);
+  const questionPath = (id) => `${faqPath}/${id}`;
 
   return (
     <main className="kq-page">
@@ -30,7 +32,7 @@ const FaqQuestionPage = ({ faq, stage, question }) => {
 
       <div className="kq-container">
         <div className="kq-masthead">
-          <Link to={`/services/${faq.slug}#faq`} className="kq-back">
+          <Link to={`${faqPath}#faq`} className="kq-back">
             <ArrowLeft size={14} aria-hidden="true" />
             {faq.title}
           </Link>
@@ -185,7 +187,7 @@ const FaqQuestionPage = ({ faq, stage, question }) => {
               <span className="kq-pager-title">{next.question.question}</span>
             </Link>
           ) : (
-            <Link to={`/services/${faq.slug}#faq`} className="kq-pager-link is-next">
+            <Link to={`${faqPath}#faq`} className="kq-pager-link is-next">
               <span className="kq-pager-label">
                 All questions
                 <ArrowRight size={14} aria-hidden="true" />

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
-import { getStarredWithStage } from "../../data/faq";
+import { getFaqPath, getStarredWithStage } from "../../data/faq";
 import "./KeyQuestions.css";
 
 const KeyQuestions = ({ faq }) => {
@@ -22,7 +22,7 @@ const KeyQuestions = ({ faq }) => {
           <li key={question.id}>
             <Link
               className="key-question-row"
-              to={`/services/${faq.slug}/${question.id}`}
+              to={`${getFaqPath(faq)}/${question.id}`}
             >
               <span className="key-question-number" aria-hidden="true">
                 {String(index + 1).padStart(2, "0")}

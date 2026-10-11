@@ -27,7 +27,7 @@ All paths are relative to `client/src/`. Each component lives in `components/<Na
 | --- | --- | --- |
 | `Hero` | none | Headline, intro copy, portrait (`assets/doc-placeholder-nobg.png`). CTAs are `Link`s: "Book Appointment" to `/#schedule`, "View Profile" to `/about` |
 | `Reviews` | `reviews` | "Voices of Healing" testimonial grid. `ReviewCard` has read-more expand state; `getTimeAgo()` formats review dates |
-| `Services` | `services` | "Specialized Care" bento grid built from `data/services.js`; cards link to `/services/:slug`. Includes `ServicesDivider` |
+| `Services` | `services` | "Specialized Care" bento grid built from `data/services.js` (eight cards; `bentoSizes`: feature, tall, then six compact); cards link to `/services/:slug`. Includes `ServicesDivider` |
 | `CaseStudies` | `case-studies` | "Clinical Paths, Clearly Mapped": static `caseStudies` array |
 | `CaseMediaDivider` | none | Decorative divider, `aria-hidden` |
 | `MediaUpdates` | `media` | "Conferences, Talks & Clinic Notes": `updates` array with icons per type (`typeIcons`) |
@@ -74,6 +74,17 @@ Sections in order: hero, profile, specialized (procedure pillars), education and
 - Editorial index style: header (set title eyebrow and "Key questions", no rules), then an ordered list from `getStarredWithStage(faq)` with hairline dividers between entries. Each row is a link to `/services/:slug/:questionId` with an italic serif numeral, the stage title in small caps, the question, and an arrow.
 - Two columns, one column up to 860px. Hover darkens the numeral, draws an underline under the question and nudges the arrow (off for reduced motion).
 
+### SharedFaqLinks
+`components/SharedFaqLinks/SharedFaqLinks.jsx` (used by ServiceDetail and SharedFaqPage)
+
+- Props `exclude` (a shared set slug to leave out), `withCancers` (also list every cancer set). Two-column hairline list in the Key questions style; each row shows the question count and set title and links to `getFaqPath(faq)#faq`.
+- On cancer pages: heading "Questions for every cancer", both shared sets. On shared pages: heading "More questions", the other shared set plus all cancer sets.
+
+### SharedFaqPage
+`pages/SharedFaq/SharedFaqPage.jsx` (route `/patient-questions/:slug`, resolved by `SharedFaqRoute` in `App.jsx`)
+
+- Prop `faq` (a shared set). Header (back link to `/#services`, "Patient questions" eyebrow, title as `h1`), `KeyQuestions`, `AskTheDoctor`, `SharedFaqLinks exclude withCancers`. Sets the document `<title>`.
+
 ### FaqText
 `components/FaqText/FaqText.jsx`
 
@@ -97,7 +108,8 @@ Defined in `App.jsx`, styled by `App.css` (`.service-not-found`):
 - `HomePage`: composes the home sections listed above.
 - `ScrollToRouteTarget`: manual scroll restoration, scroll to top on navigation, smooth scroll to hash target.
 - `ServiceDetailRoute`: reads `:slug`, calls `getServiceBySlug()`.
-- `FaqQuestionRoute`: reads `:slug` and `:questionId`, resolves them with `getFaqBySlug()` and `findFaqQuestion()`, renders `FaqQuestionPage` for starred questions only.
+- `FaqQuestionRoute`: prop `getFaq` (`getFaqBySlug` or `getSharedFaqBySlug`); reads `:slug` and `:questionId`, resolves them with `getFaq()` and `findFaqQuestion()`, renders `FaqQuestionPage` for starred questions only.
+- `SharedFaqRoute`: resolves `/patient-questions/:slug` with `getSharedFaqBySlug()`, renders `SharedFaqPage` or `NotFound`.
 
 ## Data
 
@@ -106,7 +118,7 @@ Defined in `App.jsx`, styled by `App.css` (`.service-not-found`):
 - `services`: array of service objects with fields `id`, `slug`, `title`, `category`, `summary`, `image`, `imageAlt`, `focus[]`, `overview`, `carePath[]`.
 - `getServiceBySlug(slug)`: returns the matching service or `undefined`.
 
-Current slugs: `prostate-cancer`, `urinary-bladder-cancer`, `kidney-cancer`, `testicular-cancer`, `penile-cancer`, `adrenal-cancer`, `retroperitoneal-cancer`.
+Current slugs: `prostate-cancer`, `urinary-bladder-cancer`, `kidney-cancer`, `ureter-renal-pelvis-cancer`, `testicular-cancer`, `penile-cancer`, `adrenal-cancer`, `retroperitoneal-cancer`.
 
 ### `data/faq/`
 
@@ -114,7 +126,15 @@ Patient FAQ content, one file per set (rules and shape: `docs/PATIENT-FAQ.md`).
 
 - `prostate.js`: `prostateFaq` (slug `prostate-cancer`, 4 stages, 47 questions, 10 starred).
 - `kidney.js`: `kidneyFaq` (slug `kidney-cancer`, 4 stages, 33 questions, 4 starred).
-- `index.js`: `doctorName`, `getFaqBySlug(slug)`, `findFaqQuestion(faq, questionId)` (returns `{ stage, question }` or `null`), `getFaqListStages(faq)` (stages without starred questions, empty stages dropped), `getStarredWithStage(faq)` (`{ stage, question }` for each starred question), `getStarredQuestions(faq)`, `buildFaqSchema(questions)` (FAQPage JSON-LD string).
+- `bladder.js`: `bladderFaq` (slug `urinary-bladder-cancer`, 37 questions, 7 starred).
+- `upperTract.js`: `upperTractFaq` (slug `ureter-renal-pelvis-cancer`, 20 questions, 3 starred).
+- `penile.js`: `penileFaq` (slug `penile-cancer`, 25 questions, 4 starred).
+- `testicular.js`: `testicularFaq` (slug `testicular-cancer`, 30 questions, 5 starred).
+- `adrenal.js`: `adrenalFaq` (slug `adrenal-cancer`, 23 questions, 3 starred).
+- `retroperitoneal.js`: `retroperitonealFaq` (slug `retroperitoneal-cancer`, 19 questions, 4 starred).
+- `robotic.js`: `roboticFaq` (shared, slug `robotic-surgery`, 4 groups, 28 questions, 5 starred).
+- `common.js`: `commonFaq` (shared, slug `common-questions`, 5 groups, 28 questions, 5 starred).
+- `index.js`: `doctorName`, `faqSets` (cancer sets), `sharedFaqSets`, `getFaqBySlug(slug)` (cancer sets only), `getSharedFaqBySlug(slug)`, `getFaqPath(faq)` (`/services/:slug` or `/patient-questions/:slug`), `findFaqQuestion(faq, questionId)` (returns `{ stage, question }` or `null`), `getFaqListStages(faq)` (stages without starred questions, empty stages dropped), `getStarredWithStage(faq)` (`{ stage, question }` for each starred question), `getStarredQuestions(faq)`, `buildFaqSchema(questions)` (FAQPage JSON-LD string).
 
 ## Assets (`assets/`)
 

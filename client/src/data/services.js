@@ -58,6 +58,25 @@ export const services = [
   },
   {
     id: "04",
+    slug: "ureter-renal-pelvis-cancer",
+    title: "Ureter and Renal Pelvis Cancer",
+    category: "Upper Tract Urothelial",
+    summary:
+      "Care for cancer of the lining of the kidney's drainage system and ureter, from ureteroscopy and grading to kidney-sparing or radical surgery.",
+    image:
+      "https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=1200&auto=format&fit=crop",
+    imageAlt: "Prepared operating room with surgical lights",
+    focus: ["Ureteroscopy", "Kidney-sparing treatment", "Nephroureterectomy"],
+    overview:
+      "Ureter and renal pelvis cancer (upper tract urothelial cancer) starts in the lining of the kidney's drainage system, the same lining as the bladder. Tumor grade, size, number, CT findings, and kidney function decide between kidney-sparing endoscopic treatment and removal of the kidney, ureter, and a cuff of bladder.",
+    carePath: [
+      "CT urography, ureteroscopy, biopsy, and urine cytology review",
+      "Risk-adapted planning for endoscopic, segmental, or radical surgery",
+      "Regular cystoscopy and imaging to watch the bladder and the other kidney",
+    ],
+  },
+  {
+    id: "05",
     slug: "testicular-cancer",
     title: "Testicular Cancer",
     category: "Young Adult Oncology",
@@ -76,7 +95,7 @@ export const services = [
     ],
   },
   {
-    id: "05",
+    id: "06",
     slug: "penile-cancer",
     title: "Penile Cancer",
     category: "Reconstructive Oncology",
@@ -95,7 +114,7 @@ export const services = [
     ],
   },
   {
-    id: "06",
+    id: "07",
     slug: "adrenal-cancer",
     title: "Adrenal Cancer",
     category: "Adrenal Surgery",
@@ -114,7 +133,7 @@ export const services = [
     ],
   },
   {
-    id: "07",
+    id: "08",
     slug: "retroperitoneal-cancer",
     title: "Retroperitoneal Cancer",
     category: "Complex Oncology",

@@ -1,11 +1,41 @@
+import { adrenalFaq } from "./adrenal";
+import { bladderFaq } from "./bladder";
+import { commonFaq } from "./common";
 import { kidneyFaq } from "./kidney";
+import { penileFaq } from "./penile";
 import { prostateFaq } from "./prostate";
+import { retroperitonealFaq } from "./retroperitoneal";
+import { roboticFaq } from "./robotic";
+import { testicularFaq } from "./testicular";
+import { upperTractFaq } from "./upperTract";
 
 export const doctorName = "Dr. Sarbartha Kumar Pratihar";
 
-const faqSets = [prostateFaq, kidneyFaq];
+export const faqSets = [
+  prostateFaq,
+  kidneyFaq,
+  bladderFaq,
+  upperTractFaq,
+  penileFaq,
+  testicularFaq,
+  adrenalFaq,
+  retroperitonealFaq,
+];
+
+// Shared sets are not tied to one cancer: they have their own pages under
+// /patient-questions and are linked from every cancer page.
+export const sharedFaqSets = [roboticFaq, commonFaq];
 
 export const getFaqBySlug = (slug) => faqSets.find((faq) => faq.slug === slug);
+
+export const getSharedFaqBySlug = (slug) =>
+  sharedFaqSets.find((faq) => faq.slug === slug);
+
+// Page that holds a set's FAQ; starred question pages sit under it.
+export const getFaqPath = (faq) =>
+  sharedFaqSets.includes(faq)
+    ? `/patient-questions/${faq.slug}`
+    : `/services/${faq.slug}`;
 
 export const findFaqQuestion = (faq, questionId) => {
   for (const stage of faq.stages) {

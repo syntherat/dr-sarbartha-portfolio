@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import AskTheDoctor from "../AskTheDoctor/AskTheDoctor";
 import KeyQuestions from "../KeyQuestions/KeyQuestions";
+import SharedFaqLinks from "../SharedFaqLinks/SharedFaqLinks";
 import { services } from "../../data/services";
 import { getFaqBySlug } from "../../data/faq";
 import "./ServiceDetail.css";
@@ -52,6 +53,7 @@ const ServiceDetail = ({ service }) => {
 
       {faq && <KeyQuestions faq={faq} />}
       {faq && <AskTheDoctor key={faq.slug} faq={faq} />}
+      <SharedFaqLinks />
 
       <section className="related-services">
         <div>

@@ -7,7 +7,8 @@ const bentoSizes = [
   "tall",
   "compact",
   "compact",
-  "wide",
+  "compact",
+  "compact",
   "compact",
   "compact",
 ];
