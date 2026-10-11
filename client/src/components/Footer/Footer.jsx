@@ -24,6 +24,13 @@ const footerLinks = [
     ],
   },
   {
+    title: "Patient Questions",
+    links: [
+      { label: "Robotic Surgery", href: "/patient-questions/robotic-surgery" },
+      { label: "Common Questions", href: "/patient-questions/common-questions" },
+    ],
+  },
+  {
     title: "Contact",
     links: [
       { label: "Book Appointment", href: "/#schedule" },

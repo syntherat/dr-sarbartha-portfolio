@@ -6,6 +6,7 @@ import {
   doctorName,
   getFaqPath,
   getStarredWithStage,
+  sharedFaqSets,
 } from "../../data/faq";
 import "./FaqQuestionPage.css";
 
@@ -19,6 +20,7 @@ const FaqQuestionPage = ({ faq, stage, question }) => {
   const previous = keyQuestions[position - 1];
   const next = keyQuestions[position + 1];
   const relatedQuestions = stage.questions.filter((item) => !item.starred);
+  const otherSharedSets = sharedFaqSets.filter((item) => item !== faq);
   const faqPath = getFaqPath(faq);
   const questionPath = (id) => `${faqPath}/${id}`;
 
@@ -160,6 +162,20 @@ const FaqQuestionPage = ({ faq, stage, question }) => {
                 <ArrowRight size={16} aria-hidden="true" />
               </Link>
             </div>
+
+            <nav className="kq-shared" aria-label="More patient questions">
+              <h2 className="kq-label">More patient questions</h2>
+              <ul>
+                {otherSharedSets.map((item) => (
+                  <li key={item.slug}>
+                    <Link to={`${getFaqPath(item)}#faq`}>
+                      {item.title}
+                      <ArrowRight size={14} aria-hidden="true" />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
           </aside>
         </div>
 

@@ -95,6 +95,17 @@ const Services = () => {
             </Link>
           ))}
         </div>
+
+        <p className="services-patient-questions">
+          Questions about robotic surgery, cost or travelling? Read the patient
+          questions on{" "}
+          <Link to="/patient-questions/robotic-surgery">robotic surgery</Link>{" "}
+          and{" "}
+          <Link to="/patient-questions/common-questions">
+            questions common to every cancer
+          </Link>
+          .
+        </p>
       </div>
 
       <ServicesDivider placement="bottom" />

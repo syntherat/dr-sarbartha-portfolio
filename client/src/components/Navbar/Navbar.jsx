@@ -1,18 +1,26 @@
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import "./Navbar.css";
 
 const navItems = [
   { label: "Home", to: "/", route: true },
   { label: "About", to: "/about", route: true },
   { label: "Our Services", to: "/#services" },
+  // Active on both shared FAQ pages and their question pages.
+  {
+    label: "Patient Questions",
+    to: "/patient-questions/common-questions",
+    route: true,
+    activePrefix: "/patient-questions",
+  },
   { label: "Media", to: "/#media" },
   { label: "Contact", to: "/#contact" },
 ];
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { pathname } = useLocation();
 
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
@@ -56,7 +64,12 @@ const Navbar = () => {
                   to={item.to}
                   end={item.to === "/"}
                   className={({ isActive }) =>
-                    `nav-link${isActive ? " nav-link-active" : ""}`
+                    `nav-link${
+                      isActive ||
+                      (item.activePrefix && pathname.startsWith(item.activePrefix))
+                        ? " nav-link-active"
+                        : ""
+                    }`
                   }
                   onClick={closeMobileMenu}
                 >

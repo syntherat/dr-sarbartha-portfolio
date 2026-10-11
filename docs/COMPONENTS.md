@@ -10,14 +10,14 @@ All paths are relative to `client/src/`. Each component lives in `components/<Na
 `components/Navbar/Navbar.jsx`
 
 - Brand block (name plus "URO-ONCOLOGY & ROBOTIC SURGERY") linking to `/`.
-- Links: Home (`/`), About (`/about`), Our Services (`/#services`), Media (`/#media`), Contact (`/#contact`).
+- Links: Home (`/`), About (`/about`), Our Services (`/#services`), Patient Questions (`/patient-questions/common-questions`, shown active on any path starting with `/patient-questions` via `activePrefix`), Media (`/#media`), Contact (`/#contact`).
 - Route links use `NavLink` for active styling; hash links use `Link`.
 - Mobile menu toggled with `lucide-react` `Menu` / `X` icons; state in `isMobileMenuOpen`, closes on link click.
 
 ### Footer
 `components/Footer/Footer.jsx` (section id `contact`)
 
-- Link groups (`footerLinks`): site sections, service pages, clinic and booking links.
+- Link groups (`footerLinks`): Explore (site sections), Cancer Care (service pages), Patient Questions (robotic surgery and common questions pages), Contact (clinic and booking links). Four columns above 1280px, two from 1280px down, one under 640px.
 - Social links (`socialLinks`): LinkedIn, Instagram, YouTube, X, Facebook, using `react-icons/fa6`. Open in a new tab with `rel="noopener noreferrer"`.
 - Bottom bar: copyright, developer credit (`.footer-credit`, links to https://sounakpal.dev in a new tab), and tagline.
 
@@ -27,7 +27,7 @@ All paths are relative to `client/src/`. Each component lives in `components/<Na
 | --- | --- | --- |
 | `Hero` | none | Headline, intro copy, portrait (`assets/doc-placeholder-nobg.png`). CTAs are `Link`s: "Book Appointment" to `/#schedule`, "View Profile" to `/about` |
 | `Reviews` | `reviews` | "Voices of Healing" testimonial grid. `ReviewCard` has read-more expand state; `getTimeAgo()` formats review dates |
-| `Services` | `services` | "Specialized Care" bento grid built from `data/services.js` (eight cards; `bentoSizes`: feature, tall, then six compact); cards link to `/services/:slug`. Includes `ServicesDivider` |
+| `Services` | `services` | "Specialized Care" bento grid built from `data/services.js` (eight cards; `bentoSizes`: feature, tall, then six compact); cards link to `/services/:slug`. Below the grid, a line (`.services-patient-questions`) links to both shared patient question pages. Includes `ServicesDivider` |
 | `CaseStudies` | `case-studies` | "Clinical Paths, Clearly Mapped": static `caseStudies` array |
 | `CaseMediaDivider` | none | Decorative divider, `aria-hidden` |
 | `MediaUpdates` | `media` | "Conferences, Talks & Clinic Notes": `updates` array with icons per type (`typeIcons`) |
@@ -89,12 +89,13 @@ Sections in order: hero, profile, specialized (procedure pillars), education and
 `components/FaqText/FaqText.jsx`
 
 - Prop `text`. Renders FAQ copy and wraps every `[bracketed]` placeholder in `<mark class="faq-placeholder">` so unfilled figures stay visible.
+- Cross-references (`crossReferences`): "Robotic surgery" inside "(see Robotic surgery)" or "(details under Robotic surgery)" becomes a `Link` (`.faq-cross-link`) to `/patient-questions/robotic-surgery#faq`; the text itself is unchanged.
 
 ### FaqQuestionPage
 `pages/FaqQuestion/FaqQuestionPage.jsx` (route `/services/:slug/:questionId`)
 
 - Props `faq`, `stage`, `question`, resolved in `App.jsx` by `FaqQuestionRoute`; non-starred or unknown ids render `NotFound`.
-- Minimal editorial layout with no rules or grid lines (classes prefixed `kq-`): running head (back link to `/services/:slug#faq`, "Key question NN / NN"), italic numeral with stage and question as `h1`, tinted byline band (name, credentials, review date, topic), "The short answer", numbered "In detail" points, the general-guidance note, "More on this topic" (`<details>` for the same stage's non-starred questions with their answers), a sticky aside (key questions contents with `aria-current`, booking block to `/#schedule`), and previous / next links (the last one links to the FAQ). Single column up to 980px.
+- Minimal editorial layout with no rules or grid lines (classes prefixed `kq-`): running head (back link to `/services/:slug#faq`, "Key question NN / NN"), italic numeral with stage and question as `h1`, tinted byline band (name, credentials, review date, topic), "The short answer", numbered "In detail" points, the general-guidance note, "More on this topic" (`<details>` for the same stage's non-starred questions with their answers), a sticky aside (key questions contents with `aria-current`, booking block to `/#schedule`, "More patient questions" links to the shared pages other than the current set), and previous / next links (the last one links to the FAQ). Single column up to 980px.
 - Sets the document `<title>` and renders FAQPage JSON-LD for the single question.
 
 ### Not-found views

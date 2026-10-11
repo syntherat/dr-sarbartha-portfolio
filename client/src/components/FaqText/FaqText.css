@@ -5,3 +5,15 @@
   background: rgba(232, 168, 124, 0.28);
   color: inherit;
 }
+
+.faq-cross-link {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--color-accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.faq-cross-link:hover {
+  color: var(--color-accent);
+}

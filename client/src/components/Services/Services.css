@@ -415,3 +415,22 @@
     padding: 0 1rem 1rem;
   }
 }
+
+/* Line under the directory linking to the shared patient question pages. */
+
+.services-patient-questions {
+  margin-top: 2rem;
+  color: rgba(248, 245, 242, 0.82);
+  font-size: 1.02rem;
+  line-height: 1.7;
+}
+
+.services-patient-questions a {
+  color: var(--color-bg);
+  border-bottom: 1px solid var(--color-accent);
+  transition: color 0.2s ease;
+}
+
+.services-patient-questions a:hover {
+  color: var(--color-accent);
+}

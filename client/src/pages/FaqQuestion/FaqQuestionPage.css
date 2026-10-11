@@ -376,6 +376,28 @@
   color: var(--color-accent);
 }
 
+.kq-shared ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  list-style: none;
+}
+
+.kq-shared a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0;
+  color: #5a6f6d;
+  font-size: 0.88rem;
+  line-height: 1.4;
+  transition: color 0.2s ease;
+}
+
+.kq-shared a:hover {
+  color: var(--color-primary);
+}
+
 /* Pager */
 
 .kq-pager {
