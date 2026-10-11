@@ -27,7 +27,9 @@ A single-page-app portfolio website for Dr. Sarbartha Kumar Pratihar, a uro-onco
 ├── CLAUDE.md / GEMINI.md     Agent-specific entry points (point to AGENTS.md)
 ├── .cursorrules / .windsurfrules / .github/copilot-instructions.md
 ├── .claude/settings.json     Disables Claude commit/PR attribution
+├── .gitignore                Ignores design-videos/
 ├── CHANGELOG.md              Log of every change
+├── design-videos/            Local MP4 walkthroughs of design concepts (gitignored)
 ├── README.md
 ├── docs/
 │   ├── CONTEXT.md            This file

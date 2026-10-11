@@ -25,6 +25,7 @@ Format: entries are grouped under `## [Unreleased]` until the owner asks for a r
 - 2026-10-04: Footer Contact links (Book Appointment, Online Consultation, Media Updates) used `#schedule` / `#media` without a leading `/`, so they did nothing off the home page. Changed to `/#schedule` and `/#media`. Files: `client/src/components/Footer/Footer.jsx`.
 
 ### Docs
+- 2026-10-05: Added `.gitignore` and `design-videos/` to the repository layout. Files: `docs/CONTEXT.md`.
 - 2026-10-04: Documented `CareerTimeline`, the About page section change, and the home page removal; moved the footer credit changelog entry back under Added. Files: `docs/COMPONENTS.md`, `docs/CONTEXT.md`, `CHANGELOG.md`.
 - 2026-10-04: Documented the new Timeline animations. Files: `docs/COMPONENTS.md`, `docs/CONTEXT.md`.
 - 2026-10-04: Updated the Timeline entry, removed it from the `drskp-pfp.jpg` asset users, dropped the fixed triple-import known note, and added notes on career copy and the launch config. Files: `docs/COMPONENTS.md`, `docs/CONTEXT.md`.
@@ -37,6 +38,7 @@ Format: entries are grouped under `## [Unreleased]` until the owner asks for a r
 - 2026-10-04: Added this changelog, backfilled from git history. Files: `CHANGELOG.md`.
 
 ### Chore
+- 2026-10-05: Added six walkthrough videos of the patient Q&A design concepts (A to F) in `design-videos/`, and a root `.gitignore` that keeps that folder out of git. Files: `.gitignore`, `design-videos/*.mp4` (untracked).
 - 2026-10-04: Disabled Claude Code commit and PR attribution for this project. Files: `.claude/settings.json`.
 - 2026-10-04: Audited the repository for em dashes (literal and escaped forms). None found, nothing replaced.
 
