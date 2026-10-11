@@ -1,9 +1,13 @@
 import { Link } from "react-router-dom";
+import AskTheDoctor from "../AskTheDoctor/AskTheDoctor";
+import KeyQuestions from "../KeyQuestions/KeyQuestions";
 import { services } from "../../data/services";
+import { getFaqBySlug } from "../../data/faq";
 import "./ServiceDetail.css";
 
 const ServiceDetail = ({ service }) => {
   const relatedServices = services.filter((item) => item.slug !== service.slug);
+  const faq = getFaqBySlug(service.slug);
 
   return (
     <main className="service-detail-page">
@@ -45,6 +49,9 @@ const ServiceDetail = ({ service }) => {
           </div>
         </div>
       </section>
+
+      {faq && <KeyQuestions faq={faq} />}
+      {faq && <AskTheDoctor key={faq.slug} faq={faq} />}
 
       <section className="related-services">
         <div>

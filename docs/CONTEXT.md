@@ -1,6 +1,6 @@
 # Project Context
 
-Last updated: 2026-10-04
+Last updated: 2026-10-12
 
 ## What this is
 
@@ -33,6 +33,7 @@ A single-page-app portfolio website for Dr. Sarbartha Kumar Pratihar, a uro-onco
 ├── README.md
 ├── docs/
 │   ├── CONTEXT.md            This file
+│   ├── PATIENT-FAQ.md        Rules for the patient FAQ pages (content and build)
 │   └── COMPONENTS.md         Component, page, and data reference
 └── client/                   The Vite app
     ├── index.html
@@ -47,7 +48,9 @@ A single-page-app portfolio website for Dr. Sarbartha Kumar Pratihar, a uro-onco
         ├── assets/           Images (portraits, society logos)
         ├── components/<Name>/<Name>.jsx + <Name>.css
         ├── pages/About/AboutPage.jsx + AboutPage.css
-        └── data/services.js  Service catalog and getServiceBySlug()
+        ├── pages/FaqQuestion/FaqQuestionPage.jsx + .css   Page for a starred FAQ question
+        ├── data/services.js  Service catalog and getServiceBySlug()
+        └── data/faq/         Patient FAQ sets (prostate.js) and helpers (index.js)
 ```
 
 ## Scripts
@@ -68,7 +71,8 @@ Run from `client/`:
 | --- | --- |
 | `/` | `HomePage`: Hero, Reviews, Services, CaseStudies, CaseMediaDivider, MediaUpdates, Schedule |
 | `/about` | `AboutPage` |
-| `/services/:slug` | `ServiceDetail` for a slug in `data/services.js`, otherwise `ServiceNotFound` |
+| `/services/:slug` | `ServiceDetail` for a slug in `data/services.js`, otherwise `ServiceNotFound`. Includes `KeyQuestions` (starred questions as cards) and the `AskTheDoctor` FAQ (`#faq`, non-starred questions) when a FAQ set exists for the slug |
+| `/services/:slug/:questionId` | `FaqQuestionPage` for a starred question in that slug's FAQ set, otherwise `NotFound` |
 | `*` | `NotFound` |
 
 `Navbar` and `Footer` render on every route.
@@ -100,10 +104,13 @@ Fonts load from Google Fonts in `index.css`.
 - Layout must stay responsive with no horizontal overflow (global `overflow-x: clip`).
 - External links open in a new tab with `target="_blank"` and `rel="noopener noreferrer"`.
 - No em dashes anywhere (see `AGENTS.md`).
+- Patient FAQ pages and content follow `docs/PATIENT-FAQ.md`. Prostate is built; other cancers are added one at a time.
 
 ## Known notes
 
 - Service images are remote Unsplash URLs.
 - `README.md` is a placeholder title only.
 - `CareerTimeline` career descriptions were written from the role titles and the About page; confirm wording with Dr. Pratihar.
+- FAQ content still contains bracketed placeholders (figures, `[credentials]`, `[review date]`) for the doctor to fill; they render highlighted and are included in the FAQPage JSON-LD until replaced.
+- The site is a client-rendered SPA, so FAQ JSON-LD and page titles exist only after JavaScript runs; prerendering would make them visible to crawlers that do not run JS.
 - `.claude/launch.json` defines the `client` dev server (port 5173) for the Claude desktop browser preview.

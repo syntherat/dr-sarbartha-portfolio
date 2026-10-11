@@ -18,7 +18,9 @@ import Footer from "./components/Footer/Footer";
 import Reviews from "./components/Reviews/Reviews";
 import ServiceDetail from "./components/ServiceDetail/ServiceDetail";
 import AboutPage from "./pages/About/AboutPage";
+import FaqQuestionPage from "./pages/FaqQuestion/FaqQuestionPage";
 import { getServiceBySlug } from "./data/services";
+import { findFaqQuestion, getFaqBySlug } from "./data/faq";
 import "./App.css";
 
 const HomePage = () => (
@@ -78,6 +80,24 @@ const ServiceDetailRoute = () => {
   return <ServiceDetail service={selectedService} />;
 };
 
+const FaqQuestionRoute = () => {
+  const { slug, questionId } = useParams();
+  const faq = getFaqBySlug(slug);
+  const match = faq ? findFaqQuestion(faq, questionId) : null;
+
+  if (!match || !match.question.starred) {
+    return <NotFound />;
+  }
+
+  return (
+    <FaqQuestionPage
+      faq={faq}
+      stage={match.stage}
+      question={match.question}
+    />
+  );
+};
+
 const ServiceNotFound = () => (
   <main className="service-not-found">
     <span>Service not found</span>
@@ -104,6 +124,10 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/services/:slug" element={<ServiceDetailRoute />} />
+          <Route
+            path="/services/:slug/:questionId"
+            element={<FaqQuestionRoute />}
+          />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />

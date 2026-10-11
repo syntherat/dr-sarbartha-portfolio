@@ -1,6 +1,6 @@
 # Components, Pages, and Data
 
-Last updated: 2026-10-04
+Last updated: 2026-10-12
 
 All paths are relative to `client/src/`. Each component lives in `components/<Name>/` with a matching `.css` file.
 
@@ -54,7 +54,36 @@ Sections in order: hero, profile, specialized (procedure pillars), education and
 `components/ServiceDetail/ServiceDetail.jsx` (route `/services/:slug`)
 
 - Receives a `service` prop resolved in `App.jsx` by `ServiceDetailRoute`.
-- Sections: hero (title, category, image), content (overview, focus, care path), related services ("Urologic oncology expertise").
+- Sections: hero (title, category, image), content (overview, focus, care path), `KeyQuestions` and the `AskTheDoctor` FAQ when `getFaqBySlug(service.slug)` returns a set (FAQ keyed by slug), related services ("Urologic oncology expertise").
+
+### AskTheDoctor
+`components/AskTheDoctor/AskTheDoctor.jsx` (section id `faq`, used by ServiceDetail)
+
+- Prop `faq`: a set from `data/faq/`. Shows `getFaqListStages(faq)`: starred questions are left out (they are in `KeyQuestions`) and empty stages dropped. State: `stageIndex`, `questionIndex`; picking a stage resets to its first question.
+- Three columns (topic sidebar, question list, answer panel) in a fixed-height panel on desktop (`clamp(620px, 100dvh - 3rem, 860px)`); each column scrolls on its own, the question list with top and bottom fades. Changing stage resets the list and answer scroll; changing question resets the answer scroll. A "N more questions" pill (`hiddenBelow` state, recounted on list scroll and by a `ResizeObserver`) sits at the bottom of the list while questions are hidden below and scrolls the list when clicked. Up to 1180px the columns narrow; up to 900px they stack, stages become horizontally scrolling chips, and picking a question smooth-scrolls to the answer.
+- Stage and question buttons are real `<button>`s with `aria-pressed`; the answer panel is `aria-live="polite"`.
+- Renders FAQPage JSON-LD for the questions it lists (`buildFaqSchema`).
+- "Book a consultation" links to `/#schedule`.
+- Rules for its content: `docs/PATIENT-FAQ.md`.
+
+### KeyQuestions
+`components/KeyQuestions/KeyQuestions.jsx` (used by ServiceDetail, above `AskTheDoctor`)
+
+- Prop `faq`. Renders nothing if the set has no starred questions.
+- Editorial index style: header (set title eyebrow and "Key questions", no rules), then an ordered list from `getStarredWithStage(faq)` with hairline dividers between entries. Each row is a link to `/services/:slug/:questionId` with an italic serif numeral, the stage title in small caps, the question, and an arrow.
+- Two columns, one column up to 860px. Hover darkens the numeral, draws an underline under the question and nudges the arrow (off for reduced motion).
+
+### FaqText
+`components/FaqText/FaqText.jsx`
+
+- Prop `text`. Renders FAQ copy and wraps every `[bracketed]` placeholder in `<mark class="faq-placeholder">` so unfilled figures stay visible.
+
+### FaqQuestionPage
+`pages/FaqQuestion/FaqQuestionPage.jsx` (route `/services/:slug/:questionId`)
+
+- Props `faq`, `stage`, `question`, resolved in `App.jsx` by `FaqQuestionRoute`; non-starred or unknown ids render `NotFound`.
+- Minimal editorial layout with no rules or grid lines (classes prefixed `kq-`): running head (back link to `/services/:slug#faq`, "Key question NN / NN"), italic numeral with stage and question as `h1`, tinted byline band (name, credentials, review date, topic), "The short answer", numbered "In detail" points, the general-guidance note, "More on this topic" (`<details>` for the same stage's non-starred questions with their answers), a sticky aside (key questions contents with `aria-current`, booking block to `/#schedule`), and previous / next links (the last one links to the FAQ). Single column up to 980px.
+- Sets the document `<title>` and renders FAQPage JSON-LD for the single question.
 
 ### Not-found views
 Defined in `App.jsx`, styled by `App.css` (`.service-not-found`):
@@ -67,6 +96,7 @@ Defined in `App.jsx`, styled by `App.css` (`.service-not-found`):
 - `HomePage`: composes the home sections listed above.
 - `ScrollToRouteTarget`: manual scroll restoration, scroll to top on navigation, smooth scroll to hash target.
 - `ServiceDetailRoute`: reads `:slug`, calls `getServiceBySlug()`.
+- `FaqQuestionRoute`: reads `:slug` and `:questionId`, resolves them with `getFaqBySlug()` and `findFaqQuestion()`, renders `FaqQuestionPage` for starred questions only.
 
 ## Data
 
@@ -76,6 +106,13 @@ Defined in `App.jsx`, styled by `App.css` (`.service-not-found`):
 - `getServiceBySlug(slug)`: returns the matching service or `undefined`.
 
 Current slugs: `prostate-cancer`, `urinary-bladder-cancer`, `kidney-cancer`, `testicular-cancer`, `penile-cancer`, `adrenal-cancer`, `retroperitoneal-cancer`.
+
+### `data/faq/`
+
+Patient FAQ content, one file per set (rules and shape: `docs/PATIENT-FAQ.md`).
+
+- `prostate.js`: `prostateFaq` (slug `prostate-cancer`, 4 stages, 47 questions, 10 starred).
+- `index.js`: `doctorName`, `getFaqBySlug(slug)`, `findFaqQuestion(faq, questionId)` (returns `{ stage, question }` or `null`), `getFaqListStages(faq)` (stages without starred questions, empty stages dropped), `getStarredWithStage(faq)` (`{ stage, question }` for each starred question), `getStarredQuestions(faq)`, `buildFaqSchema(questions)` (FAQPage JSON-LD string).
 
 ## Assets (`assets/`)
 
