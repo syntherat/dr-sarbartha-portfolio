@@ -9,13 +9,38 @@ import {
 } from "../../data/faq";
 import "./AskTheDoctor.css";
 
+// How long the "doctor is typing" indicator shows before the reply appears.
+const TYPING_DELAY = 1100;
+
 const AskTheDoctor = ({ faq }) => {
   const [stageIndex, setStageIndex] = useState(0);
   const [questionIndex, setQuestionIndex] = useState(0);
   const [hiddenBelow, setHiddenBelow] = useState(0);
+  const [isTyping, setIsTyping] = useState(false);
   const listRef = useRef(null);
   const answerRef = useRef(null);
+  const typingTimer = useRef(null);
   const isStacked = () => window.matchMedia("(max-width: 900px)").matches;
+  const prefersReducedMotion = () =>
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Shows the typing indicator, then swaps in the reply.
+  const startReply = () => {
+    window.clearTimeout(typingTimer.current);
+
+    if (prefersReducedMotion()) {
+      setIsTyping(false);
+      return;
+    }
+
+    setIsTyping(true);
+    typingTimer.current = window.setTimeout(
+      () => setIsTyping(false),
+      TYPING_DELAY,
+    );
+  };
+
+  useEffect(() => () => window.clearTimeout(typingTimer.current), []);
 
   // Counts questions below the visible part of the scrolling list (desktop only).
   const updateHiddenBelow = () => {
@@ -59,8 +84,13 @@ const AskTheDoctor = ({ faq }) => {
   const allQuestions = stages.flatMap((item) => item.questions);
 
   const pickStage = (index) => {
+    if (index === stageIndex) {
+      return;
+    }
+
     setStageIndex(index);
     setQuestionIndex(0);
+    startReply();
 
     if (!isStacked()) {
       listRef.current?.scrollTo({ top: 0 });
@@ -69,7 +99,10 @@ const AskTheDoctor = ({ faq }) => {
   };
 
   const pickQuestion = (index) => {
-    setQuestionIndex(index);
+    if (index !== questionIndex) {
+      setQuestionIndex(index);
+      startReply();
+    }
 
     if (isStacked()) {
       window.requestAnimationFrame(() => {
@@ -176,26 +209,42 @@ const AskTheDoctor = ({ faq }) => {
               Consultation notes
             </div>
 
-            <p className="atd-patient-bubble">{current.question}</p>
+            <p key={`question-${current.id}`} className="atd-patient-bubble">
+              {current.question}
+            </p>
 
-            <div className="atd-reply">
-              <div className="atd-avatar" aria-hidden="true">
-                SP
+            {isTyping ? (
+              <div key={`typing-${current.id}`} className="atd-reply is-typing">
+                <div className="atd-avatar" aria-hidden="true">
+                  SP
+                </div>
+                <div className="atd-typing-bubble">
+                  <span className="atd-sr-only">{doctorName} is typing</span>
+                  <span className="atd-typing-dot" aria-hidden="true" />
+                  <span className="atd-typing-dot" aria-hidden="true" />
+                  <span className="atd-typing-dot" aria-hidden="true" />
+                </div>
               </div>
-              <div className="atd-reply-bubble">
-                <span className="atd-reply-name">{doctorName}</span>
-                <p className="atd-reply-lead">
-                  <FaqText text={current.answer} />
-                </p>
-                <ul className="atd-reply-points">
-                  {current.points.map((point) => (
-                    <li key={point}>
-                      <FaqText text={point} />
-                    </li>
-                  ))}
-                </ul>
+            ) : (
+              <div key={`reply-${current.id}`} className="atd-reply is-answered">
+                <div className="atd-avatar" aria-hidden="true">
+                  SP
+                </div>
+                <div className="atd-reply-bubble">
+                  <span className="atd-reply-name">{doctorName}</span>
+                  <p className="atd-reply-lead">
+                    <FaqText text={current.answer} />
+                  </p>
+                  <ul className="atd-reply-points">
+                    {current.points.map((point, index) => (
+                      <li key={point} style={{ "--point-index": index }}>
+                        <FaqText text={point} />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-            </div>
+            )}
 
             <div className="atd-cta">
               <span>Have a question that is not here?</span>

@@ -329,8 +329,8 @@
 
 .atd-avatar {
   flex-shrink: 0;
-  width: 52px;
-  height: 52px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -338,7 +338,7 @@
   background: var(--color-primary);
   color: var(--color-bg);
   font-family: var(--font-heading);
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
 }
 
@@ -347,21 +347,26 @@
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  padding: 24px 26px;
-  border-radius: 6px 22px 22px 22px;
+  gap: 16px;
+  padding: 28px 30px 30px;
+  border: 1px solid rgba(31, 61, 59, 0.06);
+  border-radius: 4px 20px 20px 20px;
   background: #ffffff;
-  box-shadow: 0 10px 30px rgba(31, 61, 59, 0.08);
+  box-shadow:
+    0 1px 2px rgba(31, 61, 59, 0.03),
+    0 6px 20px rgba(31, 61, 59, 0.04);
 }
 
 .atd-reply-name {
-  font-size: 14px;
-  font-weight: 600;
+  color: #5a6f6d;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
 }
 
 .atd-reply-lead {
   font-family: var(--font-heading);
-  font-size: 21px;
+  font-size: 20px;
   line-height: 1.55;
 }
 
@@ -369,15 +374,18 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 16px 18px 16px 36px;
-  border-radius: 12px;
-  background: #eef1e8;
+  padding: 2px 0 0 18px;
+  color: rgba(31, 61, 59, 0.82);
   font-size: 15px;
-  line-height: 1.55;
+  line-height: 1.6;
+}
+
+.atd-reply-points li {
+  padding-left: 4px;
 }
 
 .atd-reply-points li::marker {
-  color: #6f8a5c;
+  color: var(--color-accent);
 }
 
 .atd-cta {
@@ -408,6 +416,137 @@
   color: var(--color-bg);
   font-size: 15px;
   font-weight: 600;
+}
+
+/* Conversation motion: question slides in, doctor types, reply eases in. */
+
+.atd-patient-bubble {
+  transform-origin: bottom right;
+  animation: atd-question-in 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.atd-reply.is-typing {
+  animation: atd-reply-in 0.35s cubic-bezier(0.2, 0.7, 0.2, 1) 0.3s both;
+}
+
+.atd-typing-bubble {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 18px 22px;
+  border: 1px solid rgba(31, 61, 59, 0.06);
+  border-radius: 4px 20px 20px 20px;
+  background: #ffffff;
+  box-shadow:
+    0 1px 2px rgba(31, 61, 59, 0.03),
+    0 6px 20px rgba(31, 61, 59, 0.04);
+}
+
+.atd-typing-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-secondary-accent);
+  animation: atd-typing 1.1s ease-in-out infinite;
+}
+
+.atd-typing-dot:nth-of-type(3) {
+  animation-delay: 0.15s;
+}
+
+.atd-typing-dot:nth-of-type(4) {
+  animation-delay: 0.3s;
+}
+
+.atd-reply.is-answered .atd-avatar {
+  animation: atd-fade-in 0.3s ease both;
+}
+
+.atd-reply.is-answered .atd-reply-bubble {
+  transform-origin: top left;
+  animation: atd-reply-in 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.atd-reply.is-answered .atd-reply-name,
+.atd-reply.is-answered .atd-reply-lead {
+  animation: atd-text-in 0.45s ease 0.12s both;
+}
+
+.atd-reply.is-answered .atd-reply-points li {
+  animation: atd-text-in 0.45s ease both;
+  animation-delay: calc(0.25s + var(--point-index, 0) * 0.08s);
+}
+
+.atd-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@keyframes atd-question-in {
+  from {
+    opacity: 0;
+    transform: translate(14px, 10px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes atd-reply-in {
+  from {
+    opacity: 0;
+    transform: translate(-10px, 10px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes atd-text-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes atd-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes atd-typing {
+  0%,
+  60%,
+  100% {
+    opacity: 0.35;
+    transform: translateY(0);
+  }
+
+  30% {
+    opacity: 1;
+    transform: translateY(-4px);
+  }
 }
 
 @media (max-width: 1180px) {
@@ -564,23 +703,23 @@
   }
 
   .atd-avatar {
-    width: 40px;
-    height: 40px;
-    font-size: 15px;
+    width: 38px;
+    height: 38px;
+    font-size: 14px;
   }
 
   .atd-reply-bubble {
     width: 100%;
-    padding: 20px 18px;
-    border-radius: 6px 18px 18px 18px;
+    padding: 22px 20px;
+    border-radius: 4px 18px 18px 18px;
   }
 
   .atd-reply-lead {
-    font-size: 19px;
+    font-size: 18.5px;
   }
 
   .atd-reply-points {
-    padding: 14px 14px 14px 30px;
+    padding-left: 16px;
     font-size: 14.5px;
   }
 
@@ -597,7 +736,15 @@
     transition: none;
   }
 
-  .atd-more svg {
+  .atd-more svg,
+  .atd-patient-bubble,
+  .atd-reply.is-typing,
+  .atd-reply.is-answered .atd-avatar,
+  .atd-reply.is-answered .atd-reply-bubble,
+  .atd-reply.is-answered .atd-reply-name,
+  .atd-reply.is-answered .atd-reply-lead,
+  .atd-reply.is-answered .atd-reply-points li,
+  .atd-typing-dot {
     animation: none;
   }
 }
