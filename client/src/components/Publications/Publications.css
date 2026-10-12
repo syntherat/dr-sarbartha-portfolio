@@ -133,18 +133,6 @@
   line-height: 1;
 }
 
-.research-catalog-note {
-  max-width: 280px;
-  margin: 0.9rem 0 0;
-  color: var(--ink-faint);
-  font-size: 0.78rem;
-  line-height: 1.5;
-}
-
-.research-catalog-note strong {
-  color: var(--color-primary);
-}
-
 /* Folders */
 
 .research-folder-stack {
@@ -467,19 +455,18 @@
   }
 
   .catalog-folder-icon {
-    grid-row: 1 / span 3;
+    grid-row: 1 / span 2;
     margin: 0.8rem 0 0;
   }
 
   .research-catalog-label,
-  .research-catalog h3,
-  .research-catalog-note {
+  .research-catalog h3 {
     grid-column: 2;
   }
 
   .research-catalog-meta {
     grid-column: 3;
-    grid-row: 1 / span 3;
+    grid-row: 1 / span 2;
     width: 100%;
     margin: 0;
   }
@@ -497,7 +484,6 @@
 
   .research-catalog-label,
   .research-catalog h3,
-  .research-catalog-note,
   .research-catalog-meta {
     grid-column: auto;
     grid-row: auto;

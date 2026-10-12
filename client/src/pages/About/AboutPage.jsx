@@ -9,14 +9,10 @@ import {
   Stethoscope,
   Users,
 } from "lucide-react";
-import assamUrologicalStamp from "../../assets/assam-urological-society.png";
-import surgeonsAssociationStamp from "../../assets/association-of-surgeons.png";
 import doctorPortrait from "../../assets/drskp-pfp.jpg";
 import CareerTimeline from "../../components/CareerTimeline/CareerTimeline";
+import Memberships from "../../components/Memberships/Memberships";
 import Publications from "../../components/Publications/Publications";
-import eauStamp from "../../assets/eau.png";
-import siuStamp from "../../assets/siu.jpg";
-import usiStamp from "../../assets/usi.jpg";
 import "./AboutPage.css";
 
 const aboutSummary = [
@@ -135,39 +131,6 @@ const featuredHonors = [
     title: "Best Moderated Video eposter",
     detail: "Robotic VEIL lateral approach.",
     event: "42nd SIU 2022 Congress, Montreal, Canada, November 9th-13th, 2022",
-  },
-];
-
-const memberships = [
-  {
-    code: "USI",
-    name: "Urological Society of India",
-    note: "National urology society",
-    stamp: usiStamp,
-  },
-  {
-    code: "AUS",
-    name: "Assam Urological Society",
-    note: "Regional urology community",
-    stamp: assamUrologicalStamp,
-  },
-  {
-    code: "EAU",
-    name: "European Association of Urology",
-    note: "International urology forum",
-    stamp: eauStamp,
-  },
-  {
-    code: "SIU",
-    name: "Societe Internationale d'Urologie",
-    note: "Global urological society",
-    stamp: siuStamp,
-  },
-  {
-    code: "ASI",
-    name: "Association of Surgeons of India",
-    note: "Surgical professional body",
-    stamp: surgeonsAssociationStamp,
   },
 ];
 
@@ -472,42 +435,7 @@ const AboutPage = () => {
           eyebrow="Membership"
           title="Professional Associations"
         />
-        <div className="membership-registry">
-          <aside className="membership-registry-note">
-            <span>Society Registry</span>
-            <h3>Credential marks across urology and surgical communities.</h3>
-            <p>
-              A compact record of the professional bodies connected to his
-              clinical, academic, and surgical practice.
-            </p>
-            <div className="membership-note-stamps" aria-hidden="true">
-              {memberships.slice(0, 3).map((membership) => (
-                <img
-                  src={membership.stamp}
-                  alt=""
-                  key={membership.code}
-                  loading="lazy"
-                />
-              ))}
-            </div>
-          </aside>
-
-          <div className="membership-stamp-wall" aria-label="Professional societies">
-            {memberships.map((membership) => (
-              <article className="membership-stamp" key={membership.code}>
-                <img
-                  className="membership-stamp-watermark"
-                  src={membership.stamp}
-                  alt=""
-                  loading="lazy"
-                />
-                <span>{membership.code}</span>
-                <h3>{membership.name}</h3>
-                <p>{membership.note}</p>
-              </article>
-            ))}
-          </div>
-        </div>
+        <Memberships />
       </section>
     </main>
   );

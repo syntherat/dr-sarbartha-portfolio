@@ -38,9 +38,9 @@ All paths are relative to `client/src/`. Each component lives in `components/<Na
 ### AboutPage
 `pages/About/AboutPage.jsx` (route `/about`)
 
-Data arrays at the top of the file: `aboutSummary`, `aboutHighlights`, `procedurePillars`, `techniqueNotes`, `journeyHighlights`, `journeyStats`, `academicHonors`, `conferenceHonors`, `featuredHonors`, `memberships`, `stats`.
+Data arrays at the top of the file: `aboutSummary`, `aboutHighlights`, `procedurePillars`, `techniqueNotes`, `journeyHighlights`, `journeyStats`, `academicHonors`, `conferenceHonors`, `featuredHonors`, `stats`.
 
-Sections in order: hero, profile, specialized (procedure pillars), education and career (`CareerTimeline`, inside `.about-education-section`), journey, awards, publications (`Publications`, inside `.about-publications-section`), memberships. Uses a shared `SectionHeader` helper and a `ProfilePracticeMark` SVG. Society logos come from `assets/`.
+Sections in order: hero, profile, specialized (procedure pillars), education and career (`CareerTimeline`, inside `.about-education-section`), journey, awards, publications (`Publications`, inside `.about-publications-section`), memberships (`Memberships`, inside `.about-membership-section`). Uses a shared `SectionHeader` helper and a `ProfilePracticeMark` SVG.
 
 ### CareerTimeline
 `components/CareerTimeline/CareerTimeline.jsx` (used by AboutPage)
@@ -57,6 +57,14 @@ Sections in order: hero, profile, specialized (procedure pillars), education and
 - Layout: a "research desk" with the archive card on the left (folder icon, heading, `catalogMeta` figures computed from the data, sticky on desktop) and the folder stack on the right. Under 1100px the card sits above the folders; under 760px it stacks.
 - `ResearchFolder`: folder tab, title, note and document count, then a 2-column grid of documents (1 column under 760px). Shows the first 6 (`COLLAPSED_COUNT`) with a "Pull out all N documents" / "Put documents back" toggle when a folder has more than 7.
 - `ResearchDocument`: paper sheet with masthead (journal, year), number and type, serif title, authors with Dr. Pratihar's name in bold (`SELF_PATTERN`), ruled lines, footer with volume and pages and a "DOI" link to `https://doi.org/` in a new tab, and a "First author" stamp when `firstAuthor` is set. Sheets are slightly tilted and lift on hover (tilt off under 760px).
+
+### Memberships
+`components/Memberships/Memberships.jsx` (used by AboutPage, "Professional Associations")
+
+- Data: `memberships` (`code`, `name`, `note`, `scope` of National, Regional or International, `stamp` logo from `assets/`). `scopes` counts societies per scope.
+- Registry card (left, sticky on desktop): ruled ledger with a "Society registry / No. 05" header, heading, copy, scope counts, three overlapping logo seals and a "Verified societies" stamp.
+- Stamp wall (`ul`): each society is a postage stamp with perforated edges (CSS `mask`), a tinted frame (peach and sage alternating), the code, number and scope, name and note, the logo as a faint watermark, and a postmark (logo seal plus `CancelLines` SVG). Stamps tilt slightly (`--tilt`, `--drop`) and straighten on hover.
+- Layout: 6-column grid (first two stamps span 3, the rest span 2); 2 per row under 1100px with the card above; 1 per row under 680px; cancellation lines hidden under 380px.
 
 ### ServiceDetail
 `components/ServiceDetail/ServiceDetail.jsx` (route `/services/:slug`)

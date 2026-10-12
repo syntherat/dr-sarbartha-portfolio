@@ -1114,246 +1114,6 @@
   line-height: 1.55;
 }
 
-.membership-registry {
-  display: grid;
-  grid-template-columns: minmax(260px, 0.36fr) minmax(0, 1fr);
-  gap: clamp(1.2rem, 3vw, 2.2rem);
-  align-items: stretch;
-}
-
-.membership-registry-note {
-  position: relative;
-  min-height: 360px;
-  overflow: hidden;
-  border-left: 3px solid var(--color-primary);
-  background:
-    linear-gradient(90deg, rgba(31, 61, 59, 0.08) 1px, transparent 1px) 0 0 / 2.2rem 100%,
-    linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(248, 245, 242, 0.42));
-  padding: clamp(1.15rem, 3vw, 1.8rem);
-}
-
-.membership-registry-note::before {
-  content: "";
-  position: absolute;
-  top: 1.2rem;
-  right: 1.1rem;
-  width: 4.3rem;
-  height: 1.25rem;
-  border-top: 1px solid rgba(232, 168, 124, 0.75);
-  border-bottom: 1px solid rgba(232, 168, 124, 0.75);
-  opacity: 0.75;
-}
-
-.membership-registry-note::after {
-  content: "verified societies";
-  position: absolute;
-  left: 1.45rem;
-  bottom: 1.1rem;
-  border: 1px solid rgba(31, 61, 59, 0.24);
-  border-radius: 999px;
-  color: rgba(31, 61, 59, 0.68);
-  padding: 0.35rem 0.62rem;
-  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
-  font-size: 0.64rem;
-  font-weight: 900;
-  letter-spacing: 0.08rem;
-  text-transform: uppercase;
-}
-
-.membership-registry-note > span {
-  display: block;
-  color: var(--color-accent);
-  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
-  font-size: 0.74rem;
-  font-weight: 900;
-  letter-spacing: 0.16rem;
-  text-transform: uppercase;
-}
-
-.membership-registry-note h3 {
-  max-width: 420px;
-  margin: 1.25rem 0 1rem;
-  color: var(--color-primary);
-  font-family: var(--font-heading);
-  font-size: clamp(2.05rem, 3.7vw, 3.5rem);
-  font-weight: 500;
-  line-height: 0.98;
-  text-wrap: balance;
-}
-
-.membership-registry-note p {
-  max-width: 330px;
-  margin: 0;
-  color: var(--about-ink-soft);
-  line-height: 1.7;
-}
-
-.membership-note-stamps {
-  position: absolute;
-  right: -2rem;
-  bottom: 3.8rem;
-  width: 14rem;
-  height: 12rem;
-  pointer-events: none;
-}
-
-.membership-note-stamps img {
-  position: absolute;
-  width: 7.5rem;
-  aspect-ratio: 1;
-  object-fit: contain;
-  border-radius: 50%;
-  filter: grayscale(1) contrast(1.08);
-  mix-blend-mode: multiply;
-  opacity: 0.12;
-}
-
-.membership-note-stamps img:nth-child(1) {
-  top: 0.4rem;
-  left: 0.2rem;
-  transform: rotate(-13deg);
-}
-
-.membership-note-stamps img:nth-child(2) {
-  top: 2.9rem;
-  right: 1.2rem;
-  transform: rotate(11deg);
-}
-
-.membership-note-stamps img:nth-child(3) {
-  left: 2.4rem;
-  bottom: 0;
-  transform: rotate(4deg);
-}
-
-.membership-stamp-wall {
-  display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: clamp(0.8rem, 1.5vw, 1.1rem);
-  align-content: stretch;
-}
-
-.membership-stamp {
-  position: relative;
-  min-height: 176px;
-  overflow: hidden;
-  grid-column: span 2;
-  border: 1px solid rgba(31, 61, 59, 0.18);
-  border-radius: 5px;
-  background:
-    linear-gradient(135deg, transparent 0 1.2rem, rgba(232, 168, 124, 0.16) 1.2rem 1.28rem, transparent 1.28rem),
-    rgba(255, 255, 255, 0.7);
-  padding: clamp(1rem, 2vw, 1.35rem);
-  box-shadow: 5px 6px 0 rgba(31, 61, 59, 0.05);
-}
-
-.membership-stamp:nth-child(1),
-.membership-stamp:nth-child(2) {
-  grid-column: span 3;
-  min-height: 205px;
-}
-
-.membership-stamp:nth-child(1) {
-  transform: rotate(-0.65deg);
-}
-
-.membership-stamp:nth-child(2) {
-  transform: translateY(0.65rem) rotate(0.45deg);
-}
-
-.membership-stamp:nth-child(3) {
-  transform: translateY(-0.3rem) rotate(0.7deg);
-}
-
-.membership-stamp:nth-child(4) {
-  background:
-    linear-gradient(135deg, transparent 0 1.2rem, rgba(31, 61, 59, 0.09) 1.2rem 1.28rem, transparent 1.28rem),
-    rgba(255, 248, 241, 0.76);
-  transform: rotate(-0.4deg);
-}
-
-.membership-stamp:nth-child(5) {
-  transform: translateY(0.4rem) rotate(0.35deg);
-}
-
-.membership-stamp::before {
-  content: "";
-  position: absolute;
-  inset: 0.7rem;
-  border: 1px dashed rgba(31, 61, 59, 0.22);
-  border-radius: 2px;
-  pointer-events: none;
-}
-
-.membership-stamp::after {
-  content: "";
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 1.35rem;
-  aspect-ratio: 1;
-  background: linear-gradient(135deg, rgba(232, 168, 124, 0.14) 50%, var(--color-bg) 50%);
-  border-left: 1px solid rgba(31, 61, 59, 0.1);
-  border-bottom: 1px solid rgba(31, 61, 59, 0.1);
-}
-
-.membership-stamp-watermark {
-  position: absolute;
-  right: -1.2rem;
-  top: 50%;
-  width: min(64%, 14rem);
-  max-height: 86%;
-  object-fit: contain;
-  filter: grayscale(1) contrast(1.12);
-  mix-blend-mode: multiply;
-  opacity: 0.1;
-  transform: translateY(-50%) rotate(-8deg);
-}
-
-.membership-stamp:nth-child(even) .membership-stamp-watermark {
-  right: auto;
-  left: -1.4rem;
-  transform: translateY(-50%) rotate(8deg);
-}
-
-.membership-stamp span,
-.membership-stamp h3,
-.membership-stamp p {
-  position: relative;
-  z-index: 1;
-}
-
-.membership-stamp span {
-  display: inline-flex;
-  width: max-content;
-  border-bottom: 1px solid rgba(232, 168, 124, 0.72);
-  color: var(--color-accent);
-  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
-  font-size: 0.76rem;
-  font-weight: 900;
-  letter-spacing: 0.14rem;
-}
-
-.membership-stamp h3 {
-  max-width: 16rem;
-  margin: clamp(2.2rem, 5vw, 3.8rem) 0 0.55rem;
-  color: var(--color-primary);
-  font-family: var(--font-heading);
-  font-size: clamp(1.55rem, 2.2vw, 2.25rem);
-  font-weight: 500;
-  line-height: 1.02;
-  text-wrap: balance;
-}
-
-.membership-stamp p {
-  margin: 0;
-  color: rgba(31, 61, 59, 0.62);
-  font-size: 0.78rem;
-  font-weight: 800;
-  letter-spacing: 0.02rem;
-  text-transform: uppercase;
-}
-
 @media (max-width: 1100px) {
   .about-hero {
     grid-template-columns: minmax(0, 1fr) minmax(280px, 0.58fr);
@@ -1366,24 +1126,6 @@
       "feature"
       "map"
       "note";
-  }
-
-  .membership-registry {
-    grid-template-columns: 1fr;
-  }
-
-  .membership-registry-note {
-    min-height: 300px;
-  }
-
-  .membership-stamp-wall {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
-  .membership-stamp,
-  .membership-stamp:nth-child(1),
-  .membership-stamp:nth-child(2) {
-    grid-column: span 2;
   }
 
   .recognition-board {
@@ -1525,23 +1267,6 @@
     padding: clamp(3rem, 8vw, 4.5rem) 0;
   }
 
-  .membership-stamp-wall {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .membership-stamp,
-  .membership-stamp:nth-child(1),
-  .membership-stamp:nth-child(2) {
-    grid-column: auto;
-    transform: none;
-  }
-
-  .membership-stamp:nth-child(3),
-  .membership-stamp:nth-child(4),
-  .membership-stamp:nth-child(5) {
-    transform: none;
-  }
-
   .featured-honors article,
   .conference-honor-timeline li {
     min-height: auto;
@@ -1581,41 +1306,6 @@
   .about-hero-stats,
   .journey-stat-strip {
     grid-template-columns: 1fr;
-  }
-
-  .membership-stamp-wall {
-    grid-template-columns: 1fr;
-  }
-
-  .membership-stamp,
-  .membership-stamp:nth-child(1),
-  .membership-stamp:nth-child(2) {
-    grid-column: auto;
-    min-height: 170px;
-    transform: none;
-  }
-
-  .membership-stamp:nth-child(3),
-  .membership-stamp:nth-child(4),
-  .membership-stamp:nth-child(5) {
-    transform: none;
-  }
-
-  .membership-registry-note {
-    min-height: auto;
-    padding-bottom: 4.4rem;
-  }
-
-  .membership-note-stamps {
-    right: -1.5rem;
-    bottom: 1.2rem;
-    width: 10rem;
-    height: 7rem;
-    opacity: 0.8;
-  }
-
-  .membership-note-stamps img {
-    width: 5.4rem;
   }
 
   .journey-stat-strip div + div {
@@ -1698,14 +1388,9 @@
     text-align: left;
   }
 
-  .membership-stamp {
-    min-height: auto;
-  }
-
   .about-hero-stats div,
   .procedure-feature,
-  .featured-honors article,
-  .membership-stamp {
+  .featured-honors article {
     padding: 0.95rem;
   }
 
@@ -1715,16 +1400,6 @@
 
   .about-story-mark small {
     width: 100%;
-    text-align: center;
-  }
-
-  .membership-registry-note::after {
-    display: flex;
-    align-items: center;
-    left: 1rem;
-    right: 1rem;
-    width: auto;
-    justify-content: center;
     text-align: center;
   }
 }
@@ -1752,13 +1427,7 @@
   }
 
   .about-story-copy p,
-  .procedure-map p,
-  .membership-registry-note p {
+  .procedure-map p {
     font-size: 0.9rem;
-  }
-
-  .membership-stamp-watermark {
-    width: 72%;
-    opacity: 0.08;
   }
 }

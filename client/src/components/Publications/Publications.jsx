@@ -338,9 +338,6 @@ const Publications = () => (
           </div>
         ))}
       </dl>
-      <p className="research-catalog-note">
-        Newest first. Dr. Pratihar&apos;s name is set in <strong>bold</strong>.
-      </p>
     </aside>
 
     <div className="research-folder-stack">
