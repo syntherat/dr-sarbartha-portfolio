@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import "./Hero.css";
-import doctorImage from "../../assets/doc-placeholder-nobg.png";
+import doctorImage from "../../assets/doc-placeholder-nobg.webp";
 
 const Hero = () => {
   return (

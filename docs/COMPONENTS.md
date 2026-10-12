@@ -25,7 +25,7 @@ All paths are relative to `client/src/`. Each component lives in `components/<Na
 
 | Component | Section id | Summary |
 | --- | --- | --- |
-| `Hero` | none | Headline, intro copy, portrait (`assets/doc-placeholder-nobg.png`). CTAs are `Link`s: "Book Appointment" to `/#schedule`, "View Profile" to `/about` |
+| `Hero` | none | Headline, intro copy, portrait (`assets/doc-placeholder-nobg.webp`). CTAs are `Link`s: "Book Appointment" to `/#schedule`, "View Profile" to `/about` |
 | `Reviews` | `reviews` | "Voices of Healing" testimonial grid. `ReviewCard` has read-more expand state; `getTimeAgo()` formats review dates |
 | `Services` | `services` | "Specialized Care" bento grid built from `data/services.js` (eight cards; `bentoSizes`: feature, tall, then six compact); cards link to `/services/:slug`. Below the grid, a line (`.services-patient-questions`) links to both shared patient question pages. Includes `ServicesDivider` |
 | `CaseStudies` | `case-studies` | "Clinical Paths, Clearly Mapped": static `caseStudies` array |
@@ -149,7 +149,7 @@ Patient FAQ content, one file per set (rules and shape: `docs/PATIENT-FAQ.md`).
 
 | File | Used by |
 | --- | --- |
-| `doc-placeholder-nobg.png` | Hero |
+| `doc-placeholder-nobg.webp` | Hero |
 | `drskp-pfp.jpg` | AboutPage, CareerTimeline avatar |
 | `assam-urological-society.png`, `association-of-surgeons.png`, `eau.png`, `siu.jpg`, `usi.jpg` | AboutPage memberships |
 | `doctor_placeholder.png`, `hero.png` | Not currently imported |
