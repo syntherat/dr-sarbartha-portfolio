@@ -27,7 +27,7 @@ Status: all eight cancer sets and both shared pages built (2026-10-12). Content 
     - **Translation rules:** keep the doctor's bracketed placeholders in English; keep medical acronyms (PSA, MRI, BCG) in Latin script; use gender-neutral wording unless the cancer affects only men; "(source)" becomes "(स्रोत)" in Hindi and stays "(source)" in Hinglish. Hinglish uses everyday Roman spelling (no diacritics) and keeps English words patients use themselves (surgery, report, biopsy, catheter, insurance); ranges are written "4 se 10", not with a dash.
     - **Next:** Bengali, Arabic (right-to-left) and Russian, added as new languages in `translations.js` with their own `data/faq/<lang>/` files and a loader and title per set in `catalog.js`.
 12. **Do not reword, cut or skip anything.** The question bank and answer outlines come from the doctor and are used as written: every question, every bullet, including questions about sexual function, erections, ejaculation, fertility and the penile cancer section (owner decision 2026-10-12; the earlier "no 18+ or sex-related wording" rule is withdrawn). Only punctuation changes required by the site rules are allowed.
-13. **Reviewer block placeholders.** Until the owner supplies them, the doctor's credentials line and the review date render as `[credentials]` and `[review date]`, and are listed with the other placeholders.
+13. **Reviewer block placeholders.** Until the owner supplies them, the review date renders as `[review date]` and is listed with the other placeholders. The credentials line is filled (2026-10-12): "Consultant" / "Uro-Oncology & Robotic Surgery", set once as `doctorCredentials` in `data/faq/index.js` for every set.
 14. **Site rules still apply:** no em dashes (the source documents use them; convert every one to a comma, colon, period or parentheses), and every change logged per `AGENTS.md`.
 
 ## 2. Content sets
@@ -68,7 +68,6 @@ export const prostateFaq = {
   slug: "prostate-cancer",
   title: "Prostate cancer",
   intro: "Prostate questions cluster around ...",
-  credentials: "[credentials]",
   reviewedOn: "[review date]",
   stages: [
     {

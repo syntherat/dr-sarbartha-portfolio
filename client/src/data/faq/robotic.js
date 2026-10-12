@@ -8,7 +8,6 @@ export const roboticFaq = {
   title: "Robotic surgery",
   intro:
     "Robotic searches mix curiosity, safety worries and cost. Indian families also ask which robot is used and whether insurance pays.",
-  credentials: "[credentials]",
   reviewedOn: "[review date]",
   stages: [
     {

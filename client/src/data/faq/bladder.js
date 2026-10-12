@@ -8,7 +8,6 @@ export const bladderFaq = {
   title: "Urinary bladder cancer",
   intro:
     "Bladder searches begin with painless blood in the urine and turn quickly to BCG, recurrence and life with a urine bag.",
-  credentials: "[credentials]",
   reviewedOn: "[review date]",
   stages: [
     {

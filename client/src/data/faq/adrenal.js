@@ -8,7 +8,6 @@ export const adrenalFaq = {
   title: "Adrenal tumours and adrenal cancer",
   intro:
     "Most adrenal questions start with a chance scan finding or hard-to-control BP and ask one thing: does it need surgery?",
-  credentials: "[credentials]",
   reviewedOn: "[review date]",
   stages: [
     {

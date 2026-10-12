@@ -4,6 +4,7 @@ import { ArrowRight, ChevronDown } from "lucide-react";
 import FaqText from "../FaqText/FaqText";
 import {
   buildFaqSchema,
+  doctorCredentials,
   doctorName,
   getFaqListStages,
 } from "../../data/faq";
@@ -151,7 +152,7 @@ const AskTheDoctor = ({ faq }) => {
               </p>
               <p>
                 Medically reviewed by {doctorName},{" "}
-                <FaqText text={faq.credentials} />. Reviewed on{" "}
+                {doctorCredentials.join(", ")}. Reviewed on{" "}
                 <FaqText text={faq.reviewedOn} />.
               </p>
             </div>

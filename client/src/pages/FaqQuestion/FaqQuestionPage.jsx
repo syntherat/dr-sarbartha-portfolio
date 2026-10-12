@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowRight, Plus } from "lucide-react";
 import FaqText from "../../components/FaqText/FaqText";
 import {
   buildFaqSchema,
+  doctorCredentials,
   doctorName,
   getFaqPath,
   getStarredWithStage,
@@ -16,6 +17,10 @@ import {
   uiText,
 } from "../../data/faq/translations";
 import "./FaqQuestionPage.css";
+
+// Language switcher and hreflang links are hidden for now (English only).
+// The translated routes still exist; set to true to show them again.
+const SHOW_LANGUAGES = false;
 
 const pad = (number) => String(number).padStart(2, "0");
 
@@ -48,7 +53,9 @@ const FaqQuestionPage = ({ faq, translations, stage, question, lang = "en" }) =>
     `${langPrefix(pageLang)}${faqPath}/${id}`;
 
   // Language versions of this page, for the switcher and hreflang links.
-  const pageLanguages = ["en", ...getQuestionLanguages(translations, question.id)];
+  const pageLanguages = SHOW_LANGUAGES
+    ? ["en", ...getQuestionLanguages(translations, question.id)]
+    : [lang];
   const languagePath = (pageLang) => questionPath(question.id, pageLang);
 
   return (
@@ -138,7 +145,11 @@ const FaqQuestionPage = ({ faq, translations, stage, question, lang = "en" }) =>
             </span>
             <span>
               <strong lang="en">{doctorName}</strong>
-              <FaqText text={faq.credentials} />
+              {doctorCredentials.map((line) => (
+                <span key={line} lang="en">
+                  {line}
+                </span>
+              ))}
             </span>
           </div>
           <div className="kq-byline-item">

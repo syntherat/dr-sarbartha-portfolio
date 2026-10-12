@@ -2,6 +2,9 @@ import { faqCatalog } from "./catalog";
 
 export const doctorName = "Dr. Sarbartha Kumar Pratihar";
 
+// Shown under the name in the reviewer byline, one line each.
+export const doctorCredentials = ["Consultant", "Uro-Oncology & Robotic Surgery"];
+
 // Catalog entries (slug, titles, question count, loaders), not the question
 // text: that is loaded per set with `loadFaq`.
 export const faqSets = faqCatalog.filter((entry) => !entry.shared);

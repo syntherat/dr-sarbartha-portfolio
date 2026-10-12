@@ -8,7 +8,6 @@ export const kidneyFaq = {
   title: "Kidney cancer",
   intro:
     "Most kidney searches start with a mass found by chance on a scan and end with one fear: life with one kidney.",
-  credentials: "[credentials]",
   reviewedOn: "[review date]",
   stages: [
     {

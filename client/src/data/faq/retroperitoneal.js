@@ -8,7 +8,6 @@ export const retroperitonealFaq = {
   title: "Retroperitoneal tumours and sarcoma",
   intro:
     "Patients rarely know the word \"retroperitoneum\". They search for a big lump in the stomach and for who can remove it safely.",
-  credentials: "[credentials]",
   reviewedOn: "[review date]",
   stages: [
     {

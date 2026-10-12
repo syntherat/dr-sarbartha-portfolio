@@ -8,7 +8,6 @@ export const upperTractFaq = {
   title: "Ureter and renal pelvis cancer",
   intro:
     "Few families have heard of this cancer, so lead with plain explanations and the hardest question: why remove a whole kidney?",
-  credentials: "[credentials]",
   reviewedOn: "[review date]",
   stages: [
     {

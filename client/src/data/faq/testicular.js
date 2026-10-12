@@ -8,7 +8,6 @@ export const testicularFaq = {
   title: "Testicular cancer",
   intro:
     "These are young men and their parents. Fertility, marriage and sex life matter to them as much as cure.",
-  credentials: "[credentials]",
   reviewedOn: "[review date]",
   stages: [
     {

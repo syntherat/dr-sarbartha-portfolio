@@ -8,7 +8,6 @@ export const commonFaq = {
   title: "Questions common to all urological cancers",
   intro:
     "These cut across every cancer.",
-  credentials: "[credentials]",
   reviewedOn: "[review date]",
   stages: [
     {

@@ -8,7 +8,6 @@ export const penileFaq = {
   title: "Penile cancer",
   intro:
     "Embarrassment makes men search privately before they see a doctor. Confidentiality, contagion and saving the penis decide whether they come.",
-  credentials: "[credentials]",
   reviewedOn: "[review date]",
   stages: [
     {

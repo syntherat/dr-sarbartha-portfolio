@@ -8,7 +8,6 @@ export const prostateFaq = {
   title: "Prostate cancer",
   intro:
     "Prostate questions cluster around three worries: what a PSA number means, which treatment to choose, and urine control and sex afterwards.",
-  credentials: "[credentials]",
   reviewedOn: "[review date]",
   stages: [
     {
