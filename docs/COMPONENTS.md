@@ -38,9 +38,9 @@ All paths are relative to `client/src/`. Each component lives in `components/<Na
 ### AboutPage
 `pages/About/AboutPage.jsx` (route `/about`)
 
-Data arrays at the top of the file: `aboutSummary`, `aboutHighlights`, `procedurePillars`, `techniqueNotes`, `journeyHighlights`, `journeyStats`, `academicHonors`, `conferenceHonors`, `featuredHonors`.
+Data arrays at the top of the file: `aboutSummary`, `aboutHighlights`, `procedurePillars`, `techniqueNotes`, `academicHonors`, `conferenceHonors`, `featuredHonors`.
 
-Sections in order: hero (`AboutHero`), profile, specialized (procedure pillars), education and career (`CareerTimeline`, inside `.about-education-section`), journey, awards, publications (`Publications`, inside `.about-publications-section`, id `research`), memberships (`Memberships`, inside `.about-membership-section`). Uses a shared `SectionHeader` helper and a `ProfilePracticeMark` SVG.
+Sections in order: hero (`AboutHero`), profile, specialized (procedure pillars), education and career (`CareerTimeline`, inside `.about-education-section`), journey (`RoboticMilestones`, inside `.about-journey-section`), awards, publications (`Publications`, inside `.about-publications-section`, id `research`), memberships (`Memberships`, inside `.about-membership-section`). Uses a shared `SectionHeader` helper and a `ProfilePracticeMark` SVG.
 
 ### AboutHero
 `components/AboutHero/AboutHero.jsx` (top of AboutPage)
@@ -56,6 +56,15 @@ Sections in order: hero (`AboutHero`), profile, specialized (procedure pillars),
 - Desktop: three-column rows, education card left, year marker on the center spine, career card right. Up to 760px: spine on the left, cards stacked on the right, empty sides hidden.
 - Spine: thick tube (`.career-timeline-spine`) with a gradient fill, striped flow layer and light sparks that loop downward.
 - GSAP (`gsap.matchMedia()` with `isDesktop` / `isMobile` conditions, off for reduced motion): fill clip-path and avatar (`assets/drskp-pfp.jpg`) position are scrubbed so the avatar stays at the viewport center while moving down the spine; markers get `.is-reached` with a ring burst and update the avatar year chip; cards swing in from their side (all from the right on mobile) with staggered content.
+
+### RoboticMilestones
+`components/RoboticMilestones/RoboticMilestones.jsx` (used by AboutPage, "Robotic Milestones")
+
+- Data: `logEntries` (the three SSI Mantra milestones, each with a short `tag` and an optional `mark`), `certificate` (DaVinci console certification and RGCIRC training), `conferencePasses` (presenter, invited faculty, awardee).
+- Logbook: ruled paper sheet with a peach margin line, a "Robotic surgery logbook / Platform: SSI Mantra" header over a double rule, the heading, numbered entries in the margin with dashed separators, an "India's first" stamp on the telesurgery entry and a faint "SSI" watermark.
+- Certificate: sage card with a double-rule frame, the certification in italic serif, the system, the training line, a signature-style "DaVinci console" line and a peach SVG seal; slightly tilted.
+- Conference passes: three tickets with notched edges (CSS `mask`), a dashed tear line and a coloured stub numbered 01 to 03.
+- Layout: logbook and certificate side by side, passes below in 3 columns; under 1000px everything stacks (passes 1 per row); under 560px the margin narrows and the stamp moves under its entry.
 
 ### Publications
 `components/Publications/Publications.jsx` (used by AboutPage, "Research & Scholarly Work")

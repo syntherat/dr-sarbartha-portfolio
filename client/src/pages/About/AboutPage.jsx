@@ -1,7 +1,6 @@
 import {
   Award,
   BadgeCheck,
-  CheckCircle2,
   Cpu,
   GraduationCap,
   Microscope,
@@ -12,6 +11,7 @@ import AboutHero from "../../components/AboutHero/AboutHero";
 import CareerTimeline from "../../components/CareerTimeline/CareerTimeline";
 import Memberships from "../../components/Memberships/Memberships";
 import Publications from "../../components/Publications/Publications";
+import RoboticMilestones from "../../components/RoboticMilestones/RoboticMilestones";
 import "./AboutPage.css";
 
 const aboutSummary = [
@@ -48,29 +48,6 @@ const techniqueNotes = [
   "MRI Fusion transperineal prostate biopsy",
   "TURP and TURBT",
   "Diagnostic and therapeutic uro-oncology procedures",
-];
-
-const journeyHighlights = {
-  robotics: [
-    "Involved in trials for the SSI Mantra robotic surgical system, India's indigenous surgical robot.",
-    "Among the early surgeons to perform robotic surgery on the SSI Mantra platform.",
-    "Part of India's first telesurgery animal trial using the SSI Mantra robotic surgical system.",
-  ],
-  academic: [
-    "Training in Urooncology and Robotic Surgery at RGCIRC, New Delhi.",
-    "Certified Console Surgeon on the Intuitive DaVinci Robotic Surgical System.",
-  ],
-  visibility: [
-    "Paper and video presentations at national and international conferences.",
-    "Invited faculty for paper and video presentations at national conferences.",
-    "Awards for presentations at national and international forums.",
-  ],
-};
-
-const journeyStats = [
-  { value: "SSI", label: "Mantra robotic platform" },
-  { value: "DaVinci", label: "Console certification" },
-  { value: "Faculty", label: "Conference teaching" },
 ];
 
 const academicHonors = [
@@ -288,46 +265,7 @@ const AboutPage = () => {
           eyebrow="Professional Journey"
           title="Robotic Milestones"
         />
-        <div className="journey-board">
-          <article className="journey-robotics">
-            <span>Robotic systems</span>
-            <h3>Early work with indigenous robotic surgery</h3>
-            <p>{journeyHighlights.robotics[0]}</p>
-            <div className="journey-robotics-list">
-              {journeyHighlights.robotics.slice(1).map((item) => (
-                <div key={item}>
-                  <CheckCircle2 size={16} aria-hidden="true" />
-                  <p>{item}</p>
-                </div>
-              ))}
-            </div>
-          </article>
-
-          <div className="journey-stat-strip" aria-label="Journey highlights">
-            {journeyStats.map((stat) => (
-              <div key={stat.label}>
-                <strong>{stat.value}</strong>
-                <span>{stat.label}</span>
-              </div>
-            ))}
-          </div>
-
-          <article className="journey-academic">
-            <span>Training + certification</span>
-            {journeyHighlights.academic.map((item) => (
-              <p key={item}>{item}</p>
-            ))}
-          </article>
-
-          <article className="journey-visibility">
-            <span>Conference visibility</span>
-            <ul>
-              {journeyHighlights.visibility.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </article>
-        </div>
+        <RoboticMilestones />
       </section>
 
       <section className="about-section about-awards-section">

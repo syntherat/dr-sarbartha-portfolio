@@ -1,0 +1,452 @@
+.milestones {
+  --ms-paper: #fffdf9;
+  --ms-rule: rgba(31, 61, 59, 0.16);
+  --ms-ink-soft: rgba(31, 61, 59, 0.72);
+  --ms-ink-faint: rgba(31, 61, 59, 0.5);
+  --ms-mono: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(300px, 0.75fr);
+  grid-template-areas:
+    "logbook certificate"
+    "passes passes";
+  gap: clamp(1.6rem, 3.5vw, 2.6rem) clamp(1.2rem, 3vw, 2.2rem);
+  align-items: start;
+}
+
+/* Logbook */
+
+.milestones-logbook {
+  grid-area: logbook;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--ms-rule);
+  border-radius: 3px;
+  background:
+    linear-gradient(90deg, transparent 3.4rem, rgba(232, 168, 124, 0.55) 3.4rem calc(3.4rem + 1px), transparent calc(3.4rem + 1px)),
+    repeating-linear-gradient(
+      180deg,
+      transparent 0 1.9rem,
+      rgba(31, 61, 59, 0.05) 1.9rem calc(1.9rem + 1px)
+    ),
+    var(--ms-paper);
+  padding: 0 clamp(1.2rem, 3vw, 2rem) clamp(1.2rem, 2.6vw, 1.8rem) 4.4rem;
+  box-shadow:
+    0 1px 0 rgba(31, 61, 59, 0.06),
+    7px 8px 0 rgba(31, 61, 59, 0.05),
+    0 24px 40px -28px rgba(31, 61, 59, 0.4);
+}
+
+.milestones-logbook-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.4rem 1rem;
+  border-bottom: 3px double rgba(31, 61, 59, 0.26);
+  padding: 1.1rem 0 0.6rem;
+  color: var(--color-accent);
+  font-family: var(--ms-mono);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.14rem;
+  text-transform: uppercase;
+}
+
+.milestones-logbook-head span:last-child {
+  color: var(--ms-ink-faint);
+  letter-spacing: 0.06rem;
+}
+
+.milestones-logbook h3 {
+  position: relative;
+  z-index: 1;
+  max-width: 16ch;
+  margin: 1.3rem 0 0;
+  color: var(--color-primary);
+  font-family: var(--font-heading);
+  font-size: clamp(1.9rem, 3.6vw, 3rem);
+  font-weight: 500;
+  line-height: 1.02;
+  text-wrap: balance;
+}
+
+.milestones-log {
+  position: relative;
+  z-index: 1;
+  margin: 1.4rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.milestones-log li {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: start;
+  border-top: 1px dashed rgba(31, 61, 59, 0.22);
+  padding: 1rem 0;
+}
+
+.milestones-log li:last-child {
+  padding-bottom: 0.2rem;
+}
+
+.milestones-log-number {
+  position: absolute;
+  top: 0.95rem;
+  left: -3.35rem;
+  width: 2.6rem;
+  color: var(--color-accent);
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-style: italic;
+  line-height: 1;
+  text-align: center;
+}
+
+.milestones-log-tag {
+  color: var(--ms-ink-faint);
+  font-family: var(--ms-mono);
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.12rem;
+  text-transform: uppercase;
+}
+
+.milestones-log p {
+  max-width: 46ch;
+  margin: 0.35rem 0 0;
+  color: var(--color-primary);
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
+
+.milestones-log-mark {
+  align-self: center;
+  border: 2px solid rgba(232, 168, 124, 0.9);
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 2px var(--ms-paper), inset 0 0 0 3px rgba(232, 168, 124, 0.6);
+  padding: 0.4rem 0.6rem;
+  color: var(--color-accent);
+  font-family: var(--ms-mono);
+  font-size: 0.66rem;
+  font-weight: 900;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transform: rotate(-8deg);
+}
+
+.milestones-logbook-watermark {
+  position: absolute;
+  top: 2.4rem;
+  right: 1rem;
+  color: rgba(31, 61, 59, 0.05);
+  font-family: var(--font-heading);
+  font-size: clamp(7rem, 16vw, 12rem);
+  font-style: italic;
+  font-weight: 600;
+  line-height: 1;
+  pointer-events: none;
+}
+
+/* Certificate */
+
+.milestones-certificate {
+  grid-area: certificate;
+  border: 1px solid var(--ms-rule);
+  border-radius: 3px;
+  background:
+    radial-gradient(circle at 80% 10%, rgba(255, 255, 255, 0.7), transparent 60%),
+    #eef0e6;
+  padding: 0.7rem;
+  box-shadow:
+    0 1px 0 rgba(31, 61, 59, 0.06),
+    0 22px 36px -26px rgba(31, 61, 59, 0.4);
+  transform: rotate(0.8deg) translateY(1.2rem);
+}
+
+.milestones-certificate-frame {
+  position: relative;
+  border: 3px double rgba(31, 61, 59, 0.3);
+  padding: clamp(1.2rem, 2.6vw, 1.7rem) clamp(1rem, 2.4vw, 1.5rem) 1.2rem;
+  text-align: center;
+}
+
+.milestones-certificate-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0.35rem;
+  border: 1px solid rgba(31, 61, 59, 0.12);
+  pointer-events: none;
+}
+
+.milestones-certificate-label {
+  color: var(--color-accent);
+  font-family: var(--ms-mono);
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.14rem;
+  text-transform: uppercase;
+}
+
+.milestones-certificate h3 {
+  margin: 0.9rem 0 0;
+  color: var(--color-primary);
+  font-family: var(--font-heading);
+  font-size: clamp(1.6rem, 2.6vw, 2.15rem);
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.08;
+}
+
+.milestones-certificate-system {
+  margin: 0.55rem auto 0;
+  max-width: 24ch;
+  border-bottom: 1px solid rgba(31, 61, 59, 0.22);
+  padding-bottom: 0.9rem;
+  color: var(--color-primary);
+  font-size: 0.86rem;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.milestones-certificate-training {
+  margin: 0.9rem auto 0;
+  max-width: 30ch;
+  color: var(--ms-ink-soft);
+  font-size: 0.86rem;
+  line-height: 1.6;
+}
+
+.milestones-certificate-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1rem;
+  text-align: left;
+}
+
+.milestones-certificate-foot span {
+  border-top: 1px solid rgba(31, 61, 59, 0.3);
+  padding-top: 0.35rem;
+  color: var(--ms-ink-faint);
+  font-family: var(--ms-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+}
+
+.milestones-seal {
+  flex: none;
+  width: 4.6rem;
+  fill: rgba(232, 168, 124, 0.22);
+  stroke: rgba(222, 150, 102, 0.9);
+  stroke-width: 1.4;
+  stroke-linejoin: round;
+  transform: rotate(-12deg);
+}
+
+.milestones-seal circle {
+  fill: none;
+}
+
+.milestones-seal-check {
+  fill: none;
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+/* Conference passes */
+
+.milestones-passes {
+  grid-area: passes;
+  margin-top: 1rem;
+}
+
+.milestones-passes-title {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin: 0 0 1rem;
+  color: var(--color-accent);
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14rem;
+  text-transform: uppercase;
+}
+
+.milestones-passes-title::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--ms-rule);
+}
+
+.milestones-passes ul {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.milestones-pass {
+  --notch: 0.7rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 4.2rem;
+  filter: drop-shadow(0 1px 0 rgba(31, 61, 59, 0.12)) drop-shadow(3px 5px 5px rgba(31, 61, 59, 0.08));
+  transition: transform 0.25s ease;
+}
+
+.milestones-pass:hover {
+  transform: translateY(-3px);
+}
+
+.milestones-pass-main,
+.milestones-pass-stub {
+  -webkit-mask:
+    radial-gradient(circle var(--notch) at var(--x) 0, #0000 98%, #000) top / 100% 51% no-repeat,
+    radial-gradient(circle var(--notch) at var(--x) 100%, #0000 98%, #000) bottom / 100% 51% no-repeat;
+  mask:
+    radial-gradient(circle var(--notch) at var(--x) 0, #0000 98%, #000) top / 100% 51% no-repeat,
+    radial-gradient(circle var(--notch) at var(--x) 100%, #0000 98%, #000) bottom / 100% 51% no-repeat;
+}
+
+.milestones-pass-main {
+  --x: 100%;
+  border-radius: 6px 0 0 6px;
+  background: var(--ms-paper);
+  padding: 1.1rem 1.1rem 1.15rem;
+}
+
+.milestones-pass-stub {
+  --x: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  border-left: 2px dashed rgba(31, 61, 59, 0.2);
+  border-radius: 0 6px 6px 0;
+  background: #f6e3d4;
+  color: var(--color-accent);
+}
+
+.milestones-pass:nth-child(2) .milestones-pass-stub {
+  background: #e7ebdc;
+  color: rgba(31, 61, 59, 0.6);
+}
+
+.milestones-pass:nth-child(3) .milestones-pass-stub {
+  background: var(--color-primary);
+  color: var(--color-accent);
+}
+
+.milestones-pass-stub span {
+  font-family: var(--ms-mono);
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+}
+
+.milestones-pass-stub strong {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.milestones-pass-kind {
+  color: var(--ms-ink-faint);
+  font-family: var(--ms-mono);
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.12rem;
+  text-transform: uppercase;
+}
+
+.milestones-pass-main strong {
+  display: block;
+  margin-top: 0.4rem;
+  color: var(--color-primary);
+  font-family: var(--font-heading);
+  font-size: clamp(1.3rem, 2vw, 1.6rem);
+  font-weight: 500;
+  line-height: 1.05;
+}
+
+.milestones-pass-main p {
+  margin: 0.55rem 0 0;
+  color: var(--ms-ink-soft);
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+
+@media (max-width: 1000px) {
+  .milestones {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "logbook"
+      "certificate"
+      "passes";
+  }
+
+  .milestones-certificate {
+    max-width: 460px;
+    justify-self: center;
+    width: 100%;
+    transform: rotate(0.6deg);
+  }
+
+  .milestones-passes ul {
+    grid-template-columns: 1fr;
+    max-width: 560px;
+  }
+}
+
+@media (max-width: 560px) {
+  .milestones-logbook {
+    background:
+      linear-gradient(90deg, transparent 2.6rem, rgba(232, 168, 124, 0.55) 2.6rem calc(2.6rem + 1px), transparent calc(2.6rem + 1px)),
+      repeating-linear-gradient(
+        180deg,
+        transparent 0 1.9rem,
+        rgba(31, 61, 59, 0.05) 1.9rem calc(1.9rem + 1px)
+      ),
+      var(--ms-paper);
+    padding-left: 3.4rem;
+    padding-right: 1rem;
+  }
+
+  .milestones-log-number {
+    left: -2.95rem;
+    width: 2.2rem;
+    font-size: 1.25rem;
+  }
+
+  .milestones-log li {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+  }
+
+  .milestones-log-mark {
+    justify-self: start;
+  }
+
+  .milestones-logbook-head span:last-child {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .milestones-pass {
+    transition: none;
+  }
+}
