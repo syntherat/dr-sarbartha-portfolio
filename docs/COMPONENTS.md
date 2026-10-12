@@ -38,9 +38,16 @@ All paths are relative to `client/src/`. Each component lives in `components/<Na
 ### AboutPage
 `pages/About/AboutPage.jsx` (route `/about`)
 
-Data arrays at the top of the file: `aboutSummary`, `aboutHighlights`, `procedurePillars`, `techniqueNotes`, `journeyHighlights`, `journeyStats`, `academicHonors`, `conferenceHonors`, `featuredHonors`, `stats`.
+Data arrays at the top of the file: `aboutSummary`, `aboutHighlights`, `procedurePillars`, `techniqueNotes`, `journeyHighlights`, `journeyStats`, `academicHonors`, `conferenceHonors`, `featuredHonors`.
 
-Sections in order: hero, profile, specialized (procedure pillars), education and career (`CareerTimeline`, inside `.about-education-section`), journey, awards, publications (`Publications`, inside `.about-publications-section`), memberships (`Memberships`, inside `.about-membership-section`). Uses a shared `SectionHeader` helper and a `ProfilePracticeMark` SVG.
+Sections in order: hero (`AboutHero`), profile, specialized (procedure pillars), education and career (`CareerTimeline`, inside `.about-education-section`), journey, awards, publications (`Publications`, inside `.about-publications-section`, id `research`), memberships (`Memberships`, inside `.about-membership-section`). Uses a shared `SectionHeader` helper and a `ProfilePracticeMark` SVG.
+
+### AboutHero
+`components/AboutHero/AboutHero.jsx` (top of AboutPage)
+
+- Left: "About the surgeon" kicker, the name as the `h1` ("Kumar Pratihar" in italic), role line (Consultant, Urooncology & Robotic Surgery, RGCIRC, Delhi), intro, a "Book a consultation" button (to `/#schedule`) and a "Research & publications" link (to `#research`), and three `credentials` (RGCIRC, DaVinci, SSI) under a rule.
+- Right: a "Consultant profile" sheet on two offset sheets: a double-rule header, the portrait as a clipped print with a caption (shown at most 224px wide, its source size), `profileFields` (specialty, practice, method, certification) as typed fields, and a footer with "Precision-led cancer surgery" and a round SVG ink stamp (`ProfileStamp`).
+- Under 900px the sheet sits below the copy; under 680px the credentials become rows and the photo sits above the fields.
 
 ### CareerTimeline
 `components/CareerTimeline/CareerTimeline.jsx` (used by AboutPage)

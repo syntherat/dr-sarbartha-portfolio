@@ -6,10 +6,9 @@ import {
   GraduationCap,
   Microscope,
   Newspaper,
-  Stethoscope,
   Users,
 } from "lucide-react";
-import doctorPortrait from "../../assets/drskp-pfp.jpg";
+import AboutHero from "../../components/AboutHero/AboutHero";
 import CareerTimeline from "../../components/CareerTimeline/CareerTimeline";
 import Memberships from "../../components/Memberships/Memberships";
 import Publications from "../../components/Publications/Publications";
@@ -134,12 +133,6 @@ const featuredHonors = [
   },
 ];
 
-const stats = [
-  { value: "RGCIRC", label: "Consultant in Delhi" },
-  { value: "DaVinci", label: "Certified console surgeon" },
-  { value: "SSI", label: "Mantra robot early adopter" },
-];
-
 const SectionHeader = ({ icon: Icon, eyebrow, title, copy }) => (
   <div className="about-section-header">
     <span className="about-section-kicker">
@@ -198,38 +191,7 @@ const ProfilePracticeMark = () => (
 const AboutPage = () => {
   return (
     <main className="about-page">
-      <section className="about-hero">
-        <div className="about-hero-copy">
-          <span className="about-eyebrow">
-            <Stethoscope size={17} aria-hidden="true" />
-            Consultant profile
-          </span>
-          <h1>About Dr. Sarbartha Kumar Pratihar</h1>
-          <p>
-            Uro-oncology and robotic surgery specialist at RGCIRC, Delhi,
-            combining academic rigor, surgical innovation, and cancer-focused
-            patient care.
-          </p>
-          <div className="about-hero-stats" aria-label="Professional highlights">
-            {stats.map((stat) => (
-              <div key={stat.label}>
-                <strong>{stat.value}</strong>
-                <span>{stat.label}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <aside className="about-portrait-card">
-          <div className="about-portrait-frame">
-            <img src={doctorPortrait} alt="Dr. Sarbartha Kumar Pratihar" />
-          </div>
-          <div>
-            <span>Urooncology + Robotic Surgery</span>
-            <h2>Precision-led cancer surgery</h2>
-          </div>
-        </aside>
-      </section>
+      <AboutHero />
 
       <section className="about-section about-profile-section">
         <SectionHeader
@@ -419,7 +381,7 @@ const AboutPage = () => {
         </div>
       </section>
 
-      <section className="about-section about-publications-section">
+      <section className="about-section about-publications-section" id="research">
         <SectionHeader
           icon={Newspaper}
           eyebrow="Publication"
