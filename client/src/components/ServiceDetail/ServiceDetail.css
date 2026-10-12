@@ -3,59 +3,168 @@
   color: var(--color-primary);
 }
 
-.service-detail-hero {
-  width: min(1400px, calc(100% - 4rem));
-  margin: 0 auto;
-  padding: clamp(4rem, 8vw, 7rem) 0 clamp(3rem, 6vw, 5rem);
-  display: grid;
-  grid-template-columns: minmax(280px, 0.9fr) minmax(320px, 1.1fr);
-  gap: clamp(2rem, 6vw, 5rem);
-  align-items: center;
-}
-
-.service-back-link {
-  display: inline-block;
-  margin-bottom: 2rem;
-  color: var(--color-primary);
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.14rem;
-  text-transform: uppercase;
-  border-bottom: 1px solid rgba(31, 61, 59, 0.35);
-  padding-bottom: 0.25rem;
-}
-
-.service-detail-kicker,
 .detail-label {
   display: block;
   color: var(--color-accent);
-  font-size: 0.76rem;
+  font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.2rem;
   text-transform: uppercase;
 }
 
-.service-detail-hero h1 {
-  max-width: 720px;
-  margin: 1rem 0 1.2rem;
-  font-size: clamp(3rem, 7vw, 6rem);
-  line-height: 0.96;
-  font-weight: 500;
+/* Hero: running head, title and the patients' questions on the left, the
+   image with its focus areas on the right. */
+
+.service-detail-hero {
+  width: min(1280px, calc(100% - 4rem));
+  margin: 0 auto;
+  padding: clamp(2.5rem, 5vw, 4rem) 0 clamp(4rem, 8vw, 6.5rem);
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  column-gap: clamp(2.5rem, 7vw, 6.5rem);
 }
 
-.service-detail-hero p {
-  max-width: 680px;
+.service-detail-running-head {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: clamp(2.5rem, 6vw, 4.5rem);
+}
+
+.service-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #5a6f6d;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.14rem;
+  text-transform: uppercase;
+  transition: color 0.2s ease;
+}
+
+.service-back-link svg {
+  transition: transform 0.2s ease;
+}
+
+.service-back-link:hover {
+  color: var(--color-primary);
+}
+
+.service-back-link:hover svg {
+  transform: translateX(-3px);
+}
+
+.service-detail-kicker {
+  color: #5a6f6d;
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-style: italic;
+}
+
+.service-detail-hero h1 {
+  font-size: clamp(3.2rem, 7.5vw, 6.5rem);
+  line-height: 0.95;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.service-detail-summary {
+  max-width: 34rem;
+  margin-top: 1.6rem;
   color: rgba(31, 61, 59, 0.78);
-  font-size: 1.12rem;
-  line-height: 1.8;
+  font-size: 1.1rem;
+  line-height: 1.75;
+}
+
+.service-hero-questions {
+  max-width: 40rem;
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+.service-hero-questions ul {
+  margin-top: 0.75rem;
+  list-style: none;
+}
+
+.service-hero-questions li + li {
+  border-top: 1px solid rgba(31, 61, 59, 0.18);
+}
+
+.service-hero-questions li a {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.25rem;
+  padding: 1rem 0;
+  color: var(--color-primary);
+}
+
+.service-hero-question-text {
+  position: relative;
+  padding-left: 1.4rem;
+  font-family: var(--font-heading);
+  font-size: clamp(1.15rem, 1.7vw, 1.4rem);
+  font-style: italic;
+  line-height: 1.35;
+}
+
+/* Hanging open quote: these are the patient's own words. */
+.service-hero-question-text::before {
+  content: "\201C";
+  position: absolute;
+  left: 0;
+  top: -0.05em;
+  color: var(--color-accent);
+  font-size: 1.6em;
+  font-style: normal;
+  line-height: 1;
+}
+
+.service-hero-questions li a svg {
+  flex-shrink: 0;
+  margin-top: 0.35rem;
+  color: rgba(31, 61, 59, 0.4);
+  transition:
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.service-hero-questions li a:hover svg {
+  color: var(--color-primary);
+  transform: translate(2px, -2px);
+}
+
+.service-hero-questions li a:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.service-hero-all-questions {
+  display: inline-block;
+  margin-top: 1rem;
+  color: var(--color-primary);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.14rem;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--color-accent);
+  padding-bottom: 0.2rem;
+}
+
+.service-detail-figure {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  min-width: 0;
 }
 
 .service-detail-image {
-  min-height: clamp(360px, 48vw, 620px);
+  aspect-ratio: 4 / 5;
   overflow: hidden;
-  border: 1px solid rgba(31, 61, 59, 0.22);
-  box-shadow: 12px 12px 0 rgba(31, 61, 59, 0.1);
-  min-width: 0;
+  background: #efe9e2;
 }
 
 .service-detail-image img {
@@ -63,62 +172,124 @@
   height: 100%;
   display: block;
   object-fit: cover;
-  filter: sepia(0.05) saturate(0.88) contrast(1.03);
+  filter: sepia(0.12) saturate(0.8) contrast(1.02);
 }
 
-.service-detail-content {
-  width: min(1160px, calc(100% - 4rem));
-  margin: 0 auto;
-  padding: 0 0 clamp(4rem, 8vw, 7rem);
-  display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
-  gap: 1.25rem;
-}
-
-.service-overview,
-.service-detail-panel {
-  border: 1px solid rgba(31, 61, 59, 0.2);
-  background: rgba(255, 255, 255, 0.55);
-  padding: clamp(1.4rem, 3vw, 2.4rem);
-}
-
-.service-overview {
-  grid-row: span 2;
-}
-
-.service-overview p {
-  margin-top: 1rem;
-  color: rgba(31, 61, 59, 0.78);
+.service-detail-figure figcaption ul {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+  list-style: none;
+  color: var(--color-primary);
   font-family: var(--font-heading);
-  font-size: clamp(1.35rem, 2.6vw, 2rem);
+  font-size: 1.05rem;
+}
+
+.service-detail-figure figcaption li:not(:last-child)::after {
+  content: "\00B7";
+  margin: 0 0.6rem;
+  color: var(--color-accent);
+}
+
+/* "From the doctor": a tinted band with the overview as a lede and the care
+   path as numbered steps. */
+
+.service-care {
+  background: #efe9e2;
+}
+
+.service-care-inner {
+  width: min(1280px, calc(100% - 4rem));
+  margin: 0 auto;
+  padding: clamp(4rem, 8vw, 6.5rem) 0;
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+  column-gap: clamp(2.5rem, 7vw, 6.5rem);
+  row-gap: clamp(3rem, 6vw, 4.5rem);
+}
+
+.service-care-header h2 {
+  margin-top: 0.6rem;
+  font-size: clamp(2.2rem, 4.4vw, 3.4rem);
+  line-height: 1;
+  font-weight: 500;
+}
+
+.service-care-author {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-top: 1.75rem;
+}
+
+.service-care-author > span:last-child {
+  display: flex;
+  flex-direction: column;
+  color: #5a6f6d;
+  font-size: 0.88rem;
   line-height: 1.45;
 }
 
-.service-detail-panel ol {
-  margin: 1rem 0 0;
-  padding-left: 1.2rem;
-  color: rgba(31, 61, 59, 0.8);
-  line-height: 1.75;
-}
-
-.service-detail-panel li + li {
-  margin-top: 0.75rem;
-}
-
-.detail-focus-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-  margin-top: 1rem;
-}
-
-.detail-focus-list span {
-  border: 1px solid rgba(31, 61, 59, 0.22);
-  border-radius: 999px;
-  padding: 0.42rem 0.75rem;
+.service-care-author strong {
   color: var(--color-primary);
-  font-size: 0.82rem;
-  background: rgba(163, 177, 138, 0.12);
+  font-weight: 600;
+}
+
+.service-care-monogram {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-primary);
+  border-radius: 50%;
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: 600;
+}
+
+.service-care-overview {
+  align-self: end;
+  font-family: var(--font-heading);
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  line-height: 1.45;
+}
+
+.service-care-path {
+  grid-column: 1 / -1;
+}
+
+.service-care-path ol {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: clamp(1.5rem, 4vw, 3rem);
+  margin-top: 1rem;
+  list-style: none;
+}
+
+.service-care-path li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(31, 61, 59, 0.3);
+  color: rgba(31, 61, 59, 0.85);
+  font-size: 1.02rem;
+  line-height: 1.6;
+}
+
+.service-care-step-number {
+  color: var(--color-accent);
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  font-style: italic;
+  line-height: 0.9;
+}
+
+.service-care + .shared-faq-links {
+  padding-top: clamp(4rem, 8vw, 6rem);
 }
 
 .related-services {
@@ -173,12 +344,16 @@
 
 @media (max-width: 980px) {
   .service-detail-hero,
-  .service-detail-content {
-    grid-template-columns: 1fr;
+  .service-care-inner {
+    grid-template-columns: minmax(0, 1fr);
   }
 
-  .service-overview {
-    grid-row: auto;
+  .service-detail-figure {
+    margin-top: 3rem;
+  }
+
+  .service-detail-image {
+    aspect-ratio: 16 / 10;
   }
 
   .related-grid {
@@ -186,24 +361,41 @@
   }
 }
 
+@media (max-width: 760px) {
+  .service-care-path ol {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 1.75rem;
+  }
+
+  .service-care-path li {
+    flex-direction: row;
+    gap: 1rem;
+  }
+
+  .service-care-step-number {
+    flex: 0 0 2.5rem;
+    font-size: 1.7rem;
+  }
+}
+
 @media (max-width: 620px) {
   .service-detail-hero,
-  .service-detail-content {
-    width: min(100% - 2rem, 1400px);
+  .service-care-inner {
+    width: min(100% - 2rem, 1280px);
+  }
+
+  .service-detail-running-head {
+    flex-direction: column;
+    gap: 0.6rem;
   }
 
   .service-detail-hero h1 {
-    font-size: clamp(2.25rem, 14vw, 3.4rem);
+    font-size: clamp(2.6rem, 14vw, 3.6rem);
   }
 
-  .service-detail-hero p {
+  .service-detail-summary {
     font-size: 1rem;
     line-height: 1.65;
-  }
-
-  .service-detail-image {
-    min-height: 300px;
-    box-shadow: 7px 7px 0 rgba(31, 61, 59, 0.1);
   }
 
   .related-grid {
@@ -213,8 +405,8 @@
 
 @media (max-width: 420px) {
   .service-detail-hero,
-  .service-detail-content {
-    width: min(100% - 1.5rem, 1400px);
+  .service-care-inner {
+    width: min(100% - 1.5rem, 1280px);
   }
 
   .related-services {
@@ -227,80 +419,9 @@
   min-height: 60vh;
 }
 
-/* Questions-first layout: patient questions in the hero, the service
-   content after the FAQ under "From the doctor". */
-.service-hero-questions {
-  margin-top: 2rem;
-  max-width: 680px;
-}
-
-.service-hero-questions ul {
-  margin-top: 0.6rem;
-  list-style: none;
-}
-
-.service-hero-questions li {
-  border-bottom: 1px solid rgba(31, 61, 59, 0.22);
-}
-
-.service-hero-questions li a {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 0.95rem 0;
-  color: var(--color-primary);
-  font-family: var(--font-heading);
-  font-size: clamp(1.15rem, 1.8vw, 1.4rem);
-  line-height: 1.3;
-}
-
-.service-hero-questions li a svg {
-  flex-shrink: 0;
-  color: rgba(31, 61, 59, 0.5);
-  transition: transform 0.2s ease, color 0.2s ease;
-}
-
-.service-hero-questions li a:hover svg {
-  color: var(--color-accent);
-  transform: translate(2px, -2px);
-}
-
-.service-hero-all-questions {
-  display: inline-block;
-  margin-top: 1.1rem;
-  color: var(--color-primary);
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.14rem;
-  text-transform: uppercase;
-  border-bottom: 1px solid rgba(31, 61, 59, 0.35);
-  padding-bottom: 0.25rem;
-}
-
-.service-detail-hero--questions .service-detail-image {
-  position: relative;
-  align-self: stretch;
-}
-
-.service-detail-hero--questions .service-detail-image img {
-  position: absolute;
-  inset: 0;
-}
-
-.service-content-header {
-  grid-column: 1 / -1;
-  padding-bottom: 0.75rem;
-}
-
-.service-content-header h2 {
-  margin-top: 0.5rem;
-  font-size: clamp(2.2rem, 4.4vw, 3.4rem);
-  line-height: 1;
-  font-weight: 500;
-}
-
 @media (prefers-reduced-motion: reduce) {
+  .service-back-link,
+  .service-back-link svg,
   .service-hero-questions li a svg {
     transition: none;
   }

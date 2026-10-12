@@ -1,11 +1,12 @@
 import { Suspense, use } from "react";
 import { Link } from "react-router-dom";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import AskTheDoctor from "../AskTheDoctor/AskTheDoctor";
 import KeyQuestions from "../KeyQuestions/KeyQuestions";
 import SharedFaqLinks from "../SharedFaqLinks/SharedFaqLinks";
 import { services } from "../../data/services";
 import {
+  doctorName,
   getFaqBySlug,
   getFaqPath,
   getStarredQuestions,
@@ -51,7 +52,9 @@ const HeroQuestions = ({ entry }) => {
         {questions.map((question) => (
           <li key={question.id}>
             <Link to={`${getFaqPath(faq)}/${question.id}`}>
-              <span>{question.question}</span>
+              <span className="service-hero-question-text">
+                {question.question}
+              </span>
               <ArrowUpRight size={18} strokeWidth={1.5} aria-hidden="true" />
             </Link>
           </li>
@@ -70,33 +73,36 @@ const ServiceDetail = ({ service }) => {
   const questionsFirst = Boolean(faqEntry);
 
   const serviceContent = (
-    <section className="service-detail-content">
-      {questionsFirst && (
-        <header className="service-content-header">
+    <section className="service-care" aria-labelledby="service-care-title">
+      <div className="service-care-inner">
+        <header className="service-care-header">
           <span className="detail-label">From the doctor</span>
-          <h2>How care is planned</h2>
+          <h2 id="service-care-title">How care is planned</h2>
+          <div className="service-care-author">
+            <span className="service-care-monogram" aria-hidden="true">
+              SP
+            </span>
+            <span>
+              <strong>{doctorName}</strong>
+              Uro-oncology and robotic surgery
+            </span>
+          </div>
         </header>
-      )}
-      <div className="service-overview">
-        <span className="detail-label">Overview</span>
-        <p>{service.overview}</p>
-      </div>
 
-      <div className="service-detail-panel">
-        <span className="detail-label">Care Path</span>
-        <ol>
-          {service.carePath.map((step) => (
-            <li key={step}>{step}</li>
-          ))}
-        </ol>
-      </div>
+        <p className="service-care-overview">{service.overview}</p>
 
-      <div className="service-detail-panel">
-        <span className="detail-label">Focus Areas</span>
-        <div className="detail-focus-list">
-          {service.focus.map((focus) => (
-            <span key={focus}>{focus}</span>
-          ))}
+        <div className="service-care-path">
+          <span className="detail-label">Care path</span>
+          <ol>
+            {service.carePath.map((step, index) => (
+              <li key={step}>
+                <span className="service-care-step-number" aria-hidden="true">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span>{step}</span>
+              </li>
+            ))}
+          </ol>
         </div>
       </div>
     </section>
@@ -104,27 +110,38 @@ const ServiceDetail = ({ service }) => {
 
   return (
     <main className="service-detail-page">
-      <section
-        className={`service-detail-hero${
-          questionsFirst ? " service-detail-hero--questions" : ""
-        }`}
-      >
-        <div className="service-detail-hero-copy">
+      <section className="service-detail-hero">
+        <div className="service-detail-running-head">
           <Link to="/#services" className="service-back-link">
+            <ArrowLeft size={15} strokeWidth={1.75} aria-hidden="true" />
             Back to services
           </Link>
-          <div className="service-detail-kicker">{service.category}</div>
+          <span className="service-detail-kicker">{service.category}</span>
+        </div>
+
+        <div className="service-detail-hero-copy">
           <h1>{service.title}</h1>
-          <p>{service.summary}</p>
+          <p className="service-detail-summary">{service.summary}</p>
           {questionsFirst && (
             <Suspense fallback={null}>
               <HeroQuestions entry={faqEntry} />
             </Suspense>
           )}
         </div>
-        <div className="service-detail-image">
-          <img src={service.image} alt={service.imageAlt} />
-        </div>
+
+        <figure className="service-detail-figure">
+          <div className="service-detail-image">
+            <img src={service.image} alt={service.imageAlt} />
+          </div>
+          <figcaption>
+            <span className="detail-label">Focus areas</span>
+            <ul>
+              {service.focus.map((focus) => (
+                <li key={focus}>{focus}</li>
+              ))}
+            </ul>
+          </figcaption>
+        </figure>
       </section>
 
       {!questionsFirst && serviceContent}
