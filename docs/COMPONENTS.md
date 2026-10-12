@@ -56,6 +56,7 @@ Sections in order: hero, profile, specialized (procedure pillars), education and
 - Receives a `service` prop resolved in `App.jsx` by `ServiceDetailRoute`.
 - Sections: hero (title, category, image), content (overview, focus, care path), `KeyQuestions` and the `AskTheDoctor` FAQ when `getFaqBySlug(service.slug)` returns a catalog entry (FAQ keyed by slug), related services ("Urologic oncology expertise").
 - The FAQ part (`ServiceFaq`) loads its set with `use(loadFaq(entry))` inside its own `Suspense`, so the rest of the page shows while the set downloads; a `.service-faq-loading` block (60vh) holds the space.
+- Questions-first layout (owner approved 2026-10-12): on every service page that has a FAQ (all eight cancers). The hero lists the first 3 starred questions (2 when the set has only 3, so the hero never repeats the whole Key questions list) under "Patients often ask" (`HeroQuestions`, own `Suspense`, links to their pages, plus "See every question" to `#faq`), and the service content moves after the FAQ under "From the doctor" / "How care is planned". A service without a FAQ would keep the original order (hero, content, related services).
 
 ### AskTheDoctor
 `components/AskTheDoctor/AskTheDoctor.jsx` (section id `faq`, used by ServiceDetail)

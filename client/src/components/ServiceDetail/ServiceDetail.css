@@ -226,3 +226,82 @@
 .service-faq-loading {
   min-height: 60vh;
 }
+
+/* Questions-first layout: patient questions in the hero, the service
+   content after the FAQ under "From the doctor". */
+.service-hero-questions {
+  margin-top: 2rem;
+  max-width: 680px;
+}
+
+.service-hero-questions ul {
+  margin-top: 0.6rem;
+  list-style: none;
+}
+
+.service-hero-questions li {
+  border-bottom: 1px solid rgba(31, 61, 59, 0.22);
+}
+
+.service-hero-questions li a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.95rem 0;
+  color: var(--color-primary);
+  font-family: var(--font-heading);
+  font-size: clamp(1.15rem, 1.8vw, 1.4rem);
+  line-height: 1.3;
+}
+
+.service-hero-questions li a svg {
+  flex-shrink: 0;
+  color: rgba(31, 61, 59, 0.5);
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.service-hero-questions li a:hover svg {
+  color: var(--color-accent);
+  transform: translate(2px, -2px);
+}
+
+.service-hero-all-questions {
+  display: inline-block;
+  margin-top: 1.1rem;
+  color: var(--color-primary);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14rem;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(31, 61, 59, 0.35);
+  padding-bottom: 0.25rem;
+}
+
+.service-detail-hero--questions .service-detail-image {
+  position: relative;
+  align-self: stretch;
+}
+
+.service-detail-hero--questions .service-detail-image img {
+  position: absolute;
+  inset: 0;
+}
+
+.service-content-header {
+  grid-column: 1 / -1;
+  padding-bottom: 0.75rem;
+}
+
+.service-content-header h2 {
+  margin-top: 0.5rem;
+  font-size: clamp(2.2rem, 4.4vw, 3.4rem);
+  line-height: 1;
+  font-weight: 500;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .service-hero-questions li a svg {
+    transition: none;
+  }
+}
