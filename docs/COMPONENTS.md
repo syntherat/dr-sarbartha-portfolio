@@ -152,4 +152,3 @@ Patient FAQ content, one file per set (rules and shape: `docs/PATIENT-FAQ.md`).
 | `doc-placeholder-nobg.webp` | Hero |
 | `drskp-pfp.jpg` | AboutPage, CareerTimeline avatar |
 | `assam-urological-society.png`, `association-of-surgeons.png`, `eau.png`, `siu.jpg`, `usi.jpg` | AboutPage memberships |
-| `doctor_placeholder.png`, `hero.png` | Not currently imported |

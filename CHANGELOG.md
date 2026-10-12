@@ -47,6 +47,7 @@ Format: entries are grouped under `## [Unreleased]` until the owner asks for a r
 - 2026-10-04: Redesigned the home page Education & Career section. Replaced the pinned horizontal scroller with repeated portrait placeholders by two side-by-side columns (Education, Career), each with a vertical rail and dated cards. GSAP: header fades up, each rail draws itself as you scroll (scrubbed), and each milestone dot pops before its card slides in. Respects `prefers-reduced-motion`. Columns stack on screens up to 900px. Career entries now have real descriptions instead of "Lorem Ipsum", the DaVinci entry gained an institution, and the placeholder image imports were removed. Files: `client/src/components/Timeline/Timeline.jsx`, `client/src/components/Timeline/Timeline.css`.
 
 ### Removed
+- 2026-10-12: Unused images `doctor_placeholder.png` (632 kB) and `hero.png` (16 kB), which nothing imported. Files: `client/src/assets/doctor_placeholder.png`, `client/src/assets/hero.png`.
 - 2026-10-12: `data/faq/hi/index.js` and `data/faq/hinglish/index.js` (all-sets bundles), replaced by per-set loaders in `data/faq/catalog.js`. Files: `client/src/data/faq/hi/index.js`, `client/src/data/faq/hinglish/index.js`.
 - 2026-10-04: Education & Career section removed from the home page, and the `Timeline` component deleted (its content now lives in the About page `CareerTimeline`). Files: `client/src/App.jsx`, `client/src/components/Timeline/Timeline.jsx`, `client/src/components/Timeline/Timeline.css`.
 - 2026-10-04: About page "Training Path" (education cards) and "Clinical Roles" (experience list) sections, their `education` and `experience` data arrays, the unused `Briefcase` import, and their now-unused styles (`.about-record-*`, `.clinical-track*`, `.about-experience-section` decorations), replaced by `CareerTimeline`. Files: `client/src/pages/About/AboutPage.jsx`, `client/src/pages/About/AboutPage.css`.
@@ -57,7 +58,7 @@ Format: entries are grouped under `## [Unreleased]` until the owner asks for a r
 - 2026-10-04: Footer Contact links (Book Appointment, Online Consultation, Media Updates) used `#schedule` / `#media` without a leading `/`, so they did nothing off the home page. Changed to `/#schedule` and `/#media`. Files: `client/src/components/Footer/Footer.jsx`.
 
 ### Docs
-- 2026-10-12: Asset table and Hero entry now name the WebP portrait. Files: `docs/COMPONENTS.md`.
+- 2026-10-12: Asset table and Hero entry now name the WebP portrait; removed the "Not currently imported" row for the deleted images. Files: `docs/COMPONENTS.md`.
 - 2026-10-12: Documented code splitting, the FAQ catalog and loaders, the route loading and error views, and the rule to keep FAQ data out of the main bundle. Files: `docs/COMPONENTS.md`, `docs/CONTEXT.md`, `docs/PATIENT-FAQ.md`.
 - 2026-10-12: Documented Hinglish as a separate language (routes, data, phrasings, translation rules), replacing the earlier "not a separate language" decision. Files: `docs/PATIENT-FAQ.md`, `docs/COMPONENTS.md`, `docs/CONTEXT.md`.
 - 2026-10-12: Corrected the count of Hinglish phrasings on non-starred questions from 3 to 2 (the robotic cost phrasing, Ayushman part included, is on a starred page). Files: `docs/COMPONENTS.md`, `docs/PATIENT-FAQ.md`.
