@@ -27,7 +27,7 @@ All paths are relative to `client/src/`. Each component lives in `components/<Na
 | --- | --- | --- |
 | `Hero` | none | Headline, intro copy, portrait (`assets/doc-placeholder-nobg.webp`). CTAs are `Link`s: "Book Appointment" to `/#schedule`, "View Profile" to `/about` |
 | `Reviews` | `reviews` | "Voices of Healing" testimonial grid. `ReviewCard` has read-more expand state; `getTimeAgo()` formats review dates |
-| `Services` | `services` | "Specialized Care" bento grid built from `data/services.js` (eight cards; `bentoSizes`: feature, tall, then six compact); cards link to `/services/:slug`. Below the grid, a line (`.services-patient-questions`) links to both shared patient question pages. Includes `ServicesDivider` |
+| `Services` | `services` | "Specialized Care" bento grid built from `data/services.js` (eight cards; `bentoSizes`: feature, tall, then six compact). Each card shows its photo, an italic numeral, a round arrow button, the category and a serif title; the feature and tall cards also show the summary and focus areas. Cards link to `/services/:slug`. Below the grid, a line (`.services-patient-questions`) links to both shared patient question pages. Includes `ServicesDivider`: one shared minimal wave (`servicesWave`: sage band, thin peach line, shadow, fill) at the top and, flipped vertically, at the bottom. The section stacks above Reviews (`z-index: 11`) so the top wave shows |
 | `CaseStudies` | `case-studies` | "Clinical Paths, Clearly Mapped": static `caseStudies` array |
 | `CaseMediaDivider` | none | Decorative divider, `aria-hidden` |
 | `MediaUpdates` | `media` | "Conferences, Talks & Clinic Notes": `updates` array with icons per type (`typeIcons`) |
