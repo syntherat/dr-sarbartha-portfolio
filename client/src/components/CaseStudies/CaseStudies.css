@@ -146,12 +146,13 @@
   line-height: 1.75;
 }
 
-/* Case viewer drawn as a file folder: tabs on top, papers inside. */
+/* Case viewer drawn as a manila file folder: tabs on top, papers inside. */
 
 .case-viewer {
-  --folder: #e6e9dc;
-  --folder-edge: rgba(31, 61, 59, 0.14);
-  --folder-tab-back: #d8ddca;
+  --folder: #f2e3c4;
+  --folder-edge: rgba(124, 92, 44, 0.2);
+  --folder-tab-back: #e6d2a8;
+  --folder-tab-hover: #ecdab5;
   --paper: #fffdfa;
   position: relative;
 }
@@ -197,12 +198,17 @@
     transform 0.25s ease;
 }
 
+/* First tab keeps a straight left side, continuing the folder's edge. */
+.case-tab:first-child::before {
+  transform-origin: bottom left;
+}
+
 .case-tab:hover {
   color: var(--color-primary);
 }
 
 .case-tab:hover::before {
-  background: #dfe3d2;
+  background: var(--folder-tab-hover);
 }
 
 .case-tab.is-active {
@@ -256,17 +262,14 @@
   z-index: 1;
   padding: clamp(1.25rem, 3vw, 2.5rem);
   border: 1px solid var(--folder-edge);
-  border-radius: 16px;
+  /* Square top-left corner: the tab strip starts flush with the folder edge. */
+  border-radius: 0 16px 16px 16px;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.35), transparent 40%),
     var(--folder);
   box-shadow:
     0 1px 2px rgba(31, 61, 59, 0.06),
     0 30px 60px -36px rgba(31, 61, 59, 0.45);
-}
-
-.case-folder.is-first {
-  border-top-left-radius: 4px;
 }
 
 .case-paper-stack {
@@ -624,7 +627,7 @@
 
   .case-folder {
     padding: 0.85rem;
-    border-radius: 12px;
+    border-radius: 0 12px 12px 12px;
   }
 
   .case-file {

@@ -144,7 +144,7 @@ const CaseStudies = () => {
           </div>
 
           <div
-            className={`case-folder${activeIndex === 0 ? " is-first" : ""}`}
+            className="case-folder"
             id="case-file-panel"
             role="tabpanel"
             aria-labelledby={`case-tab-${active.id}`}

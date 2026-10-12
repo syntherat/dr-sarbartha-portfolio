@@ -13,6 +13,7 @@ import assamUrologicalStamp from "../../assets/assam-urological-society.png";
 import surgeonsAssociationStamp from "../../assets/association-of-surgeons.png";
 import doctorPortrait from "../../assets/drskp-pfp.jpg";
 import CareerTimeline from "../../components/CareerTimeline/CareerTimeline";
+import Publications from "../../components/Publications/Publications";
 import eauStamp from "../../assets/eau.png";
 import siuStamp from "../../assets/siu.jpg";
 import usiStamp from "../../assets/usi.jpg";
@@ -134,41 +135,6 @@ const featuredHonors = [
     title: "Best Moderated Video eposter",
     detail: "Robotic VEIL lateral approach.",
     event: "42nd SIU 2022 Congress, Montreal, Canada, November 9th-13th, 2022",
-  },
-];
-
-const publications = [
-  "Double penile fracture with complete urethral disruption following anal intercourse: a case report. Sasanka K. Barua, Sarbartha Kumar Pratihar, Rajeev T. P., Saumar J. Baruah, Puskal K. Bagchi, Debanga Sarma, Mandeep Phukan, Nikhil Saurabh. International Surgery Journal, [S.l.], v. 6, n. 7, p. 2602-2604, June 2019.",
-  "Cervical lymphadenopathy as initial presentation of genito-urinary cancer. Barua SK, Pratihar SK, Kaman PK, Garg A, Rajeev TP, Baruah SJ, et al. Int J Otorhinolaryngol Head Neck Surg 2019;5:1739-44.",
-  "Duplex kidney anomalies and associated pathology: a single centre retrospective review. Sarma D, Pratihar SK, Rajeev TP, Barua SK, Bagchi PK, Phukan M. Int Surg J 2020;7:76-82.",
-  "A Comparative Study between Holmium Laser, Pneumatic Lithotripsy and Shock Pulse in Terms of Efficacy and Safety in Percutaneous Nephrolithotomy (PCNL): A Prospective Randomised Study. T P. Rajeev, Pratihar S. K., Sarma D., Baruah S. J., Barua K., Bagchi P. K., & Phukan M. Journal of Endoluminal Endourology, 3(1), e1-e8.",
-  "An audit of management of male urethral stricture and its outcome: a single centre retrospective review. Puskal Kumar Bagchi, Sarbartha Kumar Pratihar, Rajeev TP, Sasanka Kumar Barua, Debanga Sarma, Mandeep Phukan. Int Surg J 2020;7:774-80.",
-  "Pratihar, S.K., Khanna, A., Chakraborty, A. et al. Cutaneous Radiation-Associated Angiosarcoma After Treatment of Carcinoma Penis: First Report from Tertiary Cancer Centre of North India. Indian J Surg Oncol (2023). https://doi.org/10.1007/s13193-023-01766-0",
-  "Singh A, Khanna A, Jaipuria J, Gupta S, Pratihar SK, Vasudeo V, Gupta R, Rawal SK. Robotic re-exploration for post-operative in house complications following robotic pelvic uro-oncologic surgery: Initial experience, tips and tricks. J Minim Access Surg. 2023 Jan-Mar;19(1):95-100. doi: 10.4103/jmas.jmas_1_22",
-  "Vasudeo V, Khanna A, Pratihar SK, Jaipuria J, Chakraborty A, Rawal SK, Singh A. Robot-assisted retroperitoneal lymph node dissection for post-chemotherapy residual mass in testicular cancer: Long-term experience from a tertiary care centre. J Minim Access Surg. 2023 Apr-Jun;19(2):288-295. doi: 10.4103/jmas.jmas_141_22",
-  "Pratihar SK, Khanna A, Vasudeo V, et al. Prostate cancer detection using magnetic resonance imaging-transrectal ultrasound fusion biopsy: A retrospective cohort study. Indian J Urol. 2023;39(4):297-302. doi:10.4103/iju.iju_147_23",
-  "Vasudeo, V., Singh, A., Khanna, A., Rawal, S. K., Pratihar, S. K., Saurabh, N., Kumar, B., Ali, M., Sharma, P., Akotkar, S., Sharma, G., & Kesarwani, B. Surgical and oncological outcomes of robot-assisted versus laparoscopic radical nephroureterectomy for upper-tract urothelial carcinoma: A single-center comparative analysis. Indian Journal of Urology, 39(4), 285-291. https://doi.org/10.4103/iju.iju_128_23",
-  "Rawal SK, Khanna A, Singh A, Jindal T, Sk R, Kumar B, Taori R, Pratihar SK, Vasudeo V, Saurabh N, Ali M, Malla I, Adhikari K. Robot-Assisted Video Endoscopic Inguinal Lymph Node Dissection for Penile Cancer: An Indian Multicenter Experience. J Endourol. 2024 May 7. doi: 10.1089/end.2023.0719. Epub ahead of print. PMID: 38661519.",
-  "Saurabh, Nikhil & Khanna, Ashish & Singh, Amitabh & Pratihar, Sarbartha & Vasudeo, V. & Rawal, S. Misidentifying Superior Mesenteric Artery (SMA) as left renal artery during robot assisted laparoscopic left Nephron Sparing Surgery (NSS): Prevention and management - points to learn. European Urology Open Science. 55. S236. 10.1016/S2666-1683(23)00590-6.",
-  "Rawal, S. & Khanna, Ashish & Singh, Amitabh & Vasudev, V. & Pratihar, Sarbartha & Saurabh, Nikhil & Kumar, Bhuwan & Ali, M. Initial experience of robot assisted radical prostatectomy with mantra tm multiarm robotic platform. European Urology Open Science. 55. S78. 10.1016/S2666-1683(23)00452-4.",
-  "Saurabh, Nikhil & Singh, Amitabh & Khanna, Ashish & Vasudeo, V. & Pratihar, Sarbartha & Rawal, S. Robotic radical nephrectomy with level I-II inferior vena cava tumour thrombectomy - insight from our initial experience. European Urology Open Science. 55. S238. 10.1016/S2666-1683(23)00592-X.",
-  "Singh, Amitabh & Khanna, Ashish & Pratihar, Sarbartha & Vasudev, Vivek & Saurabh, Nikhil & Rawal, Sudhir. MP68-12 our early clinical experience with mantra tm multi arm surgical robotic system (ss innovations group company) in major uro-oncological surgeries. Journal of Urology. 209. 10.1097/JU.0000000000003331.12.",
-  "Singh, Amitabh & Khanna, Ashish & Vasudev, V. & Pratihar, Sarbartha & Saurabh, Nikhil & Rawal, S. Comparison of long term functional and oncological outcomes of robot assisted video endoscopic inguinal lymph node dissection between clinically non-palpable and palpable inguinal lymphadenopathy. European Urology. 83. S910. 10.1016/S0302-2838(23)00688-7.",
-  "Chakraborty, Arnab & Khanna, Ashish & Vasudeo, Vivek & Pratihar, Sarbartha & Singh, Amitabh & Rawal, Sudhir. Enzalutamide-Induced Acute Maculopapular Rash in Treatment of Metastatic Prostate Cancer: First Case Report from a Tertiary Cancer Care Center of North India. Indian Journal of Surgical Oncology. 14. 1-5. 10.1007/s13193-023-01719-7.",
-];
-
-const publicationFolders = [
-  {
-    tab: "Folder 01",
-    title: "Indexed Journal Papers",
-    note: "Peer-reviewed articles, surgical audits, diagnostic studies, and case reports.",
-    items: [...publications.slice(0, 11), publications[16]],
-  },
-  {
-    tab: "Folder 02",
-    title: "Conference Science",
-    note: "Robotic surgery abstracts and presented academic work from international forums.",
-    items: publications.slice(11, 16),
   },
 ];
 
@@ -497,49 +463,7 @@ const AboutPage = () => {
           title="Research & Scholarly Work"
           copy="Published and presented work spanning uro-oncology, robotic surgery, prostate cancer diagnostics, and complex surgical case reports."
         />
-        <div className="research-desk">
-          <aside className="research-catalog">
-            <div className="catalog-folder-icon" aria-hidden="true">
-              <span />
-            </div>
-            <span>Research archive</span>
-            <h3>Evidence from uro-oncology, robotics, and surgical outcomes.</h3>
-            <div className="research-catalog-meta">
-              <div>
-                <strong>{publications.length}</strong>
-                <small>Total records</small>
-              </div>
-              <div>
-                <strong>2</strong>
-                <small>Folders</small>
-              </div>
-            </div>
-          </aside>
-
-          <div className="research-folder-stack">
-            {publicationFolders.map((folder) => (
-              <section className="research-folder" key={folder.title}>
-                <div className="research-folder-tab">
-                  <span>{folder.tab}</span>
-                  <h3>{folder.title}</h3>
-                  <p>{folder.note}</p>
-                  <small>{folder.items.length} documents</small>
-                </div>
-
-                <div className="research-documents">
-                  {folder.items.map((publication, index) => (
-                    <article className="research-document" key={publication}>
-                      <span className="document-number">
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
-                      <p>{publication}</p>
-                    </article>
-                  ))}
-                </div>
-              </section>
-            ))}
-          </div>
-        </div>
+        <Publications />
       </section>
 
       <section className="about-section about-membership-section">

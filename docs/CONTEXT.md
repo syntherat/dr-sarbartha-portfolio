@@ -116,6 +116,7 @@ Fonts load from Google Fonts in `index.css`.
 
 - Service images are remote Unsplash URLs.
 - `README.md` is a placeholder title only.
+- The `Publications` year for the Journal of Endoluminal Endourology 3(1) PCNL paper (2020) is not in the original citation; confirm it with Dr. Pratihar.
 - `CareerTimeline` career descriptions were written from the role titles and the About page; confirm wording with Dr. Pratihar.
 - FAQ content still contains bracketed placeholders (figures, `[credentials]`, `[review date]`) for the doctor to fill; they render highlighted and are included in the FAQPage JSON-LD until replaced.
 - The site is a client-rendered SPA, so FAQ JSON-LD and page titles exist only after JavaScript runs; prerendering would make them visible to crawlers that do not run JS.
