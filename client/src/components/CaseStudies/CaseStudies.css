@@ -146,126 +146,372 @@
   line-height: 1.75;
 }
 
-.case-studies-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.1rem;
-}
+/* Case viewer drawn as a file folder: tabs on top, papers inside. */
 
-.case-study-card {
+.case-viewer {
+  --folder: #e6e9dc;
+  --folder-edge: rgba(31, 61, 59, 0.14);
+  --folder-tab-back: #d8ddca;
+  --paper: #fffdfa;
   position: relative;
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  min-height: 430px;
-  overflow: hidden;
-  border: 1px solid rgba(31, 61, 59, 0.34);
-  border-radius: 10px;
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(248, 245, 242, 0.88)),
-    var(--color-bg);
-  box-shadow: 8px 8px 0 rgba(31, 61, 59, 0.13);
-  min-width: 0;
 }
 
-.case-study-card::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto;
-  height: 8px;
-  background: repeating-linear-gradient(
-    90deg,
-    var(--color-primary) 0 24px,
-    var(--color-accent) 24px 36px,
-    var(--color-secondary-accent) 36px 54px
-  );
-}
-
-.case-study-top {
+.case-tabs {
+  position: relative;
+  z-index: 2;
   display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 1.35rem 1.4rem 0;
-  color: rgba(31, 61, 59, 0.72);
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.14rem;
-  text-transform: uppercase;
+  gap: 0.35rem;
+  padding: 0;
+  margin-bottom: -1px;
 }
 
-.case-study-top span:first-child {
-  color: var(--color-accent);
-}
-
-.case-study-main {
-  padding: 1.35rem 1.4rem 1rem;
-}
-
-.case-study-profile {
-  width: fit-content;
-  max-width: 100%;
-  margin: 0 0 0.85rem;
-  border: 1px solid rgba(31, 61, 59, 0.22);
-  border-radius: 999px;
-  padding: 0.35rem 0.75rem;
-  background: rgba(163, 177, 138, 0.14);
-  color: rgba(31, 61, 59, 0.72);
-  font-size: 0.76rem;
-  font-weight: 700;
-}
-
-.case-study-main h3 {
-  max-width: 620px;
-  color: var(--color-primary);
-  font-family: var(--font-heading);
-  font-size: clamp(1.65rem, 3vw, 2.35rem);
-  line-height: 1.08;
-}
-
-.case-study-flow {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  border-top: 1px solid rgba(31, 61, 59, 0.18);
-  background: rgba(255, 255, 255, 0.48);
-}
-
-.case-study-step {
+/* Trapezoid folder tab: the shape is a tilted pseudo-element behind the text. */
+.case-tab {
   position: relative;
-  padding: 1.15rem 1.2rem 1.25rem;
-  min-width: 0;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  padding: 0.85rem 1.6rem 0.75rem;
+  border: 0;
+  background: transparent;
+  color: rgba(31, 61, 59, 0.62);
+  font: inherit;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 0.25s ease;
 }
 
-.case-study-step + .case-study-step {
-  border-left: 1px solid rgba(31, 61, 59, 0.16);
-}
-
-.case-study-step + .case-study-step::before {
+.case-tab::before {
   content: "";
   position: absolute;
-  top: 1.35rem;
-  left: -0.42rem;
-  width: 0.72rem;
-  aspect-ratio: 1;
-  border-top: 1px solid rgba(31, 61, 59, 0.36);
-  border-right: 1px solid rgba(31, 61, 59, 0.36);
-  background: var(--color-bg);
-  transform: rotate(45deg);
+  inset: 0;
+  z-index: -1;
+  border: 1px solid var(--folder-edge);
+  border-bottom: 0;
+  border-radius: 10px 10px 0 0;
+  background: var(--folder-tab-back);
+  transform: perspective(60px) rotateX(5deg);
+  transform-origin: bottom;
+  transition:
+    background-color 0.25s ease,
+    transform 0.25s ease;
 }
 
-.case-study-step span {
-  display: inline-block;
-  margin-bottom: 0.55rem;
+.case-tab:hover {
+  color: var(--color-primary);
+}
+
+.case-tab:hover::before {
+  background: #dfe3d2;
+}
+
+.case-tab.is-active {
+  z-index: 3;
+  color: var(--color-primary);
+}
+
+.case-tab.is-active::before {
+  background: var(--folder);
+}
+
+/* Covers the folder's top border under the open tab so the two join. */
+.case-tab.is-active::after {
+  content: "";
+  position: absolute;
+  left: 1px;
+  right: 1px;
+  bottom: -1px;
+  height: 2px;
+  background: var(--folder);
+}
+
+.case-tab:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+.case-tab-number {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: 1.15rem;
+  line-height: 1;
+  color: rgba(31, 61, 59, 0.4);
+  transition: color 0.25s ease;
+}
+
+.case-tab.is-active .case-tab-number {
   color: var(--color-accent);
+}
+
+.case-tab-service {
   font-size: 0.72rem;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.13rem;
   text-transform: uppercase;
 }
 
-.case-study-step p {
+.case-folder {
+  position: relative;
+  z-index: 1;
+  padding: clamp(1.25rem, 3vw, 2.5rem);
+  border: 1px solid var(--folder-edge);
+  border-radius: 16px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.35), transparent 40%),
+    var(--folder);
+  box-shadow:
+    0 1px 2px rgba(31, 61, 59, 0.06),
+    0 30px 60px -36px rgba(31, 61, 59, 0.45);
+}
+
+.case-folder.is-first {
+  border-top-left-radius: 4px;
+}
+
+.case-paper-stack {
+  position: relative;
+}
+
+/* A second sheet peeking out from behind the open one. */
+.case-paper-back {
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(31, 61, 59, 0.08);
+  border-radius: 6px;
+  background: #f7f2ea;
+  transform: rotate(1.1deg) translate(6px, 4px);
+  box-shadow: 0 6px 16px -10px rgba(31, 61, 59, 0.3);
+}
+
+.case-file {
+  position: relative;
+  min-width: 0;
+  padding: clamp(1.75rem, 3.5vw, 3rem);
+  border: 1px solid rgba(31, 61, 59, 0.08);
+  border-radius: 6px;
+  background:
+    repeating-linear-gradient(
+      180deg,
+      transparent 0 31px,
+      rgba(31, 61, 59, 0.035) 31px 32px
+    ),
+    var(--paper);
+  box-shadow: 0 10px 24px -16px rgba(31, 61, 59, 0.35);
+  animation: case-file-in 0.45s ease both;
+}
+
+.case-file-clip {
+  position: absolute;
+  top: -14px;
+  left: clamp(1.25rem, 3vw, 2.5rem);
+  color: rgba(31, 61, 59, 0.55);
+  transform: rotate(-8deg);
+  filter: drop-shadow(0 2px 2px rgba(31, 61, 59, 0.15));
+}
+
+.case-file-stamp {
+  position: absolute;
+  top: clamp(1.5rem, 3vw, 2.4rem);
+  right: clamp(1.5rem, 3vw, 2.6rem);
+  padding: 0.4rem 0.75rem;
+  border: 1.5px solid rgba(232, 168, 124, 0.7);
+  border-radius: 6px;
+  color: rgba(214, 139, 90, 0.9);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.16rem;
+  text-transform: uppercase;
+  transform: rotate(-6deg);
+  opacity: 0.85;
+}
+
+@keyframes case-file-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.case-file-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  margin-bottom: 1.4rem;
+  padding-right: 11rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16rem;
+  text-transform: uppercase;
+}
+
+.case-file-label {
+  color: var(--color-accent);
+}
+
+.case-file-service {
+  color: rgba(31, 61, 59, 0.6);
+}
+
+.case-file-profile {
+  margin: 0 0 0.6rem;
+  color: rgba(31, 61, 59, 0.66);
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: 1.05rem;
+}
+
+.case-file-head h3 {
+  max-width: 680px;
+  color: var(--color-primary);
+  font-family: var(--font-heading);
+  font-size: clamp(1.9rem, 3.2vw, 2.75rem);
+  font-weight: 500;
+  line-height: 1.08;
+}
+
+.case-journey {
+  --journey-gap: clamp(1.25rem, 2.5vw, 2.25rem);
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--journey-gap);
+  margin: clamp(2rem, 4vw, 3rem) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Track from the first node to the last, then a peach fill that draws across. */
+.case-journey::before,
+.case-journey::after {
+  content: "";
+  position: absolute;
+  top: 1.1rem;
+  left: 1.1rem;
+  right: calc((100% - 2 * var(--journey-gap)) / 3 - 1.1rem);
+  height: 1px;
+}
+
+.case-journey::before {
+  background: rgba(31, 61, 59, 0.16);
+}
+
+.case-journey::after {
+  background: var(--color-accent);
+  transform-origin: left;
+  animation: case-journey-draw 1.1s 0.15s ease both;
+}
+
+@keyframes case-journey-draw {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.case-journey-step {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  animation: case-file-in 0.5s ease both;
+  animation-delay: calc(0.2s + var(--step) * 0.18s);
+}
+
+.case-journey-node {
+  display: grid;
+  place-items: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--color-accent);
+  border-radius: 50%;
+  background: var(--paper);
+  color: var(--color-primary);
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: 1rem;
+}
+
+.case-journey-step:last-child .case-journey-node {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-bg);
+}
+
+.case-journey-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--color-accent);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.15rem;
+  text-transform: uppercase;
+}
+
+.case-journey-step p {
   margin: 0;
-  color: rgba(31, 61, 59, 0.78);
+  color: rgba(31, 61, 59, 0.8);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+.case-file-foot {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: clamp(1.75rem, 3.5vw, 2.5rem);
+  padding-top: 1.25rem;
+  border-top: 1px dashed rgba(31, 61, 59, 0.18);
+}
+
+.case-file-next {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.35rem 0;
+  border: 0;
+  border-bottom: 1px solid var(--color-accent);
+  background: none;
+  color: var(--color-primary);
+  font: inherit;
   font-size: 0.9rem;
-  line-height: 1.55;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.case-file-next svg {
+  transition: transform 0.25s ease;
+}
+
+.case-file-next:hover svg,
+.case-file-next:focus-visible svg {
+  transform: translateX(4px);
+}
+
+.case-file-next:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .case-file,
+  .case-journey-step,
+  .case-journey-step::after,
+  .case-journey::after,
+  .case-floater {
+    animation: none;
+  }
+
+  .case-tab,
+  .case-tab::before,
+  .case-file-next svg {
+    transition: none;
+  }
 }
 
 @keyframes caseFloat {
@@ -277,13 +523,31 @@
   }
 }
 
-@media (max-width: 1100px) {
-  .case-studies-grid {
-    grid-template-columns: 1fr;
+@media (max-width: 900px) {
+  /* Tabs scroll sideways; the open tab is kept in view from the component. */
+  .case-tabs {
+    overflow-x: auto;
+    padding-top: 0.4rem;
+    scrollbar-width: none;
   }
 
-  .case-study-card {
-    min-height: 0;
+  .case-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .case-tab {
+    flex: 0 0 auto;
+    padding: 0.75rem 1.25rem 0.65rem;
+  }
+
+  .case-file-meta {
+    padding-right: 0;
+  }
+
+  .case-file-stamp {
+    position: static;
+    display: inline-block;
+    margin-bottom: 1.1rem;
   }
 }
 
@@ -307,19 +571,49 @@
     gap: 1.5rem;
   }
 
-  .case-study-flow {
+  /* Journey runs top to bottom with the line down the node column. */
+  .case-journey {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 
-  .case-study-step + .case-study-step {
-    border-top: 1px solid rgba(31, 61, 59, 0.16);
-    border-left: 0;
+  /* One connector per step, from its node down to the next node. */
+  .case-journey::before,
+  .case-journey::after {
+    display: none;
   }
 
-  .case-study-step + .case-study-step::before {
-    top: -0.42rem;
-    left: 1.4rem;
-    transform: rotate(135deg);
+  .case-journey-step:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 2.2rem;
+    bottom: -1.5rem;
+    left: 1.1rem;
+    width: 1px;
+    background: var(--color-accent);
+    transform-origin: top;
+    animation: case-journey-draw-down 0.5s ease both;
+    animation-delay: calc(0.35s + var(--step) * 0.18s);
+  }
+
+  .case-journey-step {
+    display: grid;
+    grid-template-columns: 2.2rem minmax(0, 1fr);
+    column-gap: 1rem;
+  }
+
+  .case-journey-node {
+    grid-row: span 2;
+    margin-bottom: 0;
+  }
+}
+
+@keyframes case-journey-draw-down {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
   }
 }
 
@@ -328,23 +622,24 @@
     font-size: clamp(2rem, 11vw, 2.8rem);
   }
 
-  .case-study-top {
+  .case-folder {
+    padding: 0.85rem;
+    border-radius: 12px;
+  }
+
+  .case-file {
+    padding: 1.75rem 1.15rem 1.5rem;
+  }
+
+  .case-file-clip {
+    left: 1rem;
+  }
+
+  .case-file-meta {
     flex-direction: column;
-    gap: 0.35rem;
   }
 
-  .case-study-card {
-    box-shadow: 5px 5px 0 rgba(31, 61, 59, 0.1);
-  }
-
-  .case-study-main,
-  .case-study-top,
-  .case-study-step {
-    padding-inline: 1rem;
-  }
-
-  .case-study-profile {
-    width: 100%;
-    border-radius: 8px;
+  .case-file-foot {
+    justify-content: flex-start;
   }
 }

@@ -1,3 +1,5 @@
+import { useEffect, useRef, useState } from "react";
+import { ArrowRight, Paperclip } from "lucide-react";
 import "./CaseStudies.css";
 
 const caseStudies = [
@@ -51,7 +53,48 @@ const caseStudies = [
   },
 ];
 
+const journeySteps = [
+  { key: "problem", label: "Problem" },
+  { key: "treatment", label: "Treatment" },
+  { key: "outcome", label: "Outcome" },
+];
+
 const CaseStudies = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const tabRefs = useRef([]);
+  const active = caseStudies[activeIndex];
+  const nextIndex = (activeIndex + 1) % caseStudies.length;
+
+  // Keep the open tab centred when the tab row scrolls sideways on phones.
+  // Scrolls only the tab row itself, never the page.
+  useEffect(() => {
+    const tab = tabRefs.current[activeIndex];
+    const list = tab?.parentElement;
+    if (!list || list.scrollWidth <= list.clientWidth) return;
+    const left = tab.offsetLeft - (list.clientWidth - tab.offsetWidth) / 2;
+    list.scrollTo({ left: Math.max(0, left), behavior: "smooth" });
+  }, [activeIndex]);
+
+  const selectCase = (index, moveFocus = false) => {
+    setActiveIndex(index);
+    if (moveFocus) tabRefs.current[index]?.focus();
+  };
+
+  const handleTabKeyDown = (event) => {
+    const last = caseStudies.length - 1;
+    const keyMap = {
+      ArrowDown: activeIndex === last ? 0 : activeIndex + 1,
+      ArrowRight: activeIndex === last ? 0 : activeIndex + 1,
+      ArrowUp: activeIndex === 0 ? last : activeIndex - 1,
+      ArrowLeft: activeIndex === 0 ? last : activeIndex - 1,
+      Home: 0,
+      End: last,
+    };
+    if (!(event.key in keyMap)) return;
+    event.preventDefault();
+    selectCase(keyMap[event.key], true);
+  };
+
   return (
     <section className="case-studies-section" id="case-studies">
       <div className="case-study-floaters" aria-hidden="true">
@@ -73,35 +116,89 @@ const CaseStudies = () => {
           </p>
         </div>
 
-        <div className="case-studies-grid">
-          {caseStudies.map((study) => (
-            <article className="case-study-card" key={study.id}>
-              <div className="case-study-top">
-                <span>{study.id}</span>
-                <span>{study.service}</span>
-              </div>
+        <div className="case-viewer">
+          <div className="case-tabs" role="tablist" aria-label="Case studies">
+            {caseStudies.map((study, index) => {
+              const isActive = index === activeIndex;
+              return (
+                <button
+                  key={study.id}
+                  ref={(node) => {
+                    tabRefs.current[index] = node;
+                  }}
+                  type="button"
+                  role="tab"
+                  id={`case-tab-${study.id}`}
+                  aria-selected={isActive}
+                  aria-controls="case-file-panel"
+                  tabIndex={isActive ? 0 : -1}
+                  className={`case-tab${isActive ? " is-active" : ""}`}
+                  onClick={() => selectCase(index)}
+                  onKeyDown={handleTabKeyDown}
+                >
+                  <span className="case-tab-number">{study.id}</span>
+                  <span className="case-tab-service">{study.service}</span>
+                </button>
+              );
+            })}
+          </div>
 
-              <div className="case-study-main">
-                <p className="case-study-profile">{study.profile}</p>
-                <h3>{study.title}</h3>
-              </div>
+          <div
+            className={`case-folder${activeIndex === 0 ? " is-first" : ""}`}
+            id="case-file-panel"
+            role="tabpanel"
+            aria-labelledby={`case-tab-${active.id}`}
+          >
+            <div className="case-paper-stack">
+              <span className="case-paper-back" aria-hidden="true" />
+              <article className="case-file" key={active.id}>
+                <span className="case-file-clip" aria-hidden="true">
+                  <Paperclip size={34} strokeWidth={1.4} />
+                </span>
+                <span className="case-file-stamp" aria-hidden="true">
+                  Representative case
+                </span>
 
-              <div className="case-study-flow" aria-label={`${study.title} care path`}>
-                <div className="case-study-step">
-                  <span>Problem</span>
-                  <p>{study.problem}</p>
-                </div>
-                <div className="case-study-step">
-                  <span>Treatment</span>
-                  <p>{study.treatment}</p>
-                </div>
-                <div className="case-study-step">
-                  <span>Outcome</span>
-                  <p>{study.outcome}</p>
-                </div>
-              </div>
-            </article>
-          ))}
+                <header className="case-file-head">
+                  <div className="case-file-meta">
+                    <span className="case-file-label">
+                      Case file {active.id}
+                    </span>
+                    <span className="case-file-service">{active.service}</span>
+                  </div>
+                  <p className="case-file-profile">{active.profile}</p>
+                  <h3>{active.title}</h3>
+                </header>
+
+                <ol className="case-journey">
+                  {journeySteps.map((step, index) => (
+                    <li
+                      className="case-journey-step"
+                      key={step.key}
+                      style={{ "--step": index }}
+                    >
+                      <span className="case-journey-node" aria-hidden="true">
+                        {index + 1}
+                      </span>
+                      <span className="case-journey-label">{step.label}</span>
+                      <p>{active[step.key]}</p>
+                    </li>
+                  ))}
+                </ol>
+
+                <footer className="case-file-foot">
+                  <button
+                    type="button"
+                    className="case-file-next"
+                    onClick={() => selectCase(nextIndex)}
+                  >
+                    Next case: {caseStudies[nextIndex].service}
+                    <ArrowRight size={16} strokeWidth={1.8} aria-hidden="true" />
+                  </button>
+                </footer>
+              </article>
+            </div>
+          </div>
         </div>
       </div>
     </section>
