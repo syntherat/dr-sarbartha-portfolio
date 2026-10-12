@@ -1,14 +1,28 @@
+import { Suspense, use } from "react";
 import { Link } from "react-router-dom";
 import AskTheDoctor from "../AskTheDoctor/AskTheDoctor";
 import KeyQuestions from "../KeyQuestions/KeyQuestions";
 import SharedFaqLinks from "../SharedFaqLinks/SharedFaqLinks";
 import { services } from "../../data/services";
-import { getFaqBySlug } from "../../data/faq";
+import { getFaqBySlug, loadFaq } from "../../data/faq";
 import "./ServiceDetail.css";
+
+// The service's FAQ set is its own chunk; the rest of the page shows while it
+// downloads.
+const ServiceFaq = ({ entry }) => {
+  const faq = use(loadFaq(entry));
+
+  return (
+    <>
+      <KeyQuestions faq={faq} />
+      <AskTheDoctor key={faq.slug} faq={faq} />
+    </>
+  );
+};
 
 const ServiceDetail = ({ service }) => {
   const relatedServices = services.filter((item) => item.slug !== service.slug);
-  const faq = getFaqBySlug(service.slug);
+  const faqEntry = getFaqBySlug(service.slug);
 
   return (
     <main className="service-detail-page">
@@ -51,8 +65,11 @@ const ServiceDetail = ({ service }) => {
         </div>
       </section>
 
-      {faq && <KeyQuestions faq={faq} />}
-      {faq && <AskTheDoctor key={faq.slug} faq={faq} />}
+      {faqEntry && (
+        <Suspense fallback={<div className="service-faq-loading" aria-busy="true" />}>
+          <ServiceFaq key={faqEntry.slug} entry={faqEntry} />
+        </Suspense>
+      )}
       <SharedFaqLinks />
 
       <section className="related-services">

@@ -23,7 +23,6 @@ export const prostateHi = {
       ],
     },
     "normal-psa-for-age": {
-      hinglish: "PSA kitna hona chahiye?",
       question:
         "मेरी उम्र में सामान्य PSA कितना है? मेरा PSA 6 (या 9, या 15) है: मुझे कितनी चिंता करनी चाहिए?",
       answer:
@@ -105,7 +104,6 @@ export const prostateHi = {
       ],
     },
     "treatment-without-surgery": {
-      hinglish: "Prostate cancer ka ilaj bina operation ke ho sakta hai?",
       question: "क्या प्रोस्टेट कैंसर का इलाज बिना सर्जरी के हो सकता है?",
       answer: "हाँ: कई असरदार इलाज ऐसे हैं जिनमें ऑपरेशन नहीं होता।",
       points: [
@@ -128,7 +126,6 @@ export const prostateHi = {
       ],
     },
     "urine-leakage-after-surgery": {
-      hinglish: "Operation ke baad peshab par control kab tak aata hai?",
       question:
         "क्या प्रोस्टेट सर्जरी के बाद पेशाब रिसेगा? पेशाब पर नियंत्रण कब तक लौटता है?",
       answer:
@@ -141,7 +138,6 @@ export const prostateHi = {
       ],
     },
     "erections-after-surgery": {
-      hinglish: "Prostate operation ke baad sex kar sakte hain?",
       question: "क्या सर्जरी के बाद मुझे इरेक्शन होगा और मैं सेक्स कर पाऊँगा?",
       answer:
         "कई पुरुषों में इरेक्शन लौट आता है, लेकिन इसमें अक्सर 6 से 24 महीने लगते हैं, और यह उम्र, सर्जरी से पहले के इरेक्शन और नर्व-स्पेयरिंग पर निर्भर करता है।",

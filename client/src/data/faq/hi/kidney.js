@@ -12,7 +12,6 @@ export const kidneyHi = {
   },
   questions: {
     "kidney-mass-on-ultrasound": {
-      hinglish: "Kidney (gurde) mein gaanth hai: kya yeh cancer hai?",
       question:
         "अल्ट्रासाउंड में मेरी किडनी में एक गाँठ (mass) मिली है: क्या यह कैंसर है?",
       answer:
@@ -47,7 +46,6 @@ export const kidneyHi = {
       ],
     },
     "life-with-one-kidney": {
-      hinglish: "Kya ek kidney ke saath normal zindagi jee sakte hain?",
       question:
         "क्या एक किडनी के साथ सामान्य जीवन जिया जा सकता है? क्या इससे उम्र कम होती है?",
       answer:

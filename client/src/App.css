@@ -22,11 +22,29 @@
   font-weight: 500;
 }
 
-.service-not-found a {
+.service-not-found a,
+.service-not-found button {
   justify-self: center;
   border-bottom: 1px solid rgba(31, 61, 59, 0.35);
   padding-bottom: 0.25rem;
   font-weight: 700;
+}
+
+.service-not-found button {
+  border-top: 0;
+  border-right: 0;
+  border-left: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Placeholder while a page's code or data downloads. */
+.route-loading {
+  min-height: 100vh;
+  background: var(--color-bg);
 }
 
 @media (max-width: 520px) {

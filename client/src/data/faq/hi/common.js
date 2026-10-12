@@ -35,7 +35,6 @@ export const commonHi = {
       ],
     },
     "tell-parent-about-cancer": {
-      hinglish: "Kya papa ko batana chahiye ki unhe cancer hai?",
       question:
         "क्या हमें अपने पिता या माँ को बताना चाहिए कि उन्हें कैंसर है?",
       answer:
@@ -47,7 +46,6 @@ export const commonHi = {
       ],
     },
     "biopsy-or-surgery-spread": {
-      hinglish: "Biopsy ya operation se cancer failta hai kya?",
       question: "क्या बायोप्सी या सर्जरी से कैंसर फैल जाता है?",
       answer:
         "नहीं: यह एक आम भ्रम है; सही तरीके से की गई बायोप्सी या ऑपरेशन से कैंसर नहीं फैलता।",

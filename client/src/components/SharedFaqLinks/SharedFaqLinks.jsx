@@ -3,12 +3,9 @@ import { ArrowUpRight } from "lucide-react";
 import { faqSets, getFaqPath, sharedFaqSets } from "../../data/faq";
 import "./SharedFaqLinks.css";
 
-const countQuestions = (faq) =>
-  faq.stages.reduce((total, stage) => total + stage.questions.length, 0);
-
 // Links to the shared FAQ pages (robotic surgery, common questions). On a
 // shared page, `exclude` drops that page and `withCancers` adds every
-// cancer's FAQ.
+// cancer's FAQ. Uses the catalog only, so no FAQ set is downloaded.
 const SharedFaqLinks = ({ exclude, withCancers = false }) => {
   const shared = sharedFaqSets.filter((faq) => faq.slug !== exclude);
   const sets = withCancers ? [...shared, ...faqSets] : shared;
@@ -28,7 +25,7 @@ const SharedFaqLinks = ({ exclude, withCancers = false }) => {
             <Link className="shared-faq-link" to={`${getFaqPath(faq)}#faq`}>
               <span className="shared-faq-link-body">
                 <span className="shared-faq-link-meta">
-                  {countQuestions(faq)} questions
+                  {faq.questionCount} questions
                 </span>
                 <span className="shared-faq-link-title">{faq.title}</span>
               </span>

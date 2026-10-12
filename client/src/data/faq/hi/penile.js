@@ -11,7 +11,6 @@ export const penileHi = {
   },
   questions: {
     "sore-not-healing": {
-      hinglish: "Ling par ghaav jo theek nahi ho raha: kya yeh cancer hai?",
       question:
         "मेरे लिंग पर एक घाव, मस्सा या छाला है जो ठीक नहीं हो रहा: क्या यह कैंसर हो सकता है?",
       answer:

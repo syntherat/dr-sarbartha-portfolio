@@ -10,7 +10,7 @@ import {
 } from "../../data/faq";
 import {
   getQuestionLanguages,
-  getSetTranslation,
+  getSetTitle,
   langPrefix,
   languages,
   uiText,
@@ -20,13 +20,13 @@ import "./FaqQuestionPage.css";
 const pad = (number) => String(number).padStart(2, "0");
 
 // A starred question on its own page, in English or a translation (`lang`).
-const FaqQuestionPage = ({ faq, stage, question, lang = "en" }) => {
+// `translations` holds the set's loaded translations ({ hi, hinglish }).
+const FaqQuestionPage = ({ faq, translations, stage, question, lang = "en" }) => {
   const t = uiText[lang];
-  const setTranslation = lang === "en" ? null : getSetTranslation(lang, faq);
+  const setTranslation = lang === "en" ? null : translations[lang];
   // Text in the page language: the translation when there is one, else English.
   const textOf = (item) => setTranslation?.questions[item.id] ?? item;
-  const titleOf = (set) =>
-    lang === "en" ? set.title : (getSetTranslation(lang, set)?.title ?? set.title);
+  const titleOf = (set) => getSetTitle(lang, set);
   const stageTitle = setTranslation?.stages[stage.id] ?? stage.title;
   const current = textOf(question);
 
@@ -42,13 +42,13 @@ const FaqQuestionPage = ({ faq, stage, question, lang = "en" }) => {
   const isTranslated = (item) => Boolean(setTranslation?.questions[item.id]);
   const hasUntranslated =
     lang !== "en" && relatedQuestions.some((item) => !isTranslated(item));
-  const otherSharedSets = sharedFaqSets.filter((item) => item !== faq);
+  const otherSharedSets = sharedFaqSets.filter((item) => item.slug !== faq.slug);
   const faqPath = getFaqPath(faq);
   const questionPath = (id, pageLang = lang) =>
     `${langPrefix(pageLang)}${faqPath}/${id}`;
 
   // Language versions of this page, for the switcher and hreflang links.
-  const pageLanguages = ["en", ...getQuestionLanguages(faq, question.id)];
+  const pageLanguages = ["en", ...getQuestionLanguages(translations, question.id)];
   const languagePath = (pageLang) => questionPath(question.id, pageLang);
 
   return (

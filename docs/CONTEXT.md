@@ -51,7 +51,7 @@ A single-page-app portfolio website for Dr. Sarbartha Kumar Pratihar, a uro-onco
         ├── pages/FaqQuestion/FaqQuestionPage.jsx + .css   Page for a starred FAQ question
         ├── pages/SharedFaq/SharedFaqPage.jsx + .css       Shared FAQ page (robotic surgery, common questions)
         ├── data/services.js  Service catalog and getServiceBySlug()
-        └── data/faq/         Patient FAQ sets (one file per cancer) and helpers (index.js)
+        └── data/faq/         Patient FAQ sets (one file per cancer), hi/ and hinglish/ translations, catalog.js (light list) and helpers (index.js, translations.js)
 ```
 
 ## Scripts
@@ -77,11 +77,12 @@ Run from `client/`:
 | `/patient-questions/:slug` | `SharedFaqPage` for a shared FAQ set (`robotic-surgery`, `common-questions`), otherwise `NotFound` |
 | `/patient-questions/:slug/:questionId` | `FaqQuestionPage` for a starred question in a shared set, otherwise `NotFound` |
 | `/hi/services/:slug/:questionId`, `/hi/patient-questions/:slug/:questionId` | Hindi `FaqQuestionPage` for a starred question with a Hindi translation, otherwise `NotFound` |
+| `/hinglish/services/:slug/:questionId`, `/hinglish/patient-questions/:slug/:questionId` | Hinglish (`hi-Latn`) `FaqQuestionPage` for a starred question with a Hinglish translation, otherwise `NotFound` |
 | `*` | `NotFound` |
 
 `Navbar` and `Footer` render on every route.
 
-Hash links (for example `/#services`) are handled by `ScrollToRouteTarget` in `App.jsx`: it sets `history.scrollRestoration` to `manual`, scrolls to the top on every route change, then smooth-scrolls to the element whose id matches the hash.
+Hash links (for example `/#services`) are handled by `ScrollToRouteTarget` in `App.jsx`: it sets `history.scrollRestoration` to `manual`, scrolls to the top on every route change, then smooth-scrolls to the element whose id matches the hash, waiting (up to 5 seconds) for it to appear on lazily loaded pages.
 
 ## Design tokens
 
@@ -106,9 +107,10 @@ Fonts load from Google Fonts in `index.css`.
 - CSS class names are kebab-case and prefixed by the component (for example `case-studies-section`, `about-section-header`).
 - JSX files use double quotes and semicolons (except the Vite-generated `main.jsx`).
 - Layout must stay responsive with no horizontal overflow (global `overflow-x: clip`).
+- Keep the first load small: pages other than the home page are `React.lazy` chunks in `App.jsx`, and FAQ sets and translations are loaded per set and language through `data/faq/catalog.js` (`loadFaq`, `loadTranslation`). Do not import FAQ set files or translation files statically; anything that only needs titles, counts or paths reads the catalog. A new set or language gets catalog loaders.
 - External links open in a new tab with `target="_blank"` and `rel="noopener noreferrer"`.
 - No em dashes anywhere (see `AGENTS.md`).
-- Patient FAQ pages and content follow `docs/PATIENT-FAQ.md`. All eight cancer sets and both shared pages (robotic surgery, common questions) are built, with Hindi drafts of the starred pages (pending medical review).
+- Patient FAQ pages and content follow `docs/PATIENT-FAQ.md`. All eight cancer sets and both shared pages (robotic surgery, common questions) are built, with Hindi and Hinglish drafts of the starred pages (pending medical review).
 
 ## Known notes
 

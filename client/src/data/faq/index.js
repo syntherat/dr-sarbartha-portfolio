@@ -1,41 +1,60 @@
-import { adrenalFaq } from "./adrenal";
-import { bladderFaq } from "./bladder";
-import { commonFaq } from "./common";
-import { kidneyFaq } from "./kidney";
-import { penileFaq } from "./penile";
-import { prostateFaq } from "./prostate";
-import { retroperitonealFaq } from "./retroperitoneal";
-import { roboticFaq } from "./robotic";
-import { testicularFaq } from "./testicular";
-import { upperTractFaq } from "./upperTract";
+import { faqCatalog } from "./catalog";
 
 export const doctorName = "Dr. Sarbartha Kumar Pratihar";
 
-export const faqSets = [
-  prostateFaq,
-  kidneyFaq,
-  bladderFaq,
-  upperTractFaq,
-  penileFaq,
-  testicularFaq,
-  adrenalFaq,
-  retroperitonealFaq,
-];
+// Catalog entries (slug, titles, question count, loaders), not the question
+// text: that is loaded per set with `loadFaq`.
+export const faqSets = faqCatalog.filter((entry) => !entry.shared);
 
 // Shared sets are not tied to one cancer: they have their own pages under
 // /patient-questions and are linked from every cancer page.
-export const sharedFaqSets = [roboticFaq, commonFaq];
+export const sharedFaqSets = faqCatalog.filter((entry) => entry.shared);
 
 export const getFaqBySlug = (slug) => faqSets.find((faq) => faq.slug === slug);
 
 export const getSharedFaqBySlug = (slug) =>
   sharedFaqSets.find((faq) => faq.slug === slug);
 
-// Page that holds a set's FAQ; starred question pages sit under it.
+// Page that holds a set's FAQ; starred question pages sit under it. Takes a
+// catalog entry or a loaded set.
 export const getFaqPath = (faq) =>
-  sharedFaqSets.includes(faq)
-    ? `/patient-questions/${faq.slug}`
-    : `/services/${faq.slug}`;
+  faq.shared ? `/patient-questions/${faq.slug}` : `/services/${faq.slug}`;
+
+const countQuestions = (faq) =>
+  faq.stages.reduce((total, stage) => total + stage.questions.length, 0);
+
+// One promise per key, so React's `use()` gets the same promise on every
+// render and a set is downloaded once. A failed download is forgotten so the
+// next render can try again.
+const loaded = new Map();
+
+export const loadOnce = (key, load) => {
+  if (!loaded.has(key)) {
+    const promise = load().catch((error) => {
+      loaded.delete(key);
+      throw error;
+    });
+    loaded.set(key, promise);
+  }
+
+  return loaded.get(key);
+};
+
+// Loads a set's questions for its catalog entry. The result is the set file
+// plus `shared` and `titles` from the catalog.
+export const loadFaq = (entry) =>
+  loadOnce(`en:${entry.slug}`, () =>
+    entry.load().then((faq) => {
+      if (
+        import.meta.env.DEV &&
+        (faq.title !== entry.title || countQuestions(faq) !== entry.questionCount)
+      ) {
+        console.warn(`FAQ catalog is out of date for "${entry.slug}".`);
+      }
+
+      return { ...faq, shared: Boolean(entry.shared), titles: entry.titles };
+    }),
+  );
 
 export const findFaqQuestion = (faq, questionId) => {
   for (const stage of faq.stages) {

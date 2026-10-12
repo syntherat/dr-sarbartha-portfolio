@@ -582,24 +582,25 @@
 }
 
 /* Devanagari: no letter-spacing (it breaks conjuncts) and taller lines so
-   vowel signs above and below the letters are not clipped. */
+   vowel signs above and below the letters are not clipped. Hinglish
+   (hi-Latn) is in Latin script and keeps the default styles. */
 
-.kq-page:lang(hi) .kq-masthead,
-.kq-page:lang(hi) .kq-stage,
-.kq-page:lang(hi) .kq-label,
-.kq-page:lang(hi) .kq-byline-item span,
-.kq-page:lang(hi) .kq-booking-eyebrow {
+.kq-page:lang(hi):not(:lang(hi-Latn)) .kq-masthead,
+.kq-page:lang(hi):not(:lang(hi-Latn)) .kq-stage,
+.kq-page:lang(hi):not(:lang(hi-Latn)) .kq-label,
+.kq-page:lang(hi):not(:lang(hi-Latn)) .kq-byline-item span,
+.kq-page:lang(hi):not(:lang(hi-Latn)) .kq-booking-eyebrow {
   letter-spacing: 0;
 }
 
-.kq-page:lang(hi) .kq-header h1 {
+.kq-page:lang(hi):not(:lang(hi-Latn)) .kq-header h1 {
   line-height: 1.35;
 }
 
-.kq-page:lang(hi) .kq-lead,
-.kq-page:lang(hi) .kq-points p,
-.kq-page:lang(hi) .kq-pager-title,
-.kq-page:lang(hi) .kq-booking p {
+.kq-page:lang(hi):not(:lang(hi-Latn)) .kq-lead,
+.kq-page:lang(hi):not(:lang(hi-Latn)) .kq-points p,
+.kq-page:lang(hi):not(:lang(hi-Latn)) .kq-pager-title,
+.kq-page:lang(hi):not(:lang(hi-Latn)) .kq-booking p {
   line-height: 1.7;
 }
 

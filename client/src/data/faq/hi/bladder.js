@@ -12,7 +12,6 @@ export const bladderHi = {
   },
   questions: {
     "blood-in-urine-no-pain": {
-      hinglish: "Peshab mein khoon aa raha hai: kya yeh cancer hai?",
       question:
         "मेरे पेशाब में खून आया लेकिन कोई दर्द नहीं है: क्या यह ब्लैडर कैंसर हो सकता है?",
       answer:
@@ -36,7 +35,6 @@ export const bladderHi = {
       ],
     },
     "is-it-curable": {
-      hinglish: "Peshab ki thaili (bladder) ke cancer ka ilaj kya hai?",
       question: "क्या ब्लैडर कैंसर ठीक हो सकता है?",
       answer:
         "हाँ: ज़्यादातर ब्लैडर कैंसर जल्दी पकड़े जाते हैं, और कई को ब्लैडर बचाते हुए ठीक किया जा सकता है या नियंत्रण में रखा जा सकता है।",
@@ -71,7 +69,6 @@ export const bladderHi = {
       ],
     },
     "living-with-urine-bag": {
-      hinglish: "Urine bag ke saath zindagi kaisi hoti hai?",
       question:
         "यूरिन बैग (यूरोस्टॉमी) के साथ कैसे जिया जाए? क्या सामान्य रूप से नहाना, यात्रा, काम और सोना हो सकता है?",
       answer:

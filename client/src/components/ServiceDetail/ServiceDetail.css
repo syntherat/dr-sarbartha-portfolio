@@ -221,3 +221,8 @@
     padding-inline: 1rem;
   }
 }
+
+/* Space held for the FAQ while its set downloads. */
+.service-faq-loading {
+  min-height: 60vh;
+}

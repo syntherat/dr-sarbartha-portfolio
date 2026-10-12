@@ -46,8 +46,6 @@ export const roboticHi = {
       ],
     },
     "cost-delhi": {
-      hinglish:
-        "Robotic surgery ka kharcha kitna hai? Kya Ayushman card ya insurance mein cover hota hai?",
       question:
         "दिल्ली में रोबोटिक सर्जरी का खर्च कितना है, और यह महँगी क्यों है?",
       answer:

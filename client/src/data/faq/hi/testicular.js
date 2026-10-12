@@ -12,7 +12,6 @@ export const testicularHi = {
   },
   questions: {
     "painless-lump": {
-      hinglish: "Andkosh mein gaanth: kya yeh cancer hai?",
       question:
         "मेरे अंडकोष में बिना दर्द वाली एक गाँठ मिली है: क्या यह कैंसर है?",
       answer:
